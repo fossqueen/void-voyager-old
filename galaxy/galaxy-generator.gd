@@ -10,8 +10,6 @@ func random_string(length):
 	var n_char = len(characters)
 	for _character in range(length):
 		string += characters[randi()% n_char]
-	if string_filter.check_string(string) == true:
-		print("uh oh")
 	return string
 
 func random_digits(length):
