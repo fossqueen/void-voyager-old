@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/radar/map-marker.gd" type="Script" id=1]
+
+[node name="PlanetMarker" type="Node2D" groups=["radar_markers"]]
+script = ExtResource( 1 )
+radius = 6

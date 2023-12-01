@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://asteroid/asteroid.gd" type="Script" id=1]
+
+[node name="Asteroid" type="RigidBody2D" groups=["asteroid", "radar_objects"]]
+collision_layer = 3
+mode = 3
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 1 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="body_shape_entered" from="." to="." method="_on_Asteroid_body_shape_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

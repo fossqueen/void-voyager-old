@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://player/player.gd" type="Script" id=1]
+[ext_resource path="res://ui/radar/radar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://camera/camera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/ui.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/player-stats/player-stats.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animations/Plume:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "thrust"
+length = 0.1
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animations/Plume:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 4000.0
+
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+
+[node name="Player" type="RigidBody2D"]
+z_index = 2
+mass = 25000.0
+contacts_reported = 4
+contact_monitor = true
+script = ExtResource( 1 )
+points = PoolVector2Array( 28, 0, -12, 16, -20, 0, -12, -16, 28, 0 )
+
+[node name="Animations" type="Node2D" parent="."]
+show_behind_parent = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
+root_node = NodePath("../..")
+anims/idle = SubResource( 1 )
+anims/thrust = SubResource( 2 )
+
+[node name="Plume" type="Polygon2D" parent="Animations"]
+visible = false
+position = Vector2( 4, 0 )
+polygon = PoolVector2Array( -16, -8, -32, 0, -16, 8 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16 )
+
+[node name="Camera" parent="." instance=ExtResource( 3 )]
+zoom_max = 6.0
+
+[node name="Scanner" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scanner"]
+visible = false
+shape = SubResource( 3 )
+
+[node name="UI" parent="." instance=ExtResource( 4 )]
+
+[node name="Radar" parent="UI" instance=ExtResource( 2 )]
+
+[node name="PlayerStats" parent="UI" instance=ExtResource( 5 )]
+margin_left = 132.0
+margin_right = 260.0
+margin_bottom = 68.0
+theme = SubResource( 5 )
+
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="body_entered" from="Scanner" to="." method="_on_Scanner_body_entered"]
+[connection signal="body_exited" from="Scanner" to="." method="_on_Scanner_body_exited"]

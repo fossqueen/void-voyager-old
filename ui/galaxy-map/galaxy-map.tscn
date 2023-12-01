@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/galaxy-map/map-marker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://camera/camera-drag.gd" type="Script" id=3]
+[ext_resource path="res://ui/galaxy-map/galaxy-map.gd" type="Script" id=4]
+
+[node name="GalaxyMap" type="Node2D" groups=["galaxy_map"]]
+script = ExtResource( 4 )
+
+[node name="MapMarker" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2( 20, 20 )
+script = ExtResource( 3 )
+zoom_min = 20.0
+zoom_max = 360.0
+zoom_factor = 20.0
+
+[node name="Tween" type="Tween" parent="Camera2D"]

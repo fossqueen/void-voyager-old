@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://planet/planet.gd" type="Script" id=1]
+[ext_resource path="res://planet/textures/moon.png" type="Texture" id=2]
+[ext_resource path="res://planet/textures/spherify.tres" type="Shader" id=3]
+[ext_resource path="res://planet/planet-controller.gd" type="Script" id=4]
+[ext_resource path="res://ui/tooltip/tooltip.tscn" type="PackedScene" id=5]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 3 )
+shader_param/aspect_ratio = 2.0
+shader_param/rotation_speed = 0.01
+shader_param/as_shadow = false
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 512.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 1024.0
+
+[node name="Planet" type="Node2D"]
+z_index = -1
+script = ExtResource( 4 )
+
+[node name="Body" type="Area2D" parent="." groups=["radar_objects"]]
+self_modulate = Color( 1.5, 1.5, 1.5, 1 )
+z_index = 2
+script = ExtResource( 1 )
+debug_color = Color( 1, 0, 0.317647, 1 )
+
+[node name="Sprite" type="Sprite" parent="Body"]
+material = SubResource( 2 )
+scale = Vector2( 0.5, 1 )
+z_index = -1
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+shape = SubResource( 1 )
+
+[node name="GravityField" type="Area2D" parent="Body"]
+space_override = 1
+gravity_point = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/GravityField"]
+shape = SubResource( 3 )
+
+[node name="UI" type="CanvasLayer" parent="Body"]
+
+[node name="ToolTip" parent="Body/UI" instance=ExtResource( 5 )]
+
+[connection signal="mouse_entered" from="Body" to="Body" method="_on_Body_mouse_entered"]
+[connection signal="mouse_exited" from="Body" to="Body" method="_on_Body_mouse_exited"]

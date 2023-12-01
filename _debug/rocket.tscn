@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://_debug/rocket.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 0.5 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+gravity = Vector3( -100, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 1, 0, 0, 1 )
+
+[node name="Projectile" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 2
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 1 )
+length = 16
+speed = 25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 8, 0 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Particles2D" type="Particles2D" parent="."]
+scale = Vector2( 3, 3 )
+amount = 4
+process_material = SubResource( 2 )
+
+[connection signal="body_shape_entered" from="." to="." method="_on_Projectile_body_shape_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
