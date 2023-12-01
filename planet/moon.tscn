@@ -22,7 +22,7 @@ radius = 768.0
 z_index = -2
 script = ExtResource( 2 )
 
-[node name="Body" type="Area2D" parent="."]
+[node name="Body" type="Area2D" parent="." groups=["radar_objects"]]
 z_index = 2
 script = ExtResource( 3 )
 

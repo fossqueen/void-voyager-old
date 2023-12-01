@@ -2,7 +2,6 @@ extends Resource
 class_name GalaxyGenerator
 
 var galaxy = []
-var string_filter := Filter.new()
 
 func random_string(length):
 	var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'

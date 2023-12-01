@@ -10,11 +10,6 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
-"class": "Filter",
-"language": "GDScript",
-"path": "res://galaxy/string-filter.gd"
-}, {
-"base": "Resource",
 "class": "Galaxy",
 "language": "GDScript",
 "path": "res://galaxy/galaxy-class.gd"
@@ -50,7 +45,6 @@ _global_script_classes=[ {
 "path": "res://player/stats.gd"
 } ]
 _global_script_class_icons={
-"Filter": "",
 "Galaxy": "",
 "GalaxyGenerator": "",
 "Inventory": "",

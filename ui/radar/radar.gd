@@ -7,8 +7,9 @@ onready var player_marker = $Panel/PlayerMarker
 onready var star_marker = load("res://ui/radar/star-marker.tscn")
 onready var planet_marker = load("res://ui/radar/planet-marker.tscn")
 onready var asteroid_marker = load("res://ui/radar/asteroid-marker.tscn")
+onready var moon_marker = load("res://ui/radar/moon-marker.tscn")
 
-onready var icons = {"star": star_marker, "planet": planet_marker, "asteroid": asteroid_marker}
+onready var icons = {"star": star_marker, "planet": planet_marker, "asteroid": asteroid_marker, "moon": moon_marker}
 
 var grid_scale
 var markers = {}
@@ -40,6 +41,8 @@ func get_objects():
 			new_marker.color = object.self_modulate
 		elif object.radar_icon == "star":
 			new_marker.color = object.color
+		elif object.radar_icon == "moon":
+			new_marker.color = object.self_modulate
 		else:
 			continue
 		$Panel.add_child(new_marker)

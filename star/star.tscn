@@ -7,7 +7,6 @@
 radius = 512.0
 
 [node name="Star" type="Area2D" groups=["radar_objects"]]
-z_index = 1
 script = ExtResource( 1 )
 type = 4
 

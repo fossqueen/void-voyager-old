@@ -20,5 +20,6 @@ func _ready():
 	$Body/GravityField.gravity = planet.gravity / 2
 
 func _physics_process(delta):
+# warning-ignore:integer_division
 	rotation += (0.015 + (1000 / int(distance))) * delta
 	$Body/Sprite.rotation -= (rotation_speed / 48) * delta
