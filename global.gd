@@ -1,8 +1,7 @@
 extends Node
 
 const TITLE: String = "Void Voyager"
-const VERSION: String = "0.1.0"
-const COPYRIGHT: String = "Ryan O'Loughlin 2023"
+const VERSION: String = "v0.1.0-pre-alpha"
 
 var player
 var main

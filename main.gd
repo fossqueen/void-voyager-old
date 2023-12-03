@@ -21,6 +21,7 @@ func _ready():
 	Global.main = self
 	load_save()
 	init_main_menu()
+	$UI/Margin/Bottom/Version.text = Global.VERSION
 
 # custom functions
 func load_save() -> void:
@@ -61,7 +62,10 @@ func load_system():
 
 func hyperspace():
 	var new_system = system.instance()
-	Global.save.player.current_system += 1
+	if Global.save.player.current_system == -1:
+		Global.save.player.current_system = 1
+	else:
+		Global.save.player.current_system += 1
 	new_system.system_id = Global.save.player.current_system
 	new_system.data = Global.save.galaxy
 	remove_child($System)

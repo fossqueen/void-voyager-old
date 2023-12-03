@@ -7,8 +7,6 @@ const SUBTITLE: Array = [
 	"Blast off!",
 	"Everyone's favorite game!",
 	"Part of a balanced breakfast!"]
-const VERSION: String = Global.VERSION
-const COPYRIGHT: String = Global.COPYRIGHT
 
 var save_exists: bool = false
 onready var main = get_parent()
@@ -29,8 +27,6 @@ func _physics_process(_delta):
 func set_labels():
 	$UI/List/Title.text = TITLE
 	$UI/List/Subtitle.text = SUBTITLE[randi() % SUBTITLE.size()]
-	$UI/Version.text = "version: " + VERSION
-	$UI/Copyright.text = COPYRIGHT
 
 # signals
 func _on_NewGame_pressed():
