@@ -56,7 +56,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="space-trader"
+config/name="Void Voyager"
 run/main_scene="res://main.tscn"
 config/icon="res://icon.png"
 

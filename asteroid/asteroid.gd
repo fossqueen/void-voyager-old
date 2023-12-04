@@ -59,11 +59,3 @@ func _on_Asteroid_body_shape_entered(_body_rid, body, _body_shape_index, _local_
 func _on_Timer_timeout():
 	contact_monitor = false
 	$Timer.queue_free()
-
-func _on_VisibilityNotifier2D_viewport_entered(_viewport):
-	sleeping = false
-	show()
-
-func _on_VisibilityNotifier2D_viewport_exited(_viewport):
-	sleeping = true
-	hide()

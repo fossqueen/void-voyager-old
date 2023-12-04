@@ -54,6 +54,7 @@ z_index = 2
 mass = 25000.0
 contacts_reported = 4
 contact_monitor = true
+can_sleep = false
 script = ExtResource( 1 )
 points = PoolVector2Array( 28, 0, -12, 16, -20, 0, -12, -16, 28, 0 )
 
