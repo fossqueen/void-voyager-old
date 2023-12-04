@@ -59,3 +59,17 @@ func _on_Asteroid_body_shape_entered(_body_rid, body, _body_shape_index, _local_
 func _on_Timer_timeout():
 	contact_monitor = false
 	$Timer.queue_free()
+
+func _on_VisEnabler_viewport_exited(_viewport):
+	set_process(false)
+	set_physics_process(false)
+	$CollisionPolygon2D.disabled = true
+	contact_monitor = false
+	sleeping = true
+
+func _on_VisEnabler_viewport_entered(_viewport):
+	set_process(true)
+	set_physics_process(true)
+	$CollisionPolygon2D.disabled = false
+	contact_monitor = true
+	sleeping = false
