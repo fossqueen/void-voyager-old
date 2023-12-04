@@ -19,3 +19,5 @@ autostart = true
 
 [connection signal="body_shape_entered" from="." to="." method="_on_Asteroid_body_shape_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="viewport_entered" from="VisEnabler" to="." method="_on_VisEnabler_viewport_entered"]
+[connection signal="viewport_exited" from="VisEnabler" to="." method="_on_VisEnabler_viewport_exited"]
