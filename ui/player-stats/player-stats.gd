@@ -10,3 +10,4 @@ func _physics_process(_delta):
 	$List/Health/ProgressBar.value = player.ship.health
 	$List/Fuel/ProgressBar.value = player.ship.fuel
 	$List/Velocity.text = "velocity: %d" % player.linear_velocity.length()
+	$List/FlightAssist.text = "flight assist: on" if player.flight_assist else "flight assist: off"

@@ -6,6 +6,7 @@ var buf_v
 var buf_v_length
 var camera
 var reset_state = false
+var flight_assist: bool = true
 
 onready var laser = load("res://_debug/laser.tscn")
 onready var rocket = load("res://_debug/rocket.tscn")
@@ -29,7 +30,6 @@ func _integrate_forces(_state):
 
 func _physics_process(_delta):
 	look()
-	movement_damper()
 
 func _unhandled_input(_event):
 	if Input.is_action_just_pressed("toggle_system_map"):
@@ -53,6 +53,7 @@ func _unhandled_input(_event):
 		new_rocket.rotation = global_rotation
 		new_rocket.linear_velocity = linear_velocity
 		get_parent().add_child(new_rocket)
+	toggle_flight_assist()
 
 # custom functions
 func movement():
@@ -60,17 +61,21 @@ func movement():
 		apply_impulse(Vector2(0, 0).rotated(rotation), Vector2(ship.speed, 0).rotated(rotation))
 		$Animations/AnimationPlayer.play("thrust")
 		burn_fuel(0.0015)
+		linear_damp =  -1
 	else:
 		$Animations/AnimationPlayer.play("idle")
+		if flight_assist:
+			linear_damp = 1
 
 func look():
 	look_at(get_global_mouse_position())
 
-func movement_damper():
+func toggle_flight_assist():
 	if Input.is_action_pressed("flight_assist"):
-		linear_damp = 0.5
-	else:
-		linear_damp = -1
+		if flight_assist:
+			flight_assist = false
+		elif !flight_assist:
+			flight_assist = true
 
 func burn_fuel(amount):
 	if ship.fuel > 0:

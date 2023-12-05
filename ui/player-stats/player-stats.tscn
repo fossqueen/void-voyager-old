@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 
 [node name="List" type="VBoxContainer" parent="."]
 margin_right = 128.0
-margin_bottom = 68.0
+margin_bottom = 86.0
 size_flags_vertical = 9
 
 [node name="Health" type="HBoxContainer" parent="List"]
@@ -59,9 +59,14 @@ margin_top = 54.0
 margin_right = 128.0
 margin_bottom = 68.0
 
+[node name="FlightAssist" type="Label" parent="List"]
+margin_top = 72.0
+margin_right = 128.0
+margin_bottom = 86.0
+
 [node name="Panel" type="Panel" parent="."]
 show_behind_parent = true
 margin_right = 128.0
-margin_bottom = 68.0
+margin_bottom = 86.0
 size_flags_vertical = 9
 custom_styles/panel = SubResource( 1 )
