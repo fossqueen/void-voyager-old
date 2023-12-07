@@ -9,3 +9,4 @@ var current_system
 var loaded_system
 var save
 var starfield
+var ui

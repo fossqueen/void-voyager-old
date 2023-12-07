@@ -81,7 +81,6 @@ zoom_max = 6.0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Scanner"]
-visible = false
 shape = SubResource( 3 )
 
 [node name="UI" parent="." instance=ExtResource( 4 )]

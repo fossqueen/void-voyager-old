@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=3]
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
+
+[node name="ControlsPanel" type="VBoxContainer"]
+margin_top = 228.0
+margin_right = 168.0
+margin_bottom = 344.0
+mouse_filter = 2
+size_flags_vertical = 8
+theme = SubResource( 4 )
+custom_constants/separation = 0
+alignment = 2
+
+[node name="Thrusters" type="Label" parent="."]
+margin_top = 20.0
+margin_right = 168.0
+margin_bottom = 36.0
+text = "thrusters: W"
+
+[node name="FlightAssist" type="Label" parent="."]
+margin_top = 36.0
+margin_right = 168.0
+margin_bottom = 52.0
+text = "toggle flight assist: SPACE"
+
+[node name="Hyperspace" type="Label" parent="."]
+margin_top = 52.0
+margin_right = 168.0
+margin_bottom = 68.0
+text = "hyperspace jump: J"
+
+[node name="Weapons" type="Label" parent="."]
+margin_top = 68.0
+margin_right = 168.0
+margin_bottom = 84.0
+text = "weapons: Left & Right Click"
+
+[node name="SystemMap" type="Label" parent="."]
+margin_top = 84.0
+margin_right = 168.0
+margin_bottom = 100.0
+text = "system map: M"
+
+[node name="Zoom" type="Label" parent="."]
+margin_top = 100.0
+margin_right = 168.0
+margin_bottom = 116.0
+text = "zoom: Scroll Up/Down | +/-"

@@ -23,6 +23,9 @@ func _ready():
 	init_main_menu()
 	$UI/Margin/Bottom/Version.text = Global.VERSION
 
+func _process(_delta):
+	$UI/Margin/FPS.text = "fps: " + str(int(Engine.get_frames_per_second()))
+
 # custom functions
 func load_save() -> void:
 	if _save.save_exists():

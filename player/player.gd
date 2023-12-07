@@ -64,6 +64,9 @@ func _unhandled_input(_event):
 	if Input.is_action_just_pressed("flight_assist"):
 		toggle_flight_assist()
 	
+	if Input.is_action_just_pressed("ship_panel"):
+		$UI.toggle_ship_panel()
+	
 	if Input.is_action_just_pressed("ui_home"):
 		Global.save.player.inventory.add_item("wood", 1)
 		Global.save.player.inventory.add_item("poopball", 14)
@@ -119,6 +122,7 @@ func set_variables():
 	$UI/Radar.player = self
 	$UI/PlayerStats.player = self
 	camera = $Camera
+	Global.ui = $UI
 
 # signals
 func _on_Player_body_entered(body):

@@ -1,0 +1,173 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://_debug/ship-panel/diagnostics-panel.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxLine" id=2]
+color = Color( 1, 1, 1, 1 )
+
+[node name="DiagnosticsPanel" type="HBoxContainer"]
+margin_top = 56.0
+margin_right = 384.0
+margin_bottom = 284.0
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="Display" type="Panel" parent="."]
+margin_right = 190.0
+margin_bottom = 228.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Display"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Display/CenterContainer"]
+margin_left = 44.0
+margin_top = 107.0
+margin_right = 146.0
+margin_bottom = 121.0
+text = "Add Visual Here"
+
+[node name="DiagnosticsList" type="VBoxContainer" parent="."]
+margin_left = 194.0
+margin_right = 384.0
+margin_bottom = 228.0
+size_flags_horizontal = 3
+
+[node name="Health" type="HBoxContainer" parent="DiagnosticsList"]
+margin_right = 190.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="DiagnosticsList/Health"]
+margin_right = 93.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Health:"
+
+[node name="ProgressBar" type="ProgressBar" parent="DiagnosticsList/Health"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Shield" type="HBoxContainer" parent="DiagnosticsList"]
+margin_top = 18.0
+margin_right = 190.0
+margin_bottom = 32.0
+
+[node name="Label" type="Label" parent="DiagnosticsList/Shield"]
+margin_right = 93.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Shield:"
+
+[node name="ProgressBar" type="ProgressBar" parent="DiagnosticsList/Shield"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Fuel" type="HBoxContainer" parent="DiagnosticsList"]
+margin_top = 36.0
+margin_right = 190.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="DiagnosticsList/Fuel"]
+margin_right = 93.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Fuel:"
+
+[node name="ProgressBar" type="ProgressBar" parent="DiagnosticsList/Fuel"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Cargo" type="HBoxContainer" parent="DiagnosticsList"]
+margin_top = 54.0
+margin_right = 190.0
+margin_bottom = 68.0
+
+[node name="Label" type="Label" parent="DiagnosticsList/Cargo"]
+margin_right = 93.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Cargo:"
+
+[node name="ProgressBar" type="ProgressBar" parent="DiagnosticsList/Cargo"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="FlightAssist" type="HBoxContainer" parent="DiagnosticsList"]
+margin_top = 72.0
+margin_right = 190.0
+margin_bottom = 86.0
+
+[node name="Label" type="Label" parent="DiagnosticsList/FlightAssist"]
+margin_right = 93.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Flight Assist:"
+
+[node name="Return" type="Label" parent="DiagnosticsList/FlightAssist"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+text = "Enabled"
+
+[node name="Separator3" type="HSeparator" parent="DiagnosticsList"]
+margin_top = 90.0
+margin_right = 190.0
+margin_bottom = 94.0
+custom_styles/separator = SubResource( 2 )
+
+[node name="CurrentSystem" type="HBoxContainer" parent="DiagnosticsList"]
+margin_top = 98.0
+margin_right = 190.0
+margin_bottom = 112.0
+
+[node name="Label" type="Label" parent="DiagnosticsList/CurrentSystem"]
+margin_right = 93.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "System:"
+
+[node name="SystemName" type="Label" parent="DiagnosticsList/CurrentSystem"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "System Name"
+
+[node name="Credits" type="HBoxContainer" parent="DiagnosticsList"]
+margin_top = 116.0
+margin_right = 190.0
+margin_bottom = 130.0
+
+[node name="Label" type="Label" parent="DiagnosticsList/Credits"]
+margin_right = 93.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Credits:"
+
+[node name="Amount" type="Label" parent="DiagnosticsList/Credits"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Amount"
