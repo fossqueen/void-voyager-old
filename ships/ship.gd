@@ -14,4 +14,4 @@ var width: int = 1
 var antialiased: bool = false
 var color_white = Color(1.0, 1.0, 1.0)
 var color_black = Color(0.0, 0.0, 0.0)
-export var points: PoolVector2Array = PoolVector2Array([Vector2(28, 0), Vector2(-12, 16) , Vector2(20, 0), Vector2(-12, -16), Vector2(28, 0)])
+export var points: PoolVector2Array = PoolVector2Array([Vector2(-20, 0), Vector2(-12, -16) , Vector2(28, 0), Vector2(-12, 16), Vector2(-20, 0)])

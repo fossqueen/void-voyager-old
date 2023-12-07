@@ -63,13 +63,13 @@ func _on_Timer_timeout():
 func _on_VisEnabler_viewport_exited(_viewport):
 	set_process(false)
 	set_physics_process(false)
-	$CollisionPolygon2D.disabled = true
+	#$CollisionPolygon2D.disabled = true
 	contact_monitor = false
 	sleeping = true
 
 func _on_VisEnabler_viewport_entered(_viewport):
 	set_process(true)
 	set_physics_process(true)
-	$CollisionPolygon2D.disabled = false
+	#$CollisionPolygon2D.disabled = false
 	contact_monitor = true
 	sleeping = false

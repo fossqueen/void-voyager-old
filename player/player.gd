@@ -5,6 +5,7 @@ export var points: PoolVector2Array
 var buf_v
 var buf_v_length
 var camera
+
 var reset_state = false
 var flight_assist: bool = true
 
@@ -16,44 +17,57 @@ func _ready():
 	set_variables()
 
 func _draw():
-	draw_colored_polygon(points, ship.color_black)
-	draw_polyline(points, ship.color_white, ship.width, ship.antialiased)
+	draw_colored_polygon(ship.points, ship.color_black)
+	draw_polyline(ship.points, ship.color_white, ship.width, ship.antialiased)
 
 func _integrate_forces(_state):
 	movement()
 	store_velocity()
-	if reset_state:
-		set_deferred("mode", MODE_KINEMATIC)
-		position = Vector2(0, 0)
-		set_deferred("mode", MODE_RIGID)
-		reset_state = false
+	reset()
 
 func _physics_process(_delta):
 	look()
 
 func _unhandled_input(_event):
+	# System map
 	if Input.is_action_just_pressed("toggle_system_map"):
 		$UI.toggle_system_map()
+	
+	# Galaxy map
 	if Input.is_action_just_pressed("toggle_galaxy_map"):
 		print("ADD HERE toggle galaxy map")
 		#$UI.toggle_galaxy_map()
+	
+	# Hyperspace
 	if Input.is_action_just_pressed("hyperspace"):
 		$UI/Radar.remove_all_objects()
 		reset_state = true
 		Global.main.hyperspace()
 		$UI/Radar.get_objects()
+	
+	# Primary fire
 	if Input.is_action_just_pressed("primary_fire"):
 		var new_laser = laser.instance()
 		new_laser.position = position
 		new_laser.rotation = global_rotation
 		get_parent().add_child(new_laser)
+	
+	# Secondary fire
 	if Input.is_action_just_pressed("secondary_fire"):
 		var new_rocket = rocket.instance()
 		new_rocket.position = position
 		new_rocket.rotation = global_rotation
 		new_rocket.linear_velocity = linear_velocity
 		get_parent().add_child(new_rocket)
-	toggle_flight_assist()
+	
+	# Flight assist
+	if Input.is_action_just_pressed("flight_assist"):
+		toggle_flight_assist()
+	
+	if Input.is_action_just_pressed("ui_home"):
+		Global.save.player.inventory.add_item("wood", 1)
+		Global.save.player.inventory.add_item("poopball", 14)
+		Global.save.player.inventory.add_item("joint", 64)
 
 # custom functions
 func movement():
@@ -71,11 +85,10 @@ func look():
 	look_at(get_global_mouse_position())
 
 func toggle_flight_assist():
-	if Input.is_action_pressed("flight_assist"):
-		if flight_assist:
-			flight_assist = false
-		elif !flight_assist:
-			flight_assist = true
+	if flight_assist:
+		flight_assist = false
+	elif !flight_assist:
+		flight_assist = true
 
 func burn_fuel(amount):
 	if ship.fuel > 0:
@@ -93,6 +106,13 @@ func damage(amount):
 func destroy():
 	print("Ship destroyed")
 	queue_free()
+
+func reset():
+	if reset_state:
+		set_deferred("mode", MODE_KINEMATIC)
+		position = Vector2(0, 0)
+		set_deferred("mode", MODE_RIGID)
+		reset_state = false
 
 func set_variables():
 	Global.player = self
