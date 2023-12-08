@@ -45,3 +45,6 @@ shape = SubResource( 3 )
 [node name="UI" type="CanvasLayer" parent="Body"]
 
 [node name="ToolTip" parent="Body/UI" instance=ExtResource( 1 )]
+
+[connection signal="mouse_entered" from="Body" to="." method="_on_Body_mouse_entered"]
+[connection signal="mouse_exited" from="Body" to="." method="_on_Body_mouse_exited"]

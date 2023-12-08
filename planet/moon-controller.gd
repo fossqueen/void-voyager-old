@@ -23,3 +23,12 @@ func _physics_process(delta):
 # warning-ignore:integer_division
 	rotation += (0.015 + (1000 / int(distance))) * delta
 	$Body/Sprite.rotation -= (rotation_speed / 48) * delta
+
+
+func _on_Body_mouse_entered():
+	$Body/UI/ToolTip/Label.text = get_parent().parent.id + "-A"
+	$Body/UI/ToolTip.show()
+
+
+func _on_Body_mouse_exited():
+		$Body/UI/ToolTip.hide()
