@@ -9,7 +9,6 @@ var camera
 var reset_state = false
 var flight_assist: bool = true
 
-onready var laser = load("res://_debug/laser.tscn")
 onready var rocket = load("res://_debug/rocket.tscn")
 
 # base functions
@@ -45,13 +44,6 @@ func _unhandled_input(_event):
 		Global.main.hyperspace()
 		$UI/Radar.get_objects()
 	
-	# Primary fire
-	if Input.is_action_just_pressed("primary_fire"):
-		var new_laser = laser.instance()
-		new_laser.position = position
-		new_laser.rotation = global_rotation
-		get_parent().add_child(new_laser)
-	
 	# Secondary fire
 	if Input.is_action_just_pressed("secondary_fire"):
 		var new_rocket = rocket.instance()
@@ -82,7 +74,7 @@ func movement():
 	else:
 		$Animations/AnimationPlayer.play("idle")
 		if flight_assist:
-			linear_damp = 1
+			linear_damp = 0.6
 
 func look():
 	look_at(get_global_mouse_position())

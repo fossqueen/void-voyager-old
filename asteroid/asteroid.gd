@@ -37,15 +37,16 @@ func _physics_process(delta):
 
 # custom functions
 func damage(amount):
-	global_scale.x -= (amount * 0.001)
-	global_scale.y -= (amount * 0.001)
+	global_scale.x -= (amount * 0.002)
+	global_scale.y -= (amount * 0.002)
 	health -= amount
-	var new_explosion = explosion.instance()
-	new_explosion.position = position
-	new_explosion.modulate = Color(1, 1, 1)
-	new_explosion.z_index = -1
-	get_parent().add_child(new_explosion)
+
 	if health <= 0:
+		var new_explosion = explosion.instance()
+		new_explosion.position = position
+		new_explosion.modulate = Color(1, 1, 1)
+		new_explosion.z_index = -1
+		get_parent().add_child(new_explosion)
 		queue_free()
 
 # signals
