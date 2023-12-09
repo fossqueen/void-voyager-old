@@ -61,6 +61,7 @@ func add_object(object):
 	elif object.radar_icon == "npc":
 		new_marker.npc = true
 		new_marker.node = object
+		new_marker.color = object.FACTION_COLORS[object.faction]
 	else:
 		new_marker.color = object.color
 	$Panel.add_child(new_marker)
