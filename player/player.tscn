@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://ui/radar/radar.tscn" type="PackedScene" id=2]
@@ -50,6 +50,18 @@ font_data = ExtResource( 6 )
 [sub_resource type="Theme" id=5]
 default_font = SubResource( 4 )
 
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 6 )
+
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 16, 16 )
+
 [node name="Player" type="RigidBody2D"]
 z_index = 2
 mass = 25000.0
@@ -95,7 +107,241 @@ shape = SubResource( 3 )
 margin_left = 132.0
 margin_right = 260.0
 margin_bottom = 68.0
+mouse_filter = 2
 theme = SubResource( 5 )
+
+[node name="TouchButtons" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = SubResource( 8 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="UI/TouchButtons"]
+position = Vector2( 48, 296 )
+shape = SubResource( 6 )
+shape_centered = false
+action = "thrust"
+visibility_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/TouchButtons/TouchScreenButton"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[node name="Label" type="Label" parent="UI/TouchButtons/TouchScreenButton/Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 64.0
+margin_bottom = 64.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Thrust"
+align = 1
+valign = 1
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="UI/TouchButtons"]
+position = Vector2( 48, 224 )
+shape = SubResource( 6 )
+shape_centered = false
+action = "primary_fire"
+visibility_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/TouchButtons/TouchScreenButton2"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[node name="Label" type="Label" parent="UI/TouchButtons/TouchScreenButton2/Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 64.0
+margin_bottom = 64.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Primary Fire"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TouchScreenButton7" type="TouchScreenButton" parent="UI/TouchButtons"]
+position = Vector2( 120, 224 )
+shape = SubResource( 6 )
+shape_centered = false
+action = "flight_assist"
+visibility_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/TouchButtons/TouchScreenButton7"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[node name="Label" type="Label" parent="UI/TouchButtons/TouchScreenButton7/Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 64.0
+margin_bottom = 64.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Flight Assist"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TouchScreenButton3" type="TouchScreenButton" parent="UI/TouchButtons"]
+position = Vector2( 120, 296 )
+shape = SubResource( 6 )
+shape_centered = false
+action = "secondary_fire"
+visibility_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/TouchButtons/TouchScreenButton3"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[node name="Label" type="Label" parent="UI/TouchButtons/TouchScreenButton3/Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 64.0
+margin_bottom = 64.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Secondary Fire"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TouchScreenButton4" type="TouchScreenButton" parent="UI/TouchButtons"]
+position = Vector2( 592, 296 )
+shape = SubResource( 6 )
+shape_centered = false
+action = "ship_panel"
+visibility_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/TouchButtons/TouchScreenButton4"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[node name="Label" type="Label" parent="UI/TouchButtons/TouchScreenButton4/Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 64.0
+margin_bottom = 64.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Ship Panel"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TouchScreenButton5" type="TouchScreenButton" parent="UI/TouchButtons"]
+position = Vector2( 592, 224 )
+shape = SubResource( 6 )
+shape_centered = false
+action = "toggle_system_map"
+visibility_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/TouchButtons/TouchScreenButton5"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[node name="Label" type="Label" parent="UI/TouchButtons/TouchScreenButton5/Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 64.0
+margin_bottom = 64.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "System Map"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TouchScreenButton6" type="TouchScreenButton" parent="UI/TouchButtons"]
+position = Vector2( 520, 296 )
+shape = SubResource( 6 )
+shape_centered = false
+action = "hyperspace"
+visibility_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/TouchButtons/TouchScreenButton6"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
+
+[node name="Label" type="Label" parent="UI/TouchButtons/TouchScreenButton6/Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 64.0
+margin_bottom = 64.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Hyperspace Jump"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TouchScreenButton8" type="TouchScreenButton" parent="UI/TouchButtons"]
+position = Vector2( 608, 48 )
+shape = SubResource( 9 )
+shape_centered = false
+action = "zoom_in"
+visibility_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/TouchButtons/TouchScreenButton8"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 16, 16, 48, 16, 48, 48, 16, 48 )
+
+[node name="Label" type="Label" parent="UI/TouchButtons/TouchScreenButton8/Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 48.0
+margin_bottom = 48.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "+"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="TouchScreenButton9" type="TouchScreenButton" parent="UI/TouchButtons"]
+position = Vector2( 568, 48 )
+shape = SubResource( 9 )
+shape_centered = false
+action = "zoom_out"
+visibility_mode = 1
+
+[node name="Polygon2D" type="Polygon2D" parent="UI/TouchButtons/TouchScreenButton9"]
+modulate = Color( 1, 1, 1, 0.5 )
+position = Vector2( -32, -32 )
+polygon = PoolVector2Array( 16, 16, 48, 16, 48, 48, 16, 48 )
+
+[node name="Label" type="Label" parent="UI/TouchButtons/TouchScreenButton9/Polygon2D"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 48.0
+margin_bottom = 48.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "-"
+align = 1
+valign = 1
+autowrap = true
 
 [connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
 [connection signal="body_entered" from="Scanner" to="." method="_on_Scanner_body_entered"]
