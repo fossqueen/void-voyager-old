@@ -15,23 +15,31 @@ onready var npc = load("res://npc/npc.tscn")
 onready var ui = load("res://ui/ui.tscn")
 onready var galaxy_map = load("res://ui/galaxy-map/galaxy-map.tscn")
 
-var loaded_system
+var npc_spawn_timer: float = 5.0
+var menu_active: bool = true
 
 # on ready
-func _ready():
+func _ready() -> void:
 	Global.main = self
 	load_save()
 	init_main_menu()
 	$UI/Margin/Bottom/Version.text = Global.VERSION
 
-func _process(_delta):
+
+func _process(delta) -> void:
+	if not menu_active:
+		npc_spawn_timer -= delta
+		if npc_spawn_timer <= 0.0:
+			spawn_npc()
+			npc_spawn_timer = 5.0
 	$UI/Margin/FPS.text = "fps: " + str(int(Engine.get_frames_per_second()))
 
-# custom functions
+
 func load_save() -> void:
 	if _save.save_exists():
 		_save.load_savefile()
 		_save_exists = true
+
 
 func create_save() -> void:
 	_save.player = PlayerSave.new()
@@ -41,43 +49,60 @@ func create_save() -> void:
 	_save.write_savefile()
 	print("Generated %s star systems" % _save.galaxy.galaxy.size())
 
-func init_main_menu():
+
+func init_main_menu() -> void:
+	menu_active = true
 	var new_main_menu = main_menu.instance()
 	if _save_exists:
 		new_main_menu.save_exists = true
 	add_child(new_main_menu)
 
-func run_game():
+
+func run_game() -> void:
 	Global.save = _save
 	#var maptest = galaxy_map.instance()
 	#add_child(maptest)
-	load_system()
 	var new_player = player.instance()
 	new_player.ship = _save.player.current_ship
 	add_child(new_player)
+
 	remove_child($MainMenu)
+	load_system()
+	menu_active = false
 
-func load_system():
+
+func spawn_npc() -> void:
+	var system_name = Global.current_system["Name"]
+	var planets = []
+	for child in Global.loaded_system.get_children():
+		# the star IS the system name, but planets only use it as a prefix
+		if child.name != system_name and child.name.begins_with(system_name):
+			planets.append(child)
+
+	var entity = npc.instance()
+
+	entity.src = planets.pop_at(randi() % len(planets))
+	if len(planets) > 1: # avoiding % by zero
+		entity.dst = planets.pop_at(randi() % len(planets))
+	if len(planets) == 1:
+		entity.dst = planets.pop_front()
+
+	add_child(entity)
+
+
+func load_system() -> void:
+	remove_child($System)
+
 	var new_system = system.instance()
-	new_system.system_id = _save.player.current_system
-	new_system.data = _save.galaxy
-	add_child(new_system)
-	Global.loaded_system = $System
-	for _i in range(randi() % 10):
-		var new_npc = npc.instance()
-		add_child(new_npc)
-
-
-func hyperspace():
-	var new_system = system.instance()
-	if Global.save.player.current_system == -1:
-		Global.save.player.current_system = 1
-	else:
-		Global.save.player.current_system += 1
+	
 	new_system.system_id = Global.save.player.current_system
 	new_system.data = Global.save.galaxy
-	remove_child($System)
 	add_child(new_system)
+
+	Global.loaded_system = $System
 	Global.player.global_position = Vector2(0, 0)
-	loaded_system = $System
-	print("Main: Jump complete")
+
+
+func hyperspace() -> void:
+	Global.save.player.current_system = randi() % 512
+	load_system()

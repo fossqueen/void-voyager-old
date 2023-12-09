@@ -12,6 +12,7 @@ var radar_icon = "star"
 var system_name
 
 func _ready():
+	name = system_name
 	if type == 0:
 		color = Color(0.00, 0.57, 0.78)
 	elif type == 1:

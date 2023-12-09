@@ -62,4 +62,5 @@ func init_objects():
 		new_planet.rotation_speed = rand_range(0.1, 1)
 		new_planet.rotation = deg2rad(rand_range(0, 360))
 		new_planet.system_name = system["Name"]
+		new_planet.name = system["Name"] + system["Objects"][i]["Name"]
 		add_child(new_planet)
