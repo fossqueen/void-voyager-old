@@ -34,7 +34,7 @@ func _physics_process(delta):
 		look_at(Vector2(0, 0))
 
 func _integrate_forces(_state):
-	var speed = ship.speed / 2.0
+	var speed = ship.speed / 1.5
 	var target = Vector2(0, 0)
 	if dst:
 		target = pos(dst.distance, dst.rotation)
@@ -47,6 +47,9 @@ func _integrate_forces(_state):
 func _draw():
 	draw_colored_polygon(ship.points, FACTION_COLORS[faction])
 	draw_polyline(ship.points, Color.white, ship.width, false)
+
+func get_faction_color():
+	return FACTION_COLORS[faction]
 
 func damage(amount):
 	ship.health -= (amount / 10)

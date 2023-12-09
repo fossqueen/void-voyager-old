@@ -24,13 +24,16 @@ func _process(_delta):
 	player_marker.rotation = player.rotation
 	
 	for i in markers:
-		var obj_pos = (i.global_position  - player.position) * grid_scale + $Panel.rect_size / 2
-		if $Panel.get_rect().has_point(obj_pos + $Panel.rect_position):
-			markers[i].scale = Vector2(1, 1)
+		if is_instance_valid(i):
+			var obj_pos = (i.global_position  - player.position) * grid_scale + $Panel.rect_size / 2
+			if $Panel.get_rect().has_point(obj_pos + $Panel.rect_position):
+				markers[i].scale = Vector2(1, 1)
+			else:
+				markers[i].scale = Vector2(0.40, 0.40)
+			obj_pos = clamp_circle(obj_pos, 64)
+			markers[i].position = obj_pos
 		else:
-			markers[i].scale = Vector2(0.40, 0.40)
-		obj_pos = clamp_circle(obj_pos, 64)
-		markers[i].position = obj_pos
+			markers.erase(i)
 
 # Custom functions
 func get_objects():
@@ -61,7 +64,7 @@ func add_object(object):
 	elif object.radar_icon == "npc":
 		new_marker.npc = true
 		new_marker.node = object
-		new_marker.color = object.FACTION_COLORS[object.faction]
+		new_marker.color = object.get_faction_color()
 	else:
 		new_marker.color = object.color
 	$Panel.add_child(new_marker)

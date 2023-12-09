@@ -21,6 +21,9 @@ func _draw():
 		draw_circle(center, radius, color)
 		draw_arc(center, radius, start_angle, end_angle, point_count, color, width, antialiased)
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if npc:
-		global_rotation = node.global_rotation
+		if not is_instance_valid(node):
+			queue_free()
+		else:
+			global_rotation = node.global_rotation
