@@ -11,6 +11,7 @@ var _galaxy_generator := GalaxyGenerator.new()
 onready var main_menu = load("res://ui/main-menu/main-menu.tscn")
 onready var system = load("res://system/system.tscn")
 onready var player = load("res://player/player.tscn")
+onready var npc = load("res://npc/npc.tscn")
 onready var ui = load("res://ui/ui.tscn")
 onready var galaxy_map = load("res://ui/galaxy-map/galaxy-map.tscn")
 
@@ -62,6 +63,10 @@ func load_system():
 	new_system.data = _save.galaxy
 	add_child(new_system)
 	Global.loaded_system = $System
+	for _i in range(randi() % 10):
+		var new_npc = npc.instance()
+		add_child(new_npc)
+
 
 func hyperspace():
 	var new_system = system.instance()
