@@ -30,6 +30,8 @@ func _physics_process(delta):
 		queue_free()
 	if dst:
 		look_at(pos(dst.distance, dst.rotation))
+	else:
+		look_at(Vector2(0, 0))
 
 func _integrate_forces(_state):
 	var speed = ship.speed / 2.0
