@@ -91,7 +91,9 @@ func spawn_npc() -> void:
 
 
 func load_system() -> void:
-	remove_child($System)
+	var get_system = get_tree().get_nodes_in_group("system")
+	for system in get_system:
+		remove_child(system)
 
 	var new_system = system.instance()
 	
