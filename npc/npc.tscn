@@ -2,7 +2,7 @@
 
 [ext_resource path="res://npc/npc.gd" type="Script" id=1]
 
-[node name="NPC" type="RigidBody2D"]
+[node name="NPC" type="RigidBody2D" groups=["npc"]]
 z_index = 2
 mass = 25000.0
 contacts_reported = 4

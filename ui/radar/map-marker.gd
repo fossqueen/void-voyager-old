@@ -9,6 +9,8 @@ export var color: Color = Color(1.0, 1.0, 1.0)
 var width = 1
 var antialiased = 0
 export var player: bool = false
+export var npc: bool = false
+var node
 
 func _draw():
 	if player:
@@ -19,3 +21,6 @@ func _draw():
 		draw_circle(center, radius, color)
 		draw_arc(center, radius, start_angle, end_angle, point_count, color, width, antialiased)
 
+func _physics_process(delta):
+	if npc:
+		global_rotation = node.global_rotation

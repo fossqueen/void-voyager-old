@@ -60,14 +60,12 @@ func init_main_menu() -> void:
 
 func run_game() -> void:
 	Global.save = _save
-	#var maptest = galaxy_map.instance()
-	#add_child(maptest)
 	var new_player = player.instance()
 	new_player.ship = _save.player.current_ship
 	add_child(new_player)
-
 	remove_child($MainMenu)
 	load_system()
+	Global.ui.radar.get_objects()
 	menu_active = false
 
 

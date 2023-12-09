@@ -15,6 +15,8 @@ export (Resource) var dst
 var time_to_live: float = 60.0
 var faction: String
 
+var radar_icon: String = "npc"
+
 func pos(r: float, t: float):
 	return Vector2(r * cos(t), r * sin(t))
 
