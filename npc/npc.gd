@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 const radar_icon: String = "npc"
-
+const NPC_NAME_POOL = [ "lisa", "bart", "maggie", "homer", "marge", "millhouse", "martin", "ralph", "burns", "smithers", "barney", "grampa", "flanders", "wiggum", "lovejoy", "willie", "apu", "bob", "skinner", "krabappel", "krusty", "nelson", "quimby", "brockman", "riviera", "otto", "patty", "selma", "frink" ]
 const NPC_FULL_SPEED = Vector2(50000, 0)
 const FACTION_COLORS = {
 	'trader': Color.lightgreen,

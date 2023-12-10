@@ -22,7 +22,6 @@ var menu_active: bool = true
 func _ready() -> void:
 	Global.main = self
 	load_save()
-	load_npc_name_pool()
 	init_main_menu()
 	$UI/Margin/Bottom/Version.text = Global.VERSION
 
@@ -40,14 +39,6 @@ func load_save() -> void:
 	if _save.save_exists():
 		_save.load_savefile()
 		_save_exists = true
-
-
-func load_npc_name_pool():
-	var file = File.new()
-	file.open("npc/data/names.txt", File.READ)
-	while not file.eof_reached():
-		Global.npc_name_pool.append(file.get_line())
-	file.close()
 
 
 func create_save() -> void:
