@@ -27,7 +27,7 @@ func _integrate_forces(_state):
 func _physics_process(_delta):
 	look()
 
-func _unhandled_input(_event):
+func _unhandled_input(event):
 	# System map
 	if Input.is_action_just_pressed("toggle_system_map"):
 		$UI.toggle_system_map()
@@ -43,6 +43,10 @@ func _unhandled_input(_event):
 		reset_state = true
 		Global.main.hyperspace()
 		$UI/Radar.get_objects()
+
+	# Primary fire
+	if event.is_action("primary_fire"):
+		$MiningLaser.is_casting = event.is_pressed()
 	
 	# Secondary fire
 	if Input.is_action_just_pressed("secondary_fire"):

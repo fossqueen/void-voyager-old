@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://npc/npc.gd" type="Script" id=1]
+[ext_resource path="res://ships/modules/mining-laser.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ships/animations/thrust.tres" type="Animation" id=3]
+[ext_resource path="res://ships/animations/idle.tres" type="Animation" id=4]
 
 [node name="NPC" type="RigidBody2D" groups=["npc"]]
 z_index = 2
@@ -9,6 +12,21 @@ contacts_reported = 4
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 1 )
+
+[node name="MiningLaser" parent="." instance=ExtResource( 2 )]
+
+[node name="Animations" type="Node2D" parent="."]
+show_behind_parent = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
+root_node = NodePath("../..")
+anims/idle = ExtResource( 4 )
+anims/thrust = ExtResource( 3 )
+
+[node name="Plume" type="Polygon2D" parent="Animations"]
+visible = false
+position = Vector2( 4, 0 )
+polygon = PoolVector2Array( -16, -8, -32, 0, -16, 8 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16 )

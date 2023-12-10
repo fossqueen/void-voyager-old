@@ -15,13 +15,14 @@ onready var npc = load("res://npc/npc.tscn")
 onready var ui = load("res://ui/ui.tscn")
 onready var galaxy_map = load("res://ui/galaxy-map/galaxy-map.tscn")
 
-var npc_spawn_timer: float = 5.0
+var npc_spawn_timer: float = rand_range(5.0, 15.0)
 var menu_active: bool = true
 
 # on ready
 func _ready() -> void:
 	Global.main = self
 	load_save()
+	load_npc_name_pool()
 	init_main_menu()
 	$UI/Margin/Bottom/Version.text = Global.VERSION
 
@@ -31,7 +32,7 @@ func _process(delta) -> void:
 		npc_spawn_timer -= delta
 		if npc_spawn_timer <= 0.0:
 			spawn_npc()
-			npc_spawn_timer = 5.0
+			npc_spawn_timer = rand_range(5.0, 15.0)
 	$UI/Margin/FPS.text = "fps: " + str(int(Engine.get_frames_per_second()))
 
 
@@ -39,6 +40,14 @@ func load_save() -> void:
 	if _save.save_exists():
 		_save.load_savefile()
 		_save_exists = true
+
+
+func load_npc_name_pool():
+	var file = File.new()
+	file.open("npc/data/names.txt", File.READ)
+	while not file.eof_reached():
+		Global.npc_name_pool.append(file.get_line())
+	file.close()
 
 
 func create_save() -> void:
@@ -70,28 +79,22 @@ func run_game() -> void:
 
 
 func spawn_npc() -> void:
-	var system_name = Global.current_system["Name"]
-	var planets = []
-	for child in Global.loaded_system.get_children():
-		# the star IS the system name, but planets only use it as a prefix
-		if child.name != system_name and child.name.begins_with(system_name):
-			planets.append(child)
+	var planets = get_tree().get_nodes_in_group("planets")
+	if planets.size() > 0:
+		var entity = npc.instance()
 
-	var entity = npc.instance()
+		entity.src = planets.pop_at(randi() % planets.size())
+		if planets.size() > 0: # avoiding % by zero
+			entity.dst = planets.pop_at(randi() % planets.size())
 
-	entity.src = planets.pop_at(randi() % len(planets))
-	if len(planets) > 1: # avoiding % by zero
-		entity.dst = planets.pop_at(randi() % len(planets))
-	if len(planets) == 1:
-		entity.dst = planets.pop_front()
-
-	add_child(entity)
+		add_child(entity)
 
 
 func load_system() -> void:
-	var get_system = get_tree().get_nodes_in_group("system")
-	for sys in get_system:
-		remove_child(sys)
+	var tree = get_tree()
+	var cleanup = tree.get_nodes_in_group("system") + tree.get_nodes_in_group("npcs")
+	for entity in cleanup:
+		remove_child(entity)
 
 	var new_system = system.instance()
 	

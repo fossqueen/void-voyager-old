@@ -5,13 +5,10 @@ var fire_action := "primary_fire"
 
 var is_casting := false setget set_is_casting 
 
+
 func _ready() -> void:
 	set_physics_process(false)
 	$Laser.points[1] = Vector2.ZERO
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action(fire_action):
-		self.is_casting = event.is_pressed()
 
 
 func _physics_process(delta) -> void:

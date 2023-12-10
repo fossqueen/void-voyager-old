@@ -18,6 +18,9 @@ export var rotation_speed: float = 1
 var center: Vector2 = Vector2(0, 0)
 var color: Color = Color(1, 1, 1, 0.1)
 
+func _init():
+	add_to_group("planets")
+
 # on ready
 func _ready():
 	$Body.position.x = distance
@@ -31,5 +34,5 @@ func _draw():
 
 # physics process
 func _physics_process(delta):
-	rotation += (0.005 + (1000 / int(distance))) * delta
+	rotation += (0.005 + int(1000.0 / int(distance))) * delta
 	$Body/Sprite.rotation -= (rotation_speed / 48) * delta

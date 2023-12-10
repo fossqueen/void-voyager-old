@@ -10,3 +10,5 @@ var loaded_system
 var save
 var starfield
 var ui
+
+var npc_name_pool: Array
