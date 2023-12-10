@@ -79,10 +79,9 @@ func run_game() -> void:
 
 
 func spawn_npc() -> void:
-	var planets = get_tree().get_nodes_in_group("planets")
-	if planets.size() > 0:
+	var planets = get_tree().get_nodes_in_group("planet")
+	if planets.size() > 0: # if there's no planets don't spawn NPCs
 		var entity = npc.instance()
-
 		entity.src = planets.pop_at(randi() % planets.size())
 		if planets.size() > 0: # avoiding % by zero
 			entity.dst = planets.pop_at(randi() % planets.size())
@@ -92,7 +91,7 @@ func spawn_npc() -> void:
 
 func load_system() -> void:
 	var tree = get_tree()
-	var cleanup = tree.get_nodes_in_group("system") + tree.get_nodes_in_group("npcs")
+	var cleanup = tree.get_nodes_in_group("system") + tree.get_nodes_in_group("npc")
 	for entity in cleanup:
 		remove_child(entity)
 

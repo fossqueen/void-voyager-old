@@ -18,11 +18,9 @@ export var rotation_speed: float = 1
 var center: Vector2 = Vector2(0, 0)
 var color: Color = Color(1, 1, 1, 0.1)
 
-func _init():
-	add_to_group("planets")
-
 # on ready
 func _ready():
+	add_to_group("planet")
 	$Body.position.x = distance
 	$Body.scale = Vector2(radius / 512, radius / 512)
 	$Body/GravityField.gravity = radius / 5.22

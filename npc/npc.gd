@@ -31,11 +31,9 @@ func get_faction_color():
 	return FACTION_COLORS[faction]
 
 
-func _init():
-	add_to_group("npcs")
-
-
 func _ready():
+	add_to_group("npc")
+	add_to_group(faction)
 	name = random_choice(Global.npc_name_pool)
 	if is_instance_valid(src):
 		position = polar2cartesian(src.distance, src.rotation)
@@ -55,10 +53,11 @@ func _integrate_forces(_state):
 	var speed = NPC_FULL_SPEED
 
 	if distance > offset:
-		linear_damp = 0.01 # they can't handle -1
-		if distance < offset * 6:
+		linear_damp = 0.05 # they can't handle -1, or 0.01...
+		if distance < offset * 8:
+			speed.x = ship.speed * 1.5
 			linear_damp = 0.6
-		elif distance < offset * 12:
+		elif distance < offset * 16:
 			linear_damp = 0.6
 			speed.x = ship.speed / 1.5
 		look_at(target)
@@ -74,5 +73,5 @@ func _integrate_forces(_state):
 
 
 func _draw():
-	draw_colored_polygon(ship.points, FACTION_COLORS[faction])
+	draw_colored_polygon(ship.points, get_faction_color())
 	draw_polyline(ship.points, Color.white, ship.width, false)
