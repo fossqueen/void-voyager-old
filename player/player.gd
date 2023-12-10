@@ -135,3 +135,5 @@ func _on_Scanner_body_entered(body):
 func _on_Scanner_body_exited(body):
 	if body.is_in_group("radar_objects"):
 		$UI/Radar.remove_object(body)
+	if body.is_in_group("npc"):
+		$UI/Radar.remove_object(body)
