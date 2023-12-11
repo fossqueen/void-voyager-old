@@ -34,7 +34,7 @@ func get_faction_color():
 func _ready():
 	add_to_group("npc")
 	add_to_group(faction)
-	name = random_choice(Global.npc_name_pool)
+	name = random_choice(NPC_NAME_POOL)
 	if is_instance_valid(src):
 		position = polar2cartesian(src.distance, src.rotation)
 	if is_instance_valid(dst):
