@@ -1,51 +1,48 @@
 extends Resource
 class_name GalaxyGenerator
 
-var galaxy = []
+const OBJECT_MASS_MIN: float = 8.0
+const OBJECT_MASS_MAX: float = 2048.0
 
-func random_string(length):
-	var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+func random_string(length: int) -> String:
+	var characters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	var string: String = ""
-	var n_char = len(characters)
+	var n_char: int = len(characters)
 	for _character in range(length):
 		string += characters[randi()% n_char]
 	return string
 
-func random_digits(length):
-	var digits = '1234567890'
+
+func random_digits(length: int) -> String:
+	var digits: String = '1234567890'
 	var string: String = ""
-	var n_digi = len(digits)
+	var n_digi: int = len(digits)
 	for _digit in range(length):
 		string += digits[randi()% n_digi]
 	return string
 
-func into_2d(i, width):
-	var a = (i % int(width))
-	var b = (i / int(width))
-	var c = Vector2(int(a), int(b))
-	
-	return c
 
-func generate_object(usable_mass, planet_name, distance):
-	var mass = rand_range(8.00, 2048.00)
-	var radius = rand_range(128.00, 512.00)
+func generate_object(usable_mass: float, planet_name: String, distance: float) -> Dictionary:
+	var mass: float = rand_range(OBJECT_MASS_MIN, OBJECT_MASS_MAX)
+	var radius: float = rand_range(128.00, 512.00)
 	var rings: bool
 	var moons: bool
 	var moon_type: int = 1
 	var moon_distance = rand_range(1500, 2500)
 	var body_distance = distance
-	var type = "Terrestrial" if mass > 256.00 else "Black Hole" if mass > 2000.00 and radius < 128.00 else "Gas Giant"
+	var type = "Terrestrial" if mass > 256.00 else "Black Hole" if mass > 2000.00 and radius < 132.00 else "Gas Giant"
 	var random_sub_type = int(rand_range(0, 100))
 	var sub_type = "None"
 	if type == "Terrestrial":
 		sub_type = "Earth-like" if random_sub_type <= 5 else "Waterworld" if random_sub_type <= 30 else "Terren"
 	if sub_type == "Waterworld" and distance >= 12000:
 		sub_type = "Ice-Planet"
-	if int(rand_range(0, 100)) <= 25:
+	if randi() % 100 + 1 <= 25:
 		rings = true 
 	else:
 		rings = false
-	if int(rand_range(0, 100)) <= 25:
+	if randi() % 100 + 1 <= 25:
 		moons = true
 	else:
 		moons = false
@@ -62,13 +59,15 @@ func generate_object(usable_mass, planet_name, distance):
 		"MoonDistance": moon_distance,
 	}
 
-func generate_asteroid_belt(distance):
+
+func generate_asteroid_belt(distance: float) -> Dictionary:
 	return {
 		"Name": "Belt",
 		"Distance": distance
 	}
 
-func generate_system(x, y, system_name):
+
+func generate_system(x: float, y: float, system_name: String) -> Dictionary:
 	var usable_mass = rand_range(256.00, 4096.00)
 	var core_mass = rand_range(128.00, 512.00)
 	var star = {"Mass": core_mass, "Radius": core_mass}
@@ -101,12 +100,14 @@ func generate_system(x, y, system_name):
 		"Objects": objects,
 	}
 
-func random_spiral(diameter, phi):
+
+func random_spiral(diameter: float, phi: float) -> Array:
 	var radius = rand_range(0, diameter / 2)
 	var angle = rand_range(0, 2 * PI)
 	return [angle, (radius / (1 - (phi * tan(phi)) * log(angle / phi)))]
 
-func generate_galaxy(stars, diameter, sigma):
+
+func generate_galaxy(stars: int, diameter: float, sigma: float) -> Array:
 	var system_coordinates = []
 	var system_names = []
 	var galaxy_gen = []
@@ -137,8 +138,8 @@ func generate_galaxy(stars, diameter, sigma):
 				galaxy_gen.append(generate_system(x2, y2, system_name))
 	return galaxy_gen
 
-func initialize_galaxy(stars, diameter, sigma):
+
+func initialize_galaxy(stars: int, diameter: float, sigma: float) -> Array:
 	randomize()
 	var new_galaxy = generate_galaxy(stars, diameter, sigma)
-	galaxy = new_galaxy
-	return galaxy
+	return new_galaxy
