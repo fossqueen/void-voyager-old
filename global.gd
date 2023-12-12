@@ -10,3 +10,4 @@ var loaded_system
 var save
 var starfield
 var ui
+var planets: Array

@@ -45,7 +45,9 @@ func _unhandled_input(event):
 		$UI/Radar.get_objects()
 	
 	if event.is_action("primary_fire"):
-		$MiningLaser.is_casting = event.is_pressed()
+		var p = event.is_pressed()
+		print(p)
+		$MiningLaser.is_casting = p
 	
 	if Input.is_action_just_pressed("secondary_fire"):
 		pass
