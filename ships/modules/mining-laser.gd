@@ -1,12 +1,16 @@
 extends RayCast2D
 
 var damage_per_second: int = 30
-var fire_action := "primary_fire"
-
 var is_casting := false setget set_is_casting 
 
+# for some reason "interpolate_property" does not work right when on an NPC
+var l: float
+var r: float
 
 func _ready() -> void:
+	var parent = get_parent()
+	l = 0.0 if parent.is_in_group("player") else 4.0
+	r = 4.0 if parent.is_in_group("player") else 0.0
 	set_physics_process(false)
 	$Laser.points[1] = Vector2.ZERO
 
@@ -44,10 +48,10 @@ func set_is_casting(cast: bool) -> void:
 
 func appear() -> void:
 	$Tween.stop_all()
-	$Tween.interpolate_property($Laser, "width", 0, 4.0, 0.1)
+	$Tween.interpolate_property($Laser, "width", l, r, 0.1)
 	$Tween.start()
 
 func disappear() -> void:
 	$Tween.stop_all()
-	$Tween.interpolate_property($Laser, "width", 4.0, 0, 0.1)
+	$Tween.interpolate_property($Laser, "width", r, l, 0.1)
 	$Tween.start()

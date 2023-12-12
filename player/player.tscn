@@ -19,7 +19,7 @@ font_data = ExtResource( 6 )
 [sub_resource type="Theme" id=5]
 default_font = SubResource( 4 )
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" groups=["player"]]
 z_index = 2
 mass = 25000.0
 contacts_reported = 4

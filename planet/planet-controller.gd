@@ -20,10 +20,15 @@ var color: Color = Color(1, 1, 1, 0.1)
 
 # on ready
 func _ready():
-	add_to_group("planet")
 	$Body.position.x = distance
 	$Body.scale = Vector2(radius / 512, radius / 512)
 	$Body/GravityField.gravity = radius / 5.22
+
+func _enter_tree():
+	Global.planets.append(self)
+
+func _exit_tree():
+	Global.planets.erase(self)
 
 # draw guides
 func _draw():

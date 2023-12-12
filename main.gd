@@ -11,11 +11,11 @@ var _galaxy_generator := GalaxyGenerator.new()
 onready var main_menu = load("res://ui/main-menu/main-menu.tscn")
 onready var system = load("res://system/system.tscn")
 onready var player = load("res://player/player.tscn")
-onready var npc = load("res://npc/npc.tscn")
+onready var npc = preload('res://npc/npc.tscn')
 onready var ui = load("res://ui/ui.tscn")
 onready var galaxy_map = load("res://ui/galaxy-map/galaxy-map.tscn")
 
-var npc_spawn_timer: float = rand_range(5.0, 15.0)
+var npc_spawn_timer: float = 0.0
 var menu_active: bool = true
 
 # on ready
@@ -31,7 +31,7 @@ func _process(delta) -> void:
 		npc_spawn_timer -= delta
 		if npc_spawn_timer <= 0.0:
 			spawn_npc()
-			npc_spawn_timer = rand_range(5.0, 15.0)
+			npc_spawn_timer = 3.0
 	$UI/Margin/FPS.text = "fps: " + str(int(Engine.get_frames_per_second()))
 
 
@@ -70,13 +70,12 @@ func run_game() -> void:
 
 
 func spawn_npc() -> void:
-	var planets = get_tree().get_nodes_in_group("planet")
-	if planets.size() > 0: # if there's no planets don't spawn NPCs
+	if not Global.planets.empty():
 		var entity = npc.instance()
-		entity.src = planets.pop_at(randi() % planets.size())
-		if planets.size() > 0: # avoiding % by zero
-			entity.dst = planets.pop_at(randi() % planets.size())
-
+		# use the planet's body as the origin and future targets, it has the real coordinates
+		entity.faction = randi() % 3 # 4 factions so far, this is a temporary line
+		entity.origin = Global.planets[randi() % Global.planets.size()].get_node("Body")
+		
 		add_child(entity)
 
 

@@ -96,6 +96,7 @@ func generate_system(x: float, y: float, system_name: String) -> Dictionary:
 			"X": x,
 			"Y": y,
 		},
+		"Population": int(rand_range(pow(core_mass, 2), pow(core_mass, 3))), # quick and nasty, we should change
 		"Star": star,
 		"Objects": objects,
 	}
