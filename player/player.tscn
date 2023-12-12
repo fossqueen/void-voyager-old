@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://ui/radar/radar.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ships/modules/mining-laser.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ships/animations/thrust.tres" type="Animation" id=8]
 [ext_resource path="res://ships/animations/idle.tres" type="Animation" id=9]
+[ext_resource path="res://ships/modules/shield.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 4000.0
@@ -30,6 +31,9 @@ points = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16, -20, 0 )
 
 [node name="MiningLaser" parent="." instance=ExtResource( 7 )]
 show_behind_parent = true
+
+[node name="Shield" parent="." instance=ExtResource( 10 )]
+visible = false
 
 [node name="Animations" type="Node2D" parent="."]
 show_behind_parent = true

@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 
 [node name="List" type="VBoxContainer" parent="."]
 margin_right = 128.0
-margin_bottom = 86.0
+margin_bottom = 104.0
 size_flags_vertical = 9
 
 [node name="Health" type="HBoxContainer" parent="List"]
@@ -32,10 +32,27 @@ margin_right = 128.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
-[node name="Fuel" type="HBoxContainer" parent="List"]
+[node name="Shield" type="HBoxContainer" parent="List"]
 margin_top = 18.0
 margin_right = 128.0
 margin_bottom = 32.0
+
+[node name="Label" type="Label" parent="List/Shield"]
+margin_right = 43.0
+margin_bottom = 14.0
+size_flags_horizontal = 5
+text = "shield:"
+
+[node name="ProgressBar" type="ProgressBar" parent="List/Shield"]
+margin_left = 47.0
+margin_right = 128.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Fuel" type="HBoxContainer" parent="List"]
+margin_top = 36.0
+margin_right = 128.0
+margin_bottom = 50.0
 
 [node name="Label" type="Label" parent="List/Fuel"]
 margin_right = 28.0
@@ -50,23 +67,23 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="Credits" type="Label" parent="List"]
-margin_top = 36.0
-margin_right = 128.0
-margin_bottom = 50.0
-
-[node name="Velocity" type="Label" parent="List"]
 margin_top = 54.0
 margin_right = 128.0
 margin_bottom = 68.0
 
-[node name="FlightAssist" type="Label" parent="List"]
+[node name="Velocity" type="Label" parent="List"]
 margin_top = 72.0
 margin_right = 128.0
 margin_bottom = 86.0
 
+[node name="FlightAssist" type="Label" parent="List"]
+margin_top = 90.0
+margin_right = 128.0
+margin_bottom = 104.0
+
 [node name="Panel" type="Panel" parent="."]
 show_behind_parent = true
 margin_right = 128.0
-margin_bottom = 86.0
+margin_bottom = 104.0
 size_flags_vertical = 9
 custom_styles/panel = SubResource( 1 )

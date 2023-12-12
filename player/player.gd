@@ -96,7 +96,14 @@ func store_velocity() -> void:
 
 
 func damage(amount: float) -> void:
-	ship.health -= (amount / 10)
+	if ship.shield > 0:
+		ship.shield -= (amount / 10000)
+		$Shield/AnimationPlayer.play("pulse")
+		if ship.shield < 0:
+			ship.health -= (ship.shield * -1)
+			ship.shield = 0
+	else:
+		ship.health -= (amount / 10000)
 	if ship.health <= 0:
 		destroy()
 
