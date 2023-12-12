@@ -6,7 +6,8 @@ const SUBTITLE: Array = [
 	"Now with more asteroids!",
 	"Blast off!",
 	"Everyone's favorite game!",
-	"Part of a balanced breakfast!"]
+	"Part of a balanced breakfast!",
+	"Hi!, I'm Paul."]
 
 var save_exists: bool = false
 onready var main = get_parent()

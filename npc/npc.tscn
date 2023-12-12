@@ -6,7 +6,7 @@
 [ext_resource path="res://ships/animations/idle.tres" type="Animation" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 4000.0
+radius = 2000.0
 
 [node name="NPC" type="RigidBody2D" groups=["npc"]]
 z_index = 2
@@ -18,6 +18,9 @@ script = ExtResource( 1 )
 
 [node name="MiningLaser" parent="." instance=ExtResource( 2 )]
 show_behind_parent = true
+
+[node name="Timer" type="Timer" parent="MiningLaser"]
+wait_time = 5.0
 
 [node name="Animations" type="Node2D" parent="."]
 show_behind_parent = true
@@ -41,4 +44,8 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Scanner"]
 shape = SubResource( 1 )
 
+[node name="ChillThrustTimer" type="Timer" parent="."]
+wait_time = 10.0
+
 [connection signal="body_entered" from="Scanner" to="." method="_on_Scanner_body_entered"]
+[connection signal="body_exited" from="Scanner" to="." method="_on_Scanner_body_exited"]

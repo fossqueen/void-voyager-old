@@ -104,7 +104,7 @@ func damage(amount: float) -> void:
 			ship.shield = 0
 	else:
 		ship.health -= (amount / 10000)
-	if ship.health <= 0:
+	if ship.health <= -100: # give some buffer for testing
 		destroy()
 
 

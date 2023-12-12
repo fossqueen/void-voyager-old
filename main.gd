@@ -16,6 +16,8 @@ onready var ui = load("res://ui/ui.tscn")
 onready var galaxy_map = load("res://ui/galaxy-map/galaxy-map.tscn")
 
 var npc_spawn_timer: float = 0.0
+var npcs: Array = []
+
 var menu_active: bool = true
 
 # on ready
@@ -27,11 +29,14 @@ func _ready() -> void:
 
 
 func _process(delta) -> void:
-	if not menu_active:
+	if not menu_active and npcs.size() < 20: # max 20 on the screen for now 
 		npc_spawn_timer -= delta
 		if npc_spawn_timer <= 0.0:
+			for entity in npcs:
+				if not is_instance_valid(entity):
+					npcs.erase(entity)
 			spawn_npc()
-			npc_spawn_timer = 3.0
+			npc_spawn_timer = 5.0
 	$UI/Margin/FPS.text = "fps: " + str(int(Engine.get_frames_per_second()))
 
 
@@ -73,9 +78,11 @@ func spawn_npc() -> void:
 	if not Global.planets.empty():
 		var entity = npc.instance()
 		# use the planet's body as the origin and future targets, it has the real coordinates
+		randomize()
 		entity.faction = randi() % 3 # 4 factions so far, this is a temporary line
 		entity.origin = Global.planets[randi() % Global.planets.size()].get_node("Body")
-		
+
+		npcs.append(entity)		
 		add_child(entity)
 
 
