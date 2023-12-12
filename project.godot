@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://save-resources/inventory.gd"
 }, {
 "base": "Resource",
+"class": "ItemDatabase",
+"language": "GDScript",
+"path": "res://item/item-database.gd"
+}, {
+"base": "Resource",
 "class": "PlayerSave",
 "language": "GDScript",
 "path": "res://save-resources/player-save.gd"
@@ -48,6 +53,7 @@ _global_script_class_icons={
 "Galaxy": "",
 "GalaxyGenerator": "",
 "Inventory": "",
+"ItemDatabase": "",
 "PlayerSave": "",
 "SaveFile": "",
 "Ship": "",
