@@ -4,10 +4,11 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "default"
-health = 100
-shield = 100
-fuel = 100.0
+name = "Grasshopper"
+role = 0
+max_health = 100.0
+max_shield = 100.0
+max_fuel = 100.0
 mass = 25000
 speed = 75000
 points = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16, -20, 0 )

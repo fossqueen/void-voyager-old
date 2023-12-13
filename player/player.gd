@@ -18,8 +18,8 @@ func _ready() -> void:
 
 
 func _draw() -> void:
-	draw_colored_polygon(ship.points, ship.color_black)
-	draw_polyline(ship.points, ship.color_white, ship.width, ship.antialiased)
+	draw_colored_polygon(ship.points, Color.black)
+	draw_polyline(ship.points, Color.white, ship.width, ship.antialiased)
 
 
 func _integrate_forces(_state) -> void:
