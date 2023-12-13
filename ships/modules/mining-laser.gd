@@ -42,6 +42,8 @@ func set_is_casting(cast: bool) -> void:
 		appear()
 	else:
 		$CollisionParticles.emitting = false
+		$BeamParticles.emitting = false
+		$CastingParticles.emitting = false
 		disappear()
 	
 	set_physics_process(is_casting)

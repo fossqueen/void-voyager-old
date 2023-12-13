@@ -7,6 +7,7 @@ var buf_v_length: float
 var camera: Node
 
 var reset_state: bool = false
+var mouse_motion: bool = false
 var flight_assist: bool = true
 
 const FUEL_EFFICIENCY: float = 0.0015
@@ -45,9 +46,8 @@ func _unhandled_input(event):
 		$UI/Radar.get_objects()
 	
 	if event.is_action("primary_fire"):
-		var p = event.is_pressed()
-		print(p)
-		$MiningLaser.is_casting = p
+		var fire = event.is_pressed()
+		$MiningLaser.is_casting = fire
 	
 	if Input.is_action_just_pressed("secondary_fire"):
 		pass
@@ -60,6 +60,11 @@ func _unhandled_input(event):
 	
 	if Input.is_action_just_pressed("ui_home"):
 		Global.save.player.inventory.add_item("poopball", 1)
+	
+	if event is InputEventMouseMotion:
+		mouse_motion = true
+	else:
+		mouse_motion = false
 
 
 func movement() -> void:
@@ -88,7 +93,12 @@ func movement() -> void:
 
 
 func look() -> void:
-	look_at(get_global_mouse_position())
+	var look_dir: Vector2 = Vector2(Input.get_axis("look_left", "look_right"), Input.get_axis("look_up", "look_down"))
+	if look_dir != Vector2.ZERO:
+		if look_dir.length() >= 0.75:
+			rotation = lerp_angle(rotation, look_dir.angle(), 0.5)
+	if mouse_motion:
+		look_at(get_global_mouse_position())
 
 
 func toggle_flight_assist() -> void:
