@@ -62,6 +62,7 @@ func add_object(object):
 		new_marker.color = Color(1.0, 1.0, 1.0)
 	elif object.radar_icon == "npc":
 		new_marker.npc = true
+		new_marker.player = false
 		new_marker.node = object
 		new_marker.color = object.get_faction_color()
 	else:
@@ -78,7 +79,8 @@ func remove_object(object):
 func remove_all_objects():
 	var map_markers = get_tree().get_nodes_in_group("radar_markers")
 	for i in map_markers:
-		$Panel.remove_child(i)
+		if !i.player:
+			$Panel.remove_child(i)
 	markers = {}
 	map_markers = {}
 	print("UI: Radar: All objects removed")
