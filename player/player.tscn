@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://ui/radar/radar.tscn" type="PackedScene" id=2]
@@ -10,6 +10,104 @@
 [ext_resource path="res://ships/animations/thrust.tres" type="Animation" id=8]
 [ext_resource path="res://ships/animations/idle.tres" type="Animation" id=9]
 [ext_resource path="res://ships/modules/shield.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animations/BackwardPlume:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "thrust"
+length = 0.1
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Animations/BackwardPlume:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("LeftPlume:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "thrust"
+length = 0.1
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("LeftPlume:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("RightPlume:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "thrust"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("RightPlume:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 4000.0
@@ -38,15 +136,47 @@ visible = false
 [node name="Animations" type="Node2D" parent="."]
 show_behind_parent = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Animations"]
+[node name="ForwardThrust" type="AnimationPlayer" parent="Animations"]
 root_node = NodePath("../..")
 anims/idle = ExtResource( 9 )
 anims/thrust = ExtResource( 8 )
 
-[node name="Plume" type="Polygon2D" parent="Animations"]
+[node name="ForwardPlume" type="Polygon2D" parent="Animations"]
 visible = false
 position = Vector2( 4, 0 )
 polygon = PoolVector2Array( -16, -8, -32, 0, -16, 8 )
+
+[node name="BackwardThrust" type="AnimationPlayer" parent="Animations"]
+root_node = NodePath("../..")
+anims/idle = SubResource( 6 )
+anims/thrust = SubResource( 7 )
+
+[node name="BackwardPlume" type="Node2D" parent="Animations"]
+visible = false
+
+[node name="BackwardPlumeL" type="Polygon2D" parent="Animations/BackwardPlume"]
+position = Vector2( 4, 0 )
+polygon = PoolVector2Array( -6, -12, 16, -8, -6, -4 )
+
+[node name="BackwardPlumeR" type="Polygon2D" parent="Animations/BackwardPlume"]
+position = Vector2( 4, 0 )
+polygon = PoolVector2Array( -6, 4, 16, 8, -6, 12 )
+
+[node name="LeftThrust" type="AnimationPlayer" parent="Animations"]
+anims/idle = SubResource( 8 )
+anims/thrust = SubResource( 9 )
+
+[node name="LeftPlume" type="Polygon2D" parent="Animations"]
+visible = false
+polygon = PoolVector2Array( -4, -8, 0, -20, 4, -8 )
+
+[node name="RightThrust" type="AnimationPlayer" parent="Animations"]
+anims/idle = SubResource( 10 )
+anims/thrust = SubResource( 11 )
+
+[node name="RightPlume" type="Polygon2D" parent="Animations"]
+visible = false
+polygon = PoolVector2Array( -4, 8, 0, 20, 4, 8 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16 )

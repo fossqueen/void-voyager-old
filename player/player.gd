@@ -22,10 +22,10 @@ func _draw() -> void:
 
 
 func _integrate_forces(_state) -> void:
-	movement()
+	#movement_old()
 	store_velocity()
 	reset()
-
+	movement()
 
 func _physics_process(_delta) -> void:
 	look()
@@ -63,13 +63,26 @@ func _unhandled_input(event):
 
 
 func movement() -> void:
-	if Input.is_action_pressed("thrust") and ship.fuel > 0:
-		apply_impulse(Vector2(0, 0).rotated(rotation), Vector2(ship.speed, 0).rotated(rotation))
-		$Animations/AnimationPlayer.play("thrust")
-		burn_fuel(FUEL_EFFICIENCY)
-		linear_damp =  -1
+	var thrust_dir: Vector2 = Vector2(Input.get_axis("thrust_backward", "thrust_forward"), Input.get_axis("thrust_left", "thrust_right")) * Vector2(ship.speed, ship.speed)
+	if thrust_dir != Vector2.ZERO and ship.fuel > 0:
+		apply_impulse(Vector2.ZERO.rotated(rotation), thrust_dir.rotated(rotation))
+		burn_fuel(FUEL_EFFICIENCY * Vector2(Input.get_axis("thrust_backward", "thrust_forward"), Input.get_axis("thrust_left", "thrust_right")).length())
+		linear_damp = -1
+		
+		if thrust_dir.x > 0:
+			$Animations/ForwardThrust.play("thrust")
+		if thrust_dir.x < 0:
+			$Animations/BackwardThrust.play("thrust")
+		if thrust_dir.y > 0:
+			$Animations/LeftThrust.play("thrust")
+		if thrust_dir.y < 0:
+			$Animations/RightThrust.play("thrust")
+	
 	else:
-		$Animations/AnimationPlayer.play("idle")
+		$Animations/ForwardThrust.play("idle")
+		$Animations/BackwardThrust.play("idle")
+		$Animations/LeftThrust.play("idle")
+		$Animations/RightThrust.play("idle")
 		if flight_assist:
 			linear_damp = FLIGHT_ASSIST_AMOUNT
 

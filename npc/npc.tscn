@@ -30,7 +30,7 @@ root_node = NodePath("../..")
 anims/idle = ExtResource( 4 )
 anims/thrust = ExtResource( 3 )
 
-[node name="Plume" type="Polygon2D" parent="Animations"]
+[node name="ForwardPlume" type="Polygon2D" parent="Animations"]
 visible = false
 position = Vector2( 4, 0 )
 polygon = PoolVector2Array( -16, -8, -32, 0, -16, 8 )

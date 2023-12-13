@@ -13,7 +13,7 @@ export var npc: bool = false
 var node
 
 func _draw():
-	if player:
+	if player or npc:
 		var points = PoolVector2Array([Vector2(5, 0), Vector2(-3, -4), Vector2(-3, 4), Vector2(5, 0)])
 		draw_colored_polygon(points, Color(0, 0, 0))
 		draw_polyline(points, color, width, antialiased)
