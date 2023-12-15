@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://_debug/_ship-refactoring/ship.gd" type="Script" id=1]
+[ext_resource path="res://_debug/_ship-refactoring/grasshopper.tres" type="Resource" id=2]
+[ext_resource path="res://camera/camera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ships/modules/mining-laser/mining-laser.tscn" type="PackedScene" id=4]
+
+[node name="Grasshopper" type="RigidBody2D"]
+mass = 25000.0
+contacts_reported = 3
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 1 )
+ship = ExtResource( 2 )
+
+[node name="Camera" parent="." instance=ExtResource( 3 )]
+zoom_max = 5.0
+
+[node name="Collider" type="CollisionPolygon2D" parent="."]
+
+[node name="Modules" type="Node2D" parent="."]
+
+[node name="MiningLaser" parent="Modules" instance=ExtResource( 4 )]

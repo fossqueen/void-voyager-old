@@ -45,6 +45,11 @@ _global_script_classes=[ {
 "path": "res://ships/ship.gd"
 }, {
 "base": "Resource",
+"class": "ShipClass",
+"language": "GDScript",
+"path": "res://_debug/_ship-refactoring/ship-class.gd"
+}, {
+"base": "Resource",
 "class": "Stats",
 "language": "GDScript",
 "path": "res://player/stats.gd"
@@ -57,6 +62,7 @@ _global_script_class_icons={
 "PlayerSave": "",
 "SaveFile": "",
 "Ship": "",
+"ShipClass": "",
 "Stats": ""
 }
 

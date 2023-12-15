@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://npc/npc.gd" type="Script" id=1]
-[ext_resource path="res://ships/modules/mining-laser.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ships/modules/mining-laser/mining-laser.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ships/animations/thrust.tres" type="Animation" id=3]
 [ext_resource path="res://ships/animations/idle.tres" type="Animation" id=4]
 

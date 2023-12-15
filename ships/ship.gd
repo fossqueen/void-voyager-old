@@ -5,9 +5,6 @@ signal ship_destroyed
 
 export var name: String = "Ship"
 
-enum SHIP_ROLES { multi, trader, combat, exploration }
-export(SHIP_ROLES) var role = SHIP_ROLES.multi
-
 export var max_health: float = 100 
 export var max_shield: float = 100
 export var max_fuel: float = 100

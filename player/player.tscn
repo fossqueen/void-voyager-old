@@ -6,10 +6,10 @@
 [ext_resource path="res://ui/ui.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/player-stats/player-stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://ships/modules/mining-laser.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ships/modules/mining-laser/mining-laser.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ships/animations/thrust.tres" type="Animation" id=8]
 [ext_resource path="res://ships/animations/idle.tres" type="Animation" id=9]
-[ext_resource path="res://ships/modules/shield.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ships/modules/shield/shield.tscn" type="PackedScene" id=10]
 
 [sub_resource type="Animation" id=6]
 resource_name = "idle"
