@@ -124,7 +124,7 @@ mass = 25000.0
 contacts_reported = 4
 contact_monitor = true
 can_sleep = false
-angular_damp = 1.0
+angular_damp = 8.0
 script = ExtResource( 1 )
 points = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16, -20, 0 )
 

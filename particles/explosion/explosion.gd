@@ -1,7 +1,7 @@
 extends Area2D
 
 var damage
-var explosion = load("res://_debug/explosionparticles.tscn")
+var explosion = load("res://particles/explosion/explosionparticles.tscn")
 
 func _ready():
 	var new_explosion = explosion.instance()

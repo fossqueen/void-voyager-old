@@ -2,7 +2,7 @@ extends CanvasLayer
 
 onready var system_map_scene = load("res://ui/system-map/system-map.tscn")
 onready var galaxy_map_scene = load("res://ui/galaxy-map/galaxy-map.tscn")
-onready var ship_panel_scene = load("res://_debug/ship-panel/ship-panel.tscn")
+onready var ship_panel_scene = load("res://ui/ship-panel/ship-panel.tscn")
 
 onready var radar = $Radar
 onready var player_stats = $PlayerStats

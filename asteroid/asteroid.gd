@@ -9,7 +9,7 @@ var health: float = 100
 var rotation_speed: float = 0
 
 var points: PoolVector2Array = PoolVector2Array([Vector2(-64, -8), Vector2(-40, -48), Vector2(-8, -56), Vector2(48, -40), Vector2(56, 16), Vector2(8, 56), Vector2(-48, 40), Vector2(-64, -8)])
-var explosion = load("res://_debug/explosionparticles.tscn")
+var explosion = load("res://particles/explosion/explosionparticles.tscn")
 
 
 func _draw():

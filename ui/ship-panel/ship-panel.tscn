@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://_debug/ship-panel/ship-panel.gd" type="Script" id=2]
-[ext_resource path="res://_debug/ship-panel/diagnostics-panel.tscn" type="PackedScene" id=3]
-[ext_resource path="res://_debug/ship-panel/inventory-panel.tscn" type="PackedScene" id=4]
-[ext_resource path="res://_debug/ship-panel/controls-panel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/ship-panel/ship-panel.gd" type="Script" id=2]
+[ext_resource path="res://ui/ship-panel/diagnostics-panel.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/ship-panel/inventory-panel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/ship-panel/controls-panel.tscn" type="PackedScene" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )

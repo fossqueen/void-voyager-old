@@ -23,13 +23,14 @@ func _draw() -> void:
 
 
 func _integrate_forces(_state) -> void:
-	#movement_old()
+	set_applied_torque(get_angle_to(get_global_mouse_position()) * pow(1.22, 100))
 	store_velocity()
 	reset()
 	movement()
 
 func _physics_process(_delta) -> void:
-	look()
+	#look()
+	pass
 
 
 func _unhandled_input(event):

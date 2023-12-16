@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-var item_scene = load("res://_debug/inventory-item.tscn")
+var item_scene = load("res://ui/ship-panel/inventory-item.tscn")
 
 func _ready():
 	for item_unique_id in Global.save.player.inventory.items:
