@@ -60,9 +60,10 @@ func configure_planet():
 			add_child(new_clouds)
 	if rings:
 		var spawn_asteroids = asteroid_spawner.instance()
-		spawn_asteroids.radius = Vector2(radius * 2, 0)
-		spawn_asteroids.count = radius * 0.1
-		add_child(spawn_asteroids)
+		spawn_asteroids.radius = Vector2(parent.radius * 3, 0)
+		spawn_asteroids.count = radius * 0.5
+		spawn_asteroids.position.x = parent.distance
+		parent.call_deferred("add_child", spawn_asteroids)
 	if moons:
 		var spawn_moon = moon_spawner.instance()
 		spawn_moon.planet = self

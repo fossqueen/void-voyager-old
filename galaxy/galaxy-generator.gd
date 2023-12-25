@@ -25,11 +25,11 @@ func random_digits(length: int) -> String:
 
 func generate_object(usable_mass: float, planet_name: String, distance: float) -> Dictionary:
 	var mass: float = rand_range(OBJECT_MASS_MIN, OBJECT_MASS_MAX)
-	var radius: float = rand_range(128.00, 512.00)
+	var radius: float = rand_range(128.00, 1024.00)
 	var rings: bool
 	var moons: bool
 	var moon_type: int = 1
-	var moon_distance = rand_range(1500, 2500)
+	var moon_distance = radius * 4
 	var body_distance = distance
 	var type = "Terrestrial" if mass > 256.00 else "Black Hole" if mass > 2000.00 and radius < 132.00 else "Gas Giant"
 	var random_sub_type = int(rand_range(0, 100))
@@ -74,8 +74,8 @@ func generate_system(x: float, y: float, system_name: String) -> Dictionary:
 	usable_mass -= core_mass
 	var object_ids = []
 	var objects = {}
-	var min_distance = 6000
-	var max_distance = 8000
+	var min_distance = 8000
+	var max_distance = 10000
 	var previous_distance = 0
 	var random_distance
 	while usable_mass  > 0: 
