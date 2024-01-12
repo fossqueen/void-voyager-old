@@ -10,6 +10,7 @@ var rotation_speed: float = 0
 
 var points: PoolVector2Array = PoolVector2Array([Vector2(-64, -8), Vector2(-40, -48), Vector2(-8, -56), Vector2(48, -40), Vector2(56, 16), Vector2(8, 56), Vector2(-48, 40), Vector2(-64, -8)])
 var explosion = load("res://particles/explosion/explosionparticles.tscn")
+var item = load("res://item/item.tscn")
 
 
 func _draw():
@@ -20,10 +21,6 @@ func _draw():
 
 func _ready():
 	sleeping = true
-	
-	randomize()
-	if randi() % 100 + 1 <= 33: # 1/3 chance to despawn. helps with 'natural' spacing
-		queue_free()
 	
 	rotation_speed = rand_range(-0.5, 0.5)
 	size = rand_range(MIN_SIZE, MAX_SIZE)
@@ -48,6 +45,10 @@ func damage(amount) -> void: # need to eventually tweak the damage
 		new_explosion.modulate = Color.white
 		new_explosion.z_index = -1
 		get_parent().add_child(new_explosion)
+		var drop_item = item.instance()
+		drop_item.itemID = randi() % 6
+		drop_item.global_position = global_position
+		get_tree().root.call_deferred("add_child", drop_item)
 		queue_free()
 
 

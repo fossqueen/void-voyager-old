@@ -64,6 +64,7 @@ func open_galaxy_map():
 	player_stats.hide()
 	Global.starfield.hide()
 	galaxy_map_toggle = true
+	
 	print("UI: Galaxy map opened")
 
 func close_galaxy_map():

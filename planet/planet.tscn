@@ -38,7 +38,6 @@ texture = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="GravityField" type="Area2D" parent="Body"]
-space_override = 1
 gravity_point = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body/GravityField"]

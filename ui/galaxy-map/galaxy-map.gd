@@ -1,4 +1,4 @@
-extends Node2D
+extends CanvasLayer
 
 onready var system_plot = load("res://ui/galaxy-map/system-plot.tscn")
 var data
@@ -25,6 +25,6 @@ func _ready():
 			new_system_plot.type = 1
 		else:
 			new_system_plot.type = 0
-		add_child(new_system_plot)
-		$Camera2D.position = $MapMarker.position
-		$Camera2D.current = true
+		$VPC/Viewport.add_child(new_system_plot)
+		$VPC/Viewport/Camera2D.position = $VPC/Viewport/MapMarker.position
+		$VPC/Viewport/Camera2D.current = true

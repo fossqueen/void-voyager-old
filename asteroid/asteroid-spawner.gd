@@ -15,7 +15,7 @@ func _ready():
 	if system_belt: # separate rotation ranges for system belts and planet belts
 		rotation_speed = rand_range(-0.001, 0.001)
 	else:
-		rotation_speed = rand_range(-0.1, 0.1)
+		rotation_speed = rand_range(-0.01, 0.01)
 	spawn_asteroids()
 
 

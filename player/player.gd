@@ -38,7 +38,7 @@ func _unhandled_input(event):
 		$UI.toggle_system_map()
 	
 	if Input.is_action_just_pressed("toggle_galaxy_map"):
-		pass
+		$UI.toggle_galaxy_map()
 	
 	if Input.is_action_just_pressed("hyperspace"):
 		$UI/Radar.remove_all_objects()

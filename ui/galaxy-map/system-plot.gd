@@ -5,7 +5,7 @@ var color
 var system
 
 const CENTER = Vector2(0, 0)
-const RADIUS = 8
+const RADIUS = 16
 
 func _draw():
 	draw_circle(CENTER, RADIUS, color)

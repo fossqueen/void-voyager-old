@@ -1,6 +1,6 @@
 extends RayCast2D
 
-var damage_per_second: int = 30
+var damage_per_second: int = 150
 var is_casting := false setget set_is_casting 
 
 # for some reason "interpolate_property" does not work right when on an NPC
