@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/galaxy-map/map-marker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://camera/camera-drag.gd" type="Script" id=3]
 [ext_resource path="res://ui/galaxy-map/galaxy-map.gd" type="Script" id=4]
 [ext_resource path="res://ui/galaxy-map/selected-plot.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/galaxy-map/select-system.png" type="Texture" id=6]
+[ext_resource path="res://ui/galaxy-map/current-system.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
@@ -84,10 +86,60 @@ margin_top = 36.0
 margin_right = 214.0
 margin_bottom = 40.0
 
-[node name="CurrentSystem" type="HBoxContainer" parent="InfoBox/List"]
+[node name="CameraButtons" type="HBoxContainer" parent="InfoBox/List"]
 margin_top = 44.0
 margin_right = 214.0
-margin_bottom = 76.0
+margin_bottom = 82.0
+
+[node name="CurrentSystem" type="Button" parent="InfoBox/List/CameraButtons"]
+margin_right = 105.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+icon = ExtResource( 7 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="SelectedSystem" type="Button" parent="InfoBox/List/CameraButtons"]
+margin_left = 109.0
+margin_right = 214.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+icon = ExtResource( 6 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="HSeparator4" type="HSeparator" parent="InfoBox/List"]
+margin_top = 86.0
+margin_right = 214.0
+margin_bottom = 90.0
+
+[node name="Fuel" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 94.0
+margin_right = 214.0
+margin_bottom = 126.0
+
+[node name="Details" type="Label" parent="InfoBox/List/Fuel"]
+margin_right = 62.0
+margin_bottom = 32.0
+text = "Fuel:"
+
+[node name="ProgressBar" type="ProgressBar" parent="InfoBox/List/Fuel"]
+margin_left = 66.0
+margin_right = 214.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="HSeparator3" type="HSeparator" parent="InfoBox/List"]
+margin_top = 130.0
+margin_right = 214.0
+margin_bottom = 134.0
+
+[node name="CurrentSystem" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 138.0
+margin_right = 214.0
+margin_bottom = 170.0
 
 [node name="Label" type="Label" parent="InfoBox/List/CurrentSystem"]
 margin_right = 208.0
@@ -100,9 +152,9 @@ margin_right = 212.0
 margin_bottom = 32.0
 
 [node name="CurrentDetails" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 80.0
+margin_top = 174.0
 margin_right = 214.0
-margin_bottom = 112.0
+margin_bottom = 206.0
 
 [node name="Details" type="Label" parent="InfoBox/List/CurrentDetails"]
 margin_right = 56.0
@@ -110,14 +162,14 @@ margin_bottom = 32.0
 text = "Desc"
 
 [node name="HSeparator2" type="HSeparator" parent="InfoBox/List"]
-margin_top = 116.0
+margin_top = 210.0
 margin_right = 214.0
-margin_bottom = 120.0
+margin_bottom = 214.0
 
 [node name="SelectedSystem" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 124.0
+margin_top = 218.0
 margin_right = 214.0
-margin_bottom = 156.0
+margin_bottom = 250.0
 
 [node name="Label" type="Label" parent="InfoBox/List/SelectedSystem"]
 margin_right = 210.0
@@ -130,9 +182,9 @@ margin_right = 214.0
 margin_bottom = 32.0
 
 [node name="SelectedDistance" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 160.0
+margin_top = 254.0
 margin_right = 214.0
-margin_bottom = 192.0
+margin_bottom = 286.0
 
 [node name="Label" type="Label" parent="InfoBox/List/SelectedDistance"]
 margin_right = 116.0
@@ -145,11 +197,14 @@ margin_right = 120.0
 margin_bottom = 32.0
 
 [node name="SelectedDetails" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 196.0
+margin_top = 290.0
 margin_right = 214.0
-margin_bottom = 228.0
+margin_bottom = 322.0
 
 [node name="Details" type="Label" parent="InfoBox/List/SelectedDetails"]
 margin_right = 56.0
 margin_bottom = 32.0
 text = "Desc"
+
+[connection signal="pressed" from="InfoBox/List/CameraButtons/CurrentSystem" to="." method="_on_CurrentSystem_pressed"]
+[connection signal="pressed" from="InfoBox/List/CameraButtons/SelectedSystem" to="." method="_on_SelectedSystem_pressed"]

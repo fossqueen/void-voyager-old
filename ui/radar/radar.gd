@@ -30,7 +30,7 @@ func _process(_delta):
 				markers[i].scale = Vector2(1, 1)
 			else:
 				markers[i].scale = Vector2(0.40, 0.40)
-			obj_pos = clamp_circle(obj_pos, 64)
+			obj_pos = clamp_circle(obj_pos, 128)
 			markers[i].position = obj_pos
 		else:
 			markers.erase(i)

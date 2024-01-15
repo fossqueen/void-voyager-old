@@ -44,6 +44,7 @@ func _physics_process(_delta):
 	$InfoBox/List/SelectedDetails/Details.text = "Coordinates: " + str(selected_system["Coordinates"]) + "\nPOI's: " + str(selected_system["Objects"].size()) if selected_system else ""
 	player_system_position = Vector2(player_system["Coordinates"]["X"], player_system["Coordinates"]["Y"])
 	player_system = Global.save.galaxy.galaxy[Global.save.player.current_system]
+	$InfoBox/List/Fuel/ProgressBar.value = Global.player.ship.fuel
 
 func scale_plots(value: float) -> void:
 	var plots = get_tree().get_nodes_in_group("system_plot")
@@ -56,8 +57,22 @@ func _unhandled_input(_event):
 	if Input.is_action_just_pressed("hyperspace"):
 		if selected_system:
 			if player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2 <= Global.player.jump_range:
-				Global.main.hyperspace(data.galaxy.galaxy.find(selected_system, 0))
+				if Global.player.ship.fuel > 0:
+					Global.player.ship.fuel -= player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"]))
+					if Global.player.ship.fuel < 0:
+						Global.player.ship.fuel = 0
+					Global.main.hyperspace(data.galaxy.galaxy.find(selected_system, 0))
 			else:
 				print("Exceeded Jump Range")
 		else:
 			print("No selected system")
+
+
+func _on_CurrentSystem_pressed():
+	$VPC/Viewport/Camera2D.position = player_system_position * 10
+	print(player_system_position)
+
+
+func _on_SelectedSystem_pressed():
+	if selected_system:
+		$VPC/Viewport/Camera2D.position = Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"]) * 10
