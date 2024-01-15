@@ -28,7 +28,7 @@ border_color = Color( 1, 1, 1, 1 )
 bg_color = Color( 0, 0, 0, 0.75 )
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
+size = 64
 use_mipmaps = true
 font_data = ExtResource( 1 )
 

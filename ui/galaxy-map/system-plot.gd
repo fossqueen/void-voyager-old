@@ -3,9 +3,12 @@ extends Node2D
 var type
 var color
 var system
+var camera
+var select
+var galaxy_map
 
 const CENTER = Vector2(0, 0)
-const RADIUS = 16
+const RADIUS = 8
 
 func _draw():
 	draw_circle(CENTER, RADIUS, color)
@@ -31,10 +34,18 @@ func _on_ClickRegion_mouse_entered():
 	var player_system = Global.save.galaxy.galaxy[Global.save.player.current_system]
 	var player_system_position = Vector2(player_system["Coordinates"]["X"], player_system["Coordinates"]["Y"])
 	var system_position = Vector2(system["Coordinates"]["X"], system["Coordinates"]["Y"])
+	#print(system["Name"])
+	#print("Points of interest: " + str(system["Objects"].size()))
+	#print("Distance from current position: " + str(int(player_system_position.distance_to(system_position)) * 2) + " ly")
 	
-	print(system["Name"])
-	print("Points of interest: " + str(system["Objects"].size()))
-	print("Distance from current position: " + str(int(player_system_position.distance_to(system_position))) + " ly")
 
 func _on_ClickRegion_mouse_exited():
 	pass
+
+
+func _on_ClickRegion_input_event(viewport, event, shape_idx):
+	if event.is_action_pressed("primary_fire"):
+		camera.position = position
+		select.show()
+		select.position = position
+		galaxy_map.selected_system = system

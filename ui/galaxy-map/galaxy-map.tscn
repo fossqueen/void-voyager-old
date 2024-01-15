@@ -1,8 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/galaxy-map/map-marker.tscn" type="PackedScene" id=2]
 [ext_resource path="res://camera/camera-drag.gd" type="Script" id=3]
 [ext_resource path="res://ui/galaxy-map/galaxy-map.gd" type="Script" id=4]
+[ext_resource path="res://ui/galaxy-map/selected-plot.tscn" type="PackedScene" id=5]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=3]
+default_font = SubResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_right = 1
+border_color = Color( 1, 1, 1, 1 )
 
 [node name="GalaxyMap" type="CanvasLayer" groups=["galaxy_map"]]
 script = ExtResource( 4 )
@@ -12,10 +26,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -320.0
-margin_top = -180.0
-margin_right = 320.0
-margin_bottom = 180.0
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -23,18 +37,113 @@ stretch = true
 
 [node name="Viewport" type="Viewport" parent="VPC"]
 size = Vector2( 1280, 720 )
-size_override_stretch = true
 handle_input_locally = false
 render_target_update_mode = 3
+physics_object_picking = true
 
 [node name="MapMarker" parent="VPC/Viewport" instance=ExtResource( 2 )]
 
+[node name="SelectedPlot" parent="VPC/Viewport" instance=ExtResource( 5 )]
+visible = false
+
 [node name="Camera2D" type="Camera2D" parent="VPC/Viewport"]
 current = true
-zoom = Vector2( 20, 20 )
 script = ExtResource( 3 )
-zoom_min = 2.0
-zoom_max = 60.0
-zoom_factor = 20.0
+zoom_min = 0.1
+zoom_max = 5.0
+zoom_factor = 0.1
+galaxy_map = true
 
 [node name="Tween" type="Tween" parent="VPC/Viewport/Camera2D"]
+
+[node name="InfoBox" type="MarginContainer" parent="."]
+anchor_bottom = 1.0
+margin_right = 196.0
+theme = SubResource( 3 )
+
+[node name="Panel" type="Panel" parent="InfoBox"]
+margin_right = 284.0
+margin_bottom = 720.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="List" type="VBoxContainer" parent="InfoBox"]
+margin_right = 284.0
+margin_bottom = 720.0
+
+[node name="Title" type="Label" parent="InfoBox/List"]
+margin_right = 284.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+text = "Galaxy Map"
+align = 1
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="InfoBox/List"]
+margin_top = 36.0
+margin_right = 284.0
+margin_bottom = 40.0
+
+[node name="CurrentSystem" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 44.0
+margin_right = 284.0
+margin_bottom = 76.0
+
+[node name="Label" type="Label" parent="InfoBox/List/CurrentSystem"]
+margin_right = 208.0
+margin_bottom = 32.0
+text = "Current System: "
+
+[node name="SystemName" type="Label" parent="InfoBox/List/CurrentSystem"]
+margin_left = 212.0
+margin_right = 212.0
+margin_bottom = 32.0
+
+[node name="CurrentDistance" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 80.0
+margin_right = 284.0
+margin_bottom = 112.0
+
+[node name="Label" type="Label" parent="InfoBox/List/CurrentDistance"]
+margin_right = 280.0
+margin_bottom = 32.0
+text = "Distance from center: "
+
+[node name="Distance" type="Label" parent="InfoBox/List/CurrentDistance"]
+margin_left = 284.0
+margin_right = 284.0
+margin_bottom = 32.0
+
+[node name="HSeparator2" type="HSeparator" parent="InfoBox/List"]
+margin_top = 116.0
+margin_right = 284.0
+margin_bottom = 120.0
+
+[node name="SelectedSystem" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 124.0
+margin_right = 284.0
+margin_bottom = 156.0
+
+[node name="Label" type="Label" parent="InfoBox/List/SelectedSystem"]
+margin_right = 210.0
+margin_bottom = 32.0
+text = "Selected System:"
+
+[node name="SystemName" type="Label" parent="InfoBox/List/SelectedSystem"]
+margin_left = 214.0
+margin_right = 214.0
+margin_bottom = 32.0
+
+[node name="SelectedDistance" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 160.0
+margin_right = 284.0
+margin_bottom = 192.0
+
+[node name="Label" type="Label" parent="InfoBox/List/SelectedDistance"]
+margin_right = 276.0
+margin_bottom = 32.0
+text = "Distance from System:"
+
+[node name="Distance" type="Label" parent="InfoBox/List/SelectedDistance"]
+margin_left = 280.0
+margin_right = 280.0
+margin_bottom = 32.0

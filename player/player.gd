@@ -5,6 +5,7 @@ export var points: PoolVector2Array
 var buf_v: Vector2
 var buf_v_length: float
 var camera: Node
+export var jump_range: float = 30.0
 
 var reset_state: bool = false
 var mouse_motion: bool = false
@@ -41,10 +42,7 @@ func _unhandled_input(event):
 		$UI.toggle_galaxy_map()
 	
 	if Input.is_action_just_pressed("hyperspace"):
-		$UI/Radar.remove_all_objects()
-		reset_state = true
-		Global.main.hyperspace()
-		$UI/Radar.get_objects()
+		pass
 	
 	if event.is_action("primary_fire"):
 		var fire = event.is_pressed()

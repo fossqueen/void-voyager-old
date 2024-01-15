@@ -49,10 +49,14 @@ func load_save() -> void:
 func create_save() -> void:
 	_save.player = PlayerSave.new()
 	_save.galaxy = Galaxy.new()
-	_save.galaxy.galaxy = _galaxy_generator.initialize_galaxy(256, 256, 0.66)
-	_save.player.current_system = randi() % _save.galaxy.galaxy.size()
+	_save.galaxy.galaxy = _galaxy_generator.initialize_galaxy(1024, 1024, 0.67)
+	#_save.player.current_system = randi() % _save.galaxy.galaxy.size()
 	_save.write_savefile()
 	print("Generated %s star systems" % _save.galaxy.galaxy.size())
+	for system in _save.galaxy.galaxy.size():
+		if Vector2(_save.galaxy.galaxy[system]["Coordinates"]["X"], _save.galaxy.galaxy[system]["Coordinates"]["Y"]).length() < 50:
+			_save.player.current_system = system
+			continue
 
 
 func init_main_menu() -> void:
@@ -102,6 +106,9 @@ func load_system() -> void:
 	Global.player.global_position = Vector2(0, 0)
 
 
-func hyperspace() -> void:
-	Global.save.player.current_system = randi() % 512
+func hyperspace(system_id) -> void:
+	Global.ui.radar.remove_all_objects()
+	Global.player.reset_state = true
+	Global.save.player.current_system = system_id
 	load_system()
+	Global.ui.radar.get_objects()

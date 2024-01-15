@@ -9,6 +9,7 @@ var _zoom_level: float = 2.0 setget _set_zoom_level
 var mouse_start_pos
 var screen_start_position
 var dragging = false
+export var galaxy_map: bool = false
 
 # base functions
 func _input(event):
@@ -42,3 +43,8 @@ func _set_zoom_level(value: float) -> void:
 		tween.EASE_OUT
 	)
 	tween.start()
+	if galaxy_map:
+		var top_level = get_tree().get_nodes_in_group("galaxy_map")
+		for node in top_level:
+			var new_value = value + 1
+			node.scale_plots(new_value)
