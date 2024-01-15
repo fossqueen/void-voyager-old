@@ -50,8 +50,9 @@ visible = false
 current = true
 script = ExtResource( 3 )
 zoom_min = 0.1
-zoom_max = 5.0
-zoom_factor = 0.1
+zoom_max = 10.0
+zoom_factor = 0.2
+zoom_duration = 0.05
 galaxy_map = true
 
 [node name="Tween" type="Tween" parent="VPC/Viewport/Camera2D"]
@@ -62,16 +63,16 @@ margin_right = 196.0
 theme = SubResource( 3 )
 
 [node name="Panel" type="Panel" parent="InfoBox"]
-margin_right = 284.0
+margin_right = 214.0
 margin_bottom = 720.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="List" type="VBoxContainer" parent="InfoBox"]
-margin_right = 284.0
+margin_right = 214.0
 margin_bottom = 720.0
 
 [node name="Title" type="Label" parent="InfoBox/List"]
-margin_right = 284.0
+margin_right = 214.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Galaxy Map"
@@ -80,12 +81,12 @@ valign = 1
 
 [node name="HSeparator" type="HSeparator" parent="InfoBox/List"]
 margin_top = 36.0
-margin_right = 284.0
+margin_right = 214.0
 margin_bottom = 40.0
 
 [node name="CurrentSystem" type="HBoxContainer" parent="InfoBox/List"]
 margin_top = 44.0
-margin_right = 284.0
+margin_right = 214.0
 margin_bottom = 76.0
 
 [node name="Label" type="Label" parent="InfoBox/List/CurrentSystem"]
@@ -98,29 +99,24 @@ margin_left = 212.0
 margin_right = 212.0
 margin_bottom = 32.0
 
-[node name="CurrentDistance" type="HBoxContainer" parent="InfoBox/List"]
+[node name="CurrentDetails" type="HBoxContainer" parent="InfoBox/List"]
 margin_top = 80.0
-margin_right = 284.0
+margin_right = 214.0
 margin_bottom = 112.0
 
-[node name="Label" type="Label" parent="InfoBox/List/CurrentDistance"]
-margin_right = 280.0
+[node name="Details" type="Label" parent="InfoBox/List/CurrentDetails"]
+margin_right = 56.0
 margin_bottom = 32.0
-text = "Distance from center: "
-
-[node name="Distance" type="Label" parent="InfoBox/List/CurrentDistance"]
-margin_left = 284.0
-margin_right = 284.0
-margin_bottom = 32.0
+text = "Desc"
 
 [node name="HSeparator2" type="HSeparator" parent="InfoBox/List"]
 margin_top = 116.0
-margin_right = 284.0
+margin_right = 214.0
 margin_bottom = 120.0
 
 [node name="SelectedSystem" type="HBoxContainer" parent="InfoBox/List"]
 margin_top = 124.0
-margin_right = 284.0
+margin_right = 214.0
 margin_bottom = 156.0
 
 [node name="Label" type="Label" parent="InfoBox/List/SelectedSystem"]
@@ -135,15 +131,25 @@ margin_bottom = 32.0
 
 [node name="SelectedDistance" type="HBoxContainer" parent="InfoBox/List"]
 margin_top = 160.0
-margin_right = 284.0
+margin_right = 214.0
 margin_bottom = 192.0
 
 [node name="Label" type="Label" parent="InfoBox/List/SelectedDistance"]
-margin_right = 276.0
+margin_right = 116.0
 margin_bottom = 32.0
-text = "Distance from System:"
+text = "Distance:"
 
 [node name="Distance" type="Label" parent="InfoBox/List/SelectedDistance"]
-margin_left = 280.0
-margin_right = 280.0
+margin_left = 120.0
+margin_right = 120.0
 margin_bottom = 32.0
+
+[node name="SelectedDetails" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 196.0
+margin_right = 214.0
+margin_bottom = 228.0
+
+[node name="Details" type="Label" parent="InfoBox/List/SelectedDetails"]
+margin_right = 56.0
+margin_bottom = 32.0
+text = "Desc"

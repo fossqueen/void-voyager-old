@@ -113,6 +113,7 @@ tracks/0/keys = {
 radius = 4000.0
 
 [sub_resource type="DynamicFont" id=4]
+size = 32
 font_data = ExtResource( 6 )
 
 [sub_resource type="Theme" id=5]
@@ -196,9 +197,9 @@ shape = SubResource( 3 )
 [node name="Radar" parent="UI" instance=ExtResource( 2 )]
 
 [node name="PlayerStats" parent="UI" instance=ExtResource( 5 )]
-margin_left = 132.0
-margin_right = 260.0
-margin_bottom = 68.0
+margin_left = 264.0
+margin_right = 392.0
+margin_bottom = 212.0
 mouse_filter = 2
 theme = SubResource( 5 )
 

@@ -3,7 +3,7 @@
 [ext_resource path="res://ui/galaxy-map/system-plot.gd" type="Script" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 32.0
+radius = 48.0
 
 [node name="SystemPlot" type="Node2D" groups=["system_plot"]]
 z_index = 5

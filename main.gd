@@ -49,7 +49,7 @@ func load_save() -> void:
 func create_save() -> void:
 	_save.player = PlayerSave.new()
 	_save.galaxy = Galaxy.new()
-	_save.galaxy.galaxy = _galaxy_generator.initialize_galaxy(1024, 1024, 0.67)
+	_save.galaxy.galaxy = _galaxy_generator.initialize_galaxy(512, 864, 0.68)
 	#_save.player.current_system = randi() % _save.galaxy.galaxy.size()
 	_save.write_savefile()
 	print("Generated %s star systems" % _save.galaxy.galaxy.size())

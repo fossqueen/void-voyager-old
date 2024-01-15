@@ -2,7 +2,7 @@ tool
 extends Control
 
 var center = rect_size / 2
-var radius = 64
+var radius = 128
 var angle = deg2rad(360)
 var points = 100
 var color = Color(1.0 ,1.0, 1.0)

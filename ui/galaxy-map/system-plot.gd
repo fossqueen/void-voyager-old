@@ -8,7 +8,7 @@ var select
 var galaxy_map
 
 const CENTER = Vector2(0, 0)
-const RADIUS = 8
+const RADIUS = 12
 
 func _draw():
 	draw_circle(CENTER, RADIUS, color)
@@ -43,9 +43,8 @@ func _on_ClickRegion_mouse_exited():
 	pass
 
 
-func _on_ClickRegion_input_event(viewport, event, shape_idx):
+func _on_ClickRegion_input_event(_viewport, event, _shape_idx):
 	if event.is_action_pressed("primary_fire"):
-		camera.position = position
 		select.show()
 		select.position = position
 		galaxy_map.selected_system = system

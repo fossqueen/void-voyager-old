@@ -40,8 +40,10 @@ func _physics_process(_delta):
 	$InfoBox/List/SelectedSystem/SystemName.text = selected_system["Name"] if selected_system else ""
 	$InfoBox/List/SelectedDistance/Distance.text = str(int(player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2)) + " ly" if selected_system else ""
 	$InfoBox/List/CurrentSystem/SystemName.text = Global.current_system["Name"]
-	$InfoBox/List/CurrentDistance/Distance.text = str(int(Vector2(Global.current_system["Coordinates"]["X"], Global.current_system["Coordinates"]["Y"]).length() * 2)) + " ly"
-
+	$InfoBox/List/CurrentDetails/Details.text = "Coordinates: " + str(player_system["Coordinates"]) + "\nPOI's: " + str(player_system["Objects"].size())
+	$InfoBox/List/SelectedDetails/Details.text = "Coordinates: " + str(selected_system["Coordinates"]) + "\nPOI's: " + str(selected_system["Objects"].size()) if selected_system else ""
+	player_system_position = Vector2(player_system["Coordinates"]["X"], player_system["Coordinates"]["Y"])
+	player_system = Global.save.galaxy.galaxy[Global.save.player.current_system]
 
 func scale_plots(value: float) -> void:
 	var plots = get_tree().get_nodes_in_group("system_plot")
