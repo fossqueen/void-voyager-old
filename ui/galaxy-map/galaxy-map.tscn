@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/galaxy-map/map-marker.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://ui/galaxy-map/selected-plot.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/galaxy-map/select-system.png" type="Texture" id=6]
 [ext_resource path="res://ui/galaxy-map/current-system.png" type="Texture" id=7]
+[ext_resource path="res://ui/galaxy-map/search.png" type="Texture" id=8]
+[ext_resource path="res://ui/message-box/message-box.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
@@ -86,10 +88,46 @@ margin_top = 36.0
 margin_right = 214.0
 margin_bottom = 40.0
 
-[node name="CameraButtons" type="HBoxContainer" parent="InfoBox/List"]
+[node name="Fuel" type="HBoxContainer" parent="InfoBox/List"]
 margin_top = 44.0
 margin_right = 214.0
-margin_bottom = 82.0
+margin_bottom = 76.0
+
+[node name="Details" type="Label" parent="InfoBox/List/Fuel"]
+margin_right = 62.0
+margin_bottom = 32.0
+text = "Fuel:"
+
+[node name="ProgressBar" type="ProgressBar" parent="InfoBox/List/Fuel"]
+margin_left = 66.0
+margin_right = 214.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="SelectedDistance" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 80.0
+margin_right = 214.0
+margin_bottom = 112.0
+
+[node name="Label" type="Label" parent="InfoBox/List/SelectedDistance"]
+margin_right = 184.0
+margin_bottom = 32.0
+text = "Selected Jump:"
+
+[node name="Distance" type="Label" parent="InfoBox/List/SelectedDistance"]
+margin_left = 188.0
+margin_right = 188.0
+margin_bottom = 32.0
+
+[node name="HSeparator4" type="HSeparator" parent="InfoBox/List"]
+margin_top = 116.0
+margin_right = 214.0
+margin_bottom = 120.0
+
+[node name="CameraButtons" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 124.0
+margin_right = 214.0
+margin_bottom = 162.0
 
 [node name="CurrentSystem" type="Button" parent="InfoBox/List/CameraButtons"]
 margin_right = 105.0
@@ -110,36 +148,68 @@ flat = true
 icon_align = 1
 expand_icon = true
 
-[node name="HSeparator4" type="HSeparator" parent="InfoBox/List"]
-margin_top = 86.0
+[node name="MapButtons" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 166.0
 margin_right = 214.0
-margin_bottom = 90.0
+margin_bottom = 204.0
 
-[node name="Fuel" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 94.0
-margin_right = 214.0
-margin_bottom = 126.0
-
-[node name="Details" type="Label" parent="InfoBox/List/Fuel"]
-margin_right = 62.0
-margin_bottom = 32.0
-text = "Fuel:"
-
-[node name="ProgressBar" type="ProgressBar" parent="InfoBox/List/Fuel"]
-margin_left = 66.0
-margin_right = 214.0
-margin_bottom = 32.0
+[node name="Jump" type="Button" parent="InfoBox/List/MapButtons"]
+margin_right = 105.0
+margin_bottom = 38.0
 size_flags_horizontal = 3
+text = "JUMP"
+flat = true
+
+[node name="Plot" type="Button" parent="InfoBox/List/MapButtons"]
+margin_left = 109.0
+margin_right = 214.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+text = "PLOT"
+flat = true
+
+[node name="Search" type="HBoxContainer" parent="InfoBox/List"]
+margin_top = 208.0
+margin_right = 214.0
+margin_bottom = 250.0
+
+[node name="LineEdit" type="LineEdit" parent="InfoBox/List/Search"]
+margin_right = 174.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+placeholder_text = "SEARCH"
+
+[node name="Search" type="Button" parent="InfoBox/List/Search"]
+margin_left = 178.0
+margin_right = 214.0
+margin_bottom = 42.0
+text = "   "
+icon = ExtResource( 8 )
+flat = true
+icon_align = 1
+expand_icon = true
 
 [node name="HSeparator3" type="HSeparator" parent="InfoBox/List"]
-margin_top = 130.0
+margin_top = 254.0
 margin_right = 214.0
-margin_bottom = 134.0
+margin_bottom = 258.0
+
+[node name="Label2" type="Label" parent="InfoBox/List"]
+margin_top = 262.0
+margin_right = 214.0
+margin_bottom = 294.0
+text = "Press J to Jump"
+
+[node name="Label" type="Label" parent="InfoBox/List"]
+margin_top = 417.0
+margin_right = 214.0
+margin_bottom = 449.0
+size_flags_vertical = 6
 
 [node name="CurrentSystem" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 138.0
+margin_top = 572.0
 margin_right = 214.0
-margin_bottom = 170.0
+margin_bottom = 604.0
 
 [node name="Label" type="Label" parent="InfoBox/List/CurrentSystem"]
 margin_right = 208.0
@@ -152,9 +222,9 @@ margin_right = 212.0
 margin_bottom = 32.0
 
 [node name="CurrentDetails" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 174.0
+margin_top = 608.0
 margin_right = 214.0
-margin_bottom = 206.0
+margin_bottom = 640.0
 
 [node name="Details" type="Label" parent="InfoBox/List/CurrentDetails"]
 margin_right = 56.0
@@ -162,14 +232,14 @@ margin_bottom = 32.0
 text = "Desc"
 
 [node name="HSeparator2" type="HSeparator" parent="InfoBox/List"]
-margin_top = 210.0
+margin_top = 644.0
 margin_right = 214.0
-margin_bottom = 214.0
+margin_bottom = 648.0
 
 [node name="SelectedSystem" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 218.0
+margin_top = 652.0
 margin_right = 214.0
-margin_bottom = 250.0
+margin_bottom = 684.0
 
 [node name="Label" type="Label" parent="InfoBox/List/SelectedSystem"]
 margin_right = 210.0
@@ -181,30 +251,22 @@ margin_left = 214.0
 margin_right = 214.0
 margin_bottom = 32.0
 
-[node name="SelectedDistance" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 254.0
-margin_right = 214.0
-margin_bottom = 286.0
-
-[node name="Label" type="Label" parent="InfoBox/List/SelectedDistance"]
-margin_right = 116.0
-margin_bottom = 32.0
-text = "Distance:"
-
-[node name="Distance" type="Label" parent="InfoBox/List/SelectedDistance"]
-margin_left = 120.0
-margin_right = 120.0
-margin_bottom = 32.0
-
 [node name="SelectedDetails" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 290.0
+margin_top = 688.0
 margin_right = 214.0
-margin_bottom = 322.0
+margin_bottom = 720.0
 
 [node name="Details" type="Label" parent="InfoBox/List/SelectedDetails"]
 margin_right = 56.0
 margin_bottom = 32.0
 text = "Desc"
 
+[node name="MessageBox" parent="." instance=ExtResource( 9 )]
+visible = false
+
 [connection signal="pressed" from="InfoBox/List/CameraButtons/CurrentSystem" to="." method="_on_CurrentSystem_pressed"]
 [connection signal="pressed" from="InfoBox/List/CameraButtons/SelectedSystem" to="." method="_on_SelectedSystem_pressed"]
+[connection signal="pressed" from="InfoBox/List/MapButtons/Jump" to="." method="_on_Jump_pressed"]
+[connection signal="pressed" from="InfoBox/List/MapButtons/Plot" to="." method="_on_Plot_pressed"]
+[connection signal="text_entered" from="InfoBox/List/Search/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="InfoBox/List/Search/Search" to="." method="_on_Search_pressed"]

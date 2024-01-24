@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/ship-panel/diagnostics-panel.gd" type="Script" id=1]
+[ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -9,6 +10,16 @@ border_width_top = 1
 border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
 
 [sub_resource type="StyleBoxLine" id=2]
 color = Color( 1, 1, 1, 1 )
@@ -21,8 +32,8 @@ size_flags_vertical = 3
 script = ExtResource( 1 )
 
 [node name="Display" type="Panel" parent="."]
-margin_right = 190.0
-margin_bottom = 228.0
+margin_right = 112.0
+margin_bottom = 256.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 1 )
@@ -32,142 +43,144 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Label" type="Label" parent="Display/CenterContainer"]
-margin_left = 44.0
-margin_top = 107.0
-margin_right = 146.0
-margin_bottom = 121.0
+margin_left = 8.0
+margin_top = 120.0
+margin_right = 103.0
+margin_bottom = 136.0
+custom_fonts/font = SubResource( 3 )
 text = "Add Visual Here"
 
 [node name="DiagnosticsList" type="VBoxContainer" parent="."]
-margin_left = 194.0
+margin_left = 116.0
 margin_right = 384.0
-margin_bottom = 228.0
+margin_bottom = 256.0
 size_flags_horizontal = 3
+theme = SubResource( 5 )
 
 [node name="Health" type="HBoxContainer" parent="DiagnosticsList"]
-margin_right = 190.0
-margin_bottom = 14.0
+margin_right = 268.0
+margin_bottom = 32.0
 
 [node name="Label" type="Label" parent="DiagnosticsList/Health"]
-margin_right = 93.0
-margin_bottom = 14.0
+margin_right = 132.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Health:"
 
 [node name="ProgressBar" type="ProgressBar" parent="DiagnosticsList/Health"]
-margin_left = 97.0
-margin_right = 190.0
-margin_bottom = 14.0
+margin_left = 136.0
+margin_right = 268.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 
 [node name="Shield" type="HBoxContainer" parent="DiagnosticsList"]
-margin_top = 18.0
-margin_right = 190.0
-margin_bottom = 32.0
+margin_top = 36.0
+margin_right = 268.0
+margin_bottom = 68.0
 
 [node name="Label" type="Label" parent="DiagnosticsList/Shield"]
-margin_right = 93.0
-margin_bottom = 14.0
+margin_right = 132.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Shield:"
 
 [node name="ProgressBar" type="ProgressBar" parent="DiagnosticsList/Shield"]
-margin_left = 97.0
-margin_right = 190.0
-margin_bottom = 14.0
+margin_left = 136.0
+margin_right = 268.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 
 [node name="Fuel" type="HBoxContainer" parent="DiagnosticsList"]
-margin_top = 36.0
-margin_right = 190.0
-margin_bottom = 50.0
+margin_top = 72.0
+margin_right = 268.0
+margin_bottom = 104.0
 
 [node name="Label" type="Label" parent="DiagnosticsList/Fuel"]
-margin_right = 93.0
-margin_bottom = 14.0
+margin_right = 132.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Fuel:"
 
 [node name="ProgressBar" type="ProgressBar" parent="DiagnosticsList/Fuel"]
-margin_left = 97.0
-margin_right = 190.0
-margin_bottom = 14.0
+margin_left = 136.0
+margin_right = 268.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 
 [node name="Cargo" type="HBoxContainer" parent="DiagnosticsList"]
-margin_top = 54.0
-margin_right = 190.0
-margin_bottom = 68.0
+margin_top = 108.0
+margin_right = 268.0
+margin_bottom = 140.0
 
 [node name="Label" type="Label" parent="DiagnosticsList/Cargo"]
-margin_right = 93.0
-margin_bottom = 14.0
+margin_right = 132.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Cargo:"
 
 [node name="ProgressBar" type="ProgressBar" parent="DiagnosticsList/Cargo"]
-margin_left = 97.0
-margin_right = 190.0
-margin_bottom = 14.0
+margin_left = 136.0
+margin_right = 268.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 
 [node name="FlightAssist" type="HBoxContainer" parent="DiagnosticsList"]
-margin_top = 72.0
-margin_right = 190.0
-margin_bottom = 86.0
+margin_top = 144.0
+margin_right = 268.0
+margin_bottom = 176.0
 
 [node name="Label" type="Label" parent="DiagnosticsList/FlightAssist"]
-margin_right = 93.0
-margin_bottom = 14.0
+margin_right = 170.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Flight Assist:"
 
 [node name="Return" type="Label" parent="DiagnosticsList/FlightAssist"]
-margin_left = 97.0
-margin_right = 190.0
-margin_bottom = 14.0
+margin_left = 174.0
+margin_right = 268.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 text = "Enabled"
 
 [node name="Separator3" type="HSeparator" parent="DiagnosticsList"]
-margin_top = 90.0
-margin_right = 190.0
-margin_bottom = 94.0
+margin_top = 180.0
+margin_right = 268.0
+margin_bottom = 184.0
 custom_styles/separator = SubResource( 2 )
 
 [node name="CurrentSystem" type="HBoxContainer" parent="DiagnosticsList"]
-margin_top = 98.0
-margin_right = 190.0
-margin_bottom = 112.0
+margin_top = 188.0
+margin_right = 268.0
+margin_bottom = 220.0
 
 [node name="Label" type="Label" parent="DiagnosticsList/CurrentSystem"]
-margin_right = 93.0
-margin_bottom = 14.0
+margin_right = 110.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "System:"
 
 [node name="SystemName" type="Label" parent="DiagnosticsList/CurrentSystem"]
-margin_left = 97.0
-margin_right = 190.0
-margin_bottom = 14.0
+margin_left = 114.0
+margin_right = 268.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "System Name"
 
 [node name="Credits" type="HBoxContainer" parent="DiagnosticsList"]
-margin_top = 116.0
-margin_right = 190.0
-margin_bottom = 130.0
+margin_top = 224.0
+margin_right = 268.0
+margin_bottom = 256.0
 
 [node name="Label" type="Label" parent="DiagnosticsList/Credits"]
-margin_right = 93.0
-margin_bottom = 14.0
+margin_right = 132.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Credits:"
 
 [node name="Amount" type="Label" parent="DiagnosticsList/Credits"]
-margin_left = 97.0
-margin_right = 190.0
-margin_bottom = 14.0
+margin_left = 136.0
+margin_right = 268.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Amount"

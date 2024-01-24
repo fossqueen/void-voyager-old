@@ -30,11 +30,12 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=9]
+size = 32
 font_data = ExtResource( 1 )
 
-[sub_resource type="Theme" id=5]
-default_font = SubResource( 4 )
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 9 )
 Button/styles/focus = SubResource( 6 )
 Button/styles/hover = SubResource( 6 )
 Button/styles/normal = SubResource( 3 )
@@ -66,75 +67,75 @@ margin_left = 128.0
 margin_top = 38.0
 margin_right = -128.0
 margin_bottom = -38.0
-theme = SubResource( 5 )
+theme = SubResource( 10 )
 
 [node name="Content" type="VBoxContainer" parent="Margin"]
-margin_right = 384.0
-margin_bottom = 284.0
+margin_right = 1024.0
+margin_bottom = 644.0
 
 [node name="TitleBar" type="HBoxContainer" parent="Margin/Content"]
-margin_right = 384.0
-margin_bottom = 16.0
+margin_right = 1024.0
+margin_bottom = 32.0
 
 [node name="Title" type="Label" parent="Margin/Content/TitleBar"]
-margin_right = 365.0
-margin_bottom = 16.0
+margin_right = 990.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "shipOS"
 
 [node name="CloseButton" type="Button" parent="Margin/Content/TitleBar"]
-margin_left = 369.0
-margin_right = 384.0
-margin_bottom = 16.0
+margin_left = 994.0
+margin_right = 1024.0
+margin_bottom = 32.0
 text = " x "
 
 [node name="Separator" type="HSeparator" parent="Margin/Content"]
-margin_top = 20.0
-margin_right = 384.0
-margin_bottom = 24.0
+margin_top = 36.0
+margin_right = 1024.0
+margin_bottom = 40.0
 custom_styles/separator = SubResource( 2 )
 
 [node name="NavigationBar" type="HBoxContainer" parent="Margin/Content"]
-margin_top = 28.0
-margin_right = 384.0
-margin_bottom = 44.0
+margin_top = 44.0
+margin_right = 1024.0
+margin_bottom = 76.0
 
 [node name="DiagnosticsButton" type="Button" parent="Margin/Content/NavigationBar"]
-margin_right = 120.0
-margin_bottom = 16.0
+margin_right = 333.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Diagnostics"
 
 [node name="Separator" type="VSeparator" parent="Margin/Content/NavigationBar"]
-margin_left = 124.0
-margin_right = 128.0
-margin_bottom = 16.0
+margin_left = 337.0
+margin_right = 341.0
+margin_bottom = 32.0
 custom_styles/separator = SubResource( 8 )
 
 [node name="InventoryButton" type="Button" parent="Margin/Content/NavigationBar"]
-margin_left = 132.0
-margin_right = 252.0
-margin_bottom = 16.0
+margin_left = 345.0
+margin_right = 678.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Inventory"
 
 [node name="Separator2" type="VSeparator" parent="Margin/Content/NavigationBar"]
-margin_left = 256.0
-margin_right = 260.0
-margin_bottom = 16.0
+margin_left = 682.0
+margin_right = 686.0
+margin_bottom = 32.0
 custom_styles/separator = SubResource( 8 )
 
 [node name="ControlsButton" type="Button" parent="Margin/Content/NavigationBar"]
-margin_left = 264.0
-margin_right = 384.0
-margin_bottom = 16.0
+margin_left = 690.0
+margin_right = 1024.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 text = "Controls"
 
 [node name="Separator2" type="HSeparator" parent="Margin/Content"]
-margin_top = 48.0
-margin_right = 384.0
-margin_bottom = 52.0
+margin_top = 80.0
+margin_right = 1024.0
+margin_bottom = 84.0
 custom_styles/separator = SubResource( 2 )
 
 [node name="DiagnosticsPanel" parent="Margin/Content" instance=ExtResource( 3 )]

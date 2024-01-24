@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/message-box/message-box.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+
+[node name="MessageBox" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 350.0
+margin_top = 200.0
+margin_right = -350.0
+margin_bottom = -200.0
+theme = SubResource( 6 )
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 580.0
+margin_bottom = 320.0
+custom_styles/panel = SubResource( 4 )
+
+[node name="VBox" type="VBoxContainer" parent="."]
+margin_right = 580.0
+margin_bottom = 320.0
+
+[node name="Label" type="Label" parent="VBox"]
+margin_right = 580.0
+margin_bottom = 158.0
+size_flags_vertical = 3
+text = "Insert Message Here"
+align = 1
+valign = 1
+
+[node name="Label2" type="CenterContainer" parent="VBox"]
+margin_top = 162.0
+margin_right = 580.0
+margin_bottom = 320.0
+size_flags_vertical = 3
+
+[node name="OK" type="Button" parent="VBox/Label2"]
+margin_left = 262.0
+margin_top = 60.0
+margin_right = 318.0
+margin_bottom = 98.0
+text = " OK "
+flat = true
+
+[connection signal="pressed" from="VBox/Label2/OK" to="." method="_on_OK_pressed"]

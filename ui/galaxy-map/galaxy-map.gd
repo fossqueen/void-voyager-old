@@ -39,6 +39,9 @@ func _ready():
 func _physics_process(_delta):
 	$InfoBox/List/SelectedSystem/SystemName.text = selected_system["Name"] if selected_system else ""
 	$InfoBox/List/SelectedDistance/Distance.text = str(int(player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2)) + " ly" if selected_system else ""
+	
+	$InfoBox/List/SelectedDistance/Distance.add_color_override("font_color", Color.green if selected_system and player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2 <= Global.player.jump_range else Color.red)
+	
 	$InfoBox/List/CurrentSystem/SystemName.text = Global.current_system["Name"]
 	$InfoBox/List/CurrentDetails/Details.text = "Coordinates: " + str(player_system["Coordinates"]) + "\nPOI's: " + str(player_system["Objects"].size())
 	$InfoBox/List/SelectedDetails/Details.text = "Coordinates: " + str(selected_system["Coordinates"]) + "\nPOI's: " + str(selected_system["Objects"].size()) if selected_system else ""
@@ -64,8 +67,12 @@ func _unhandled_input(_event):
 					Global.main.hyperspace(data.galaxy.galaxy.find(selected_system, 0))
 			else:
 				print("Exceeded Jump Range")
+				$MessageBox/VBox/Label.text = "Jump Range is insufficient."
+				$MessageBox.show()
 		else:
 			print("No selected system")
+			$MessageBox/VBox/Label.text = "No star system selected."
+			$MessageBox.show()
 
 
 func _on_CurrentSystem_pressed():
@@ -76,3 +83,40 @@ func _on_CurrentSystem_pressed():
 func _on_SelectedSystem_pressed():
 	if selected_system:
 		$VPC/Viewport/Camera2D.position = Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"]) * 10
+
+
+func _on_Jump_pressed():
+		if selected_system:
+			if player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2 <= Global.player.jump_range:
+				if Global.player.ship.fuel > 0:
+					Global.player.ship.fuel -= player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"]))
+					if Global.player.ship.fuel < 0:
+						Global.player.ship.fuel = 0
+					Global.main.hyperspace(data.galaxy.galaxy.find(selected_system, 0))
+			else:
+				print("Exceeded Jump Range")
+				$MessageBox/VBox/Label.text = "Jump Range is insufficient."
+				$MessageBox.show()
+		else:
+			print("No selected system")
+			$MessageBox/VBox/Label.text = "No star system selected."
+			$MessageBox.show()
+
+
+func _on_LineEdit_text_entered(new_text):
+	for system in data.galaxy.galaxy:
+		if system["Name"] == new_text:
+			selected_system = system
+			$VPC/Viewport/SelectedPlot.position = Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"]) * 10
+
+
+func _on_Search_pressed():
+	for system in data.galaxy.galaxy:
+		if system["Name"] == $InfoBox/List/Search/LineEdit.text:
+			selected_system = system
+			$VPC/Viewport/SelectedPlot.position = Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"]) * 10
+
+
+func _on_Plot_pressed():
+	if selected_system:
+		$Navigation2D.get_simple_path(player_system_position, Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"]))

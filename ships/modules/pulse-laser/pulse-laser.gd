@@ -1,21 +1,15 @@
-extends Area2D
+extends Node2D
 
-export var color: Color = Color(1, 1, 1, 1)
-export var length: int = 32
-export var damage: int = 100
-export var speed: int = 100
+var damage: int = 1000
 
-const PROJECTILE_SPEED: int = 6000
+var parent
+onready var laser = load("res://ships/modules/pulse-laser/laser.tscn")
 
-func _process(delta):
-	position += Vector2(1, 0).rotated(rotation) * PROJECTILE_SPEED * delta
 
-func _on_Timer_timeout():
-	queue_free()
-
-func _draw():
-	draw_line(Vector2(0,0), Vector2(length, 0), color, 1, false)
-
-func _on_Laser_body_entered(body):
-	body.damage(damage)
-	queue_free()
+func fire() -> void:
+	var new_laser = laser.instance()
+	new_laser.rotation = global_rotation
+	new_laser.position = global_position
+	new_laser.damage = damage
+	new_laser.parent = parent
+	Global.main.add_child(new_laser)

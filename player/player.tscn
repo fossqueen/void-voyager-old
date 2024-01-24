@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://player/player.gd" type="Script" id=1]
 [ext_resource path="res://ui/radar/radar.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://ships/animations/thrust.tres" type="Animation" id=8]
 [ext_resource path="res://ships/animations/idle.tres" type="Animation" id=9]
 [ext_resource path="res://ships/modules/shield/shield.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ships/modules/pulse-laser/pulse-laser.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=6]
 resource_name = "idle"
@@ -129,6 +130,8 @@ angular_damp = 10.0
 script = ExtResource( 1 )
 points = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16, -20, 0 )
 
+[node name="PulseLaser" parent="." instance=ExtResource( 11 )]
+
 [node name="MiningLaser" parent="." instance=ExtResource( 7 )]
 show_behind_parent = true
 
@@ -197,9 +200,9 @@ shape = SubResource( 3 )
 [node name="Radar" parent="UI" instance=ExtResource( 2 )]
 
 [node name="PlayerStats" parent="UI" instance=ExtResource( 5 )]
-margin_left = 264.0
-margin_right = 392.0
-margin_bottom = 212.0
+margin_left = 0.0
+margin_top = 264.0
+margin_bottom = 476.0
 mouse_filter = 2
 theme = SubResource( 5 )
 

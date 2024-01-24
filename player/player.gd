@@ -44,22 +44,19 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("hyperspace"):
 		pass
 	
-	if event.is_action("primary_fire"):
+	if event.is_action_pressed("primary_fire"):
+		$PulseLaser.fire()
+	
+	if event.is_action("secondary_fire"):
 		var fire = event.is_pressed()
 		$MiningLaser.is_casting = fire
-	
-	if Input.is_action_just_pressed("secondary_fire"):
-		pass
 	
 	if Input.is_action_just_pressed("flight_assist"):
 		toggle_flight_assist()
 	
 	if Input.is_action_just_pressed("ship_panel"):
 		$UI.toggle_ship_panel()
-	
-	if Input.is_action_just_pressed("ui_home"):
-		Global.save.player.inventory.add_item("poopball", 1)
-	
+		
 	if event is InputEventMouseMotion:
 		mouse_motion = true
 	else:
@@ -149,6 +146,7 @@ func set_variables() -> void:
 	$UI/PlayerStats.player = self
 	camera = $Camera
 	Global.ui = $UI
+	$PulseLaser.parent = self
 
 
 # Signals

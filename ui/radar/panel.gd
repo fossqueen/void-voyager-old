@@ -8,7 +8,7 @@ var points = 100
 var color = Color(1.0 ,1.0, 1.0)
 
 func _draw():
-	draw_circle(center, radius, Color(0, 0, 0))
+	draw_circle(center, radius, Color(0, 0, 0, 0.25))
 	draw_arc(center, radius, 0, angle, points, color, 0)
 	var count = 4
 	var multi = 1

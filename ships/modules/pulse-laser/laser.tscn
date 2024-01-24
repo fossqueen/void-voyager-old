@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ships/modules/pulse-laser/laser.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 0.5 )
+
+[node name="Laser" type="Area2D"]
+z_index = 1
+collision_layer = 0
+script = ExtResource( 1 )
+color = Color( 100, 0, 100, 1 )
+length = 256
+speed = 300
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 32, 0, 0, 0 )
+width = 1.0
+default_color = Color( 100, 0, 100, 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 16, 0 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_Laser_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -3,6 +3,7 @@
 [ext_resource path="res://ui/radar/map-marker.gd" type="Script" id=1]
 
 [node name="PlayerMarker" type="Node2D" groups=["radar_markers"]]
+scale = Vector2( 2, 2 )
 z_index = 1
 script = ExtResource( 1 )
 player = true
