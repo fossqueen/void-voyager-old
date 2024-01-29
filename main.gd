@@ -1,7 +1,7 @@
 extends Node2D
 
 # save file
-var _save := SaveFile.new()
+var _save:= SaveFile.new()
 var _save_exists: bool = false
 
 # galaxy generator
@@ -52,9 +52,9 @@ func create_save() -> void:
 	_save.galaxy.galaxy = _galaxy_generator.initialize_galaxy(1024, 1024, 0.67)
 	_save.write_savefile()
 	print("Generated %s star systems" % _save.galaxy.galaxy.size())
-	for system in _save.galaxy.galaxy.size():
-		if Vector2(_save.galaxy.galaxy[system]["Coordinates"]["X"], _save.galaxy.galaxy[system]["Coordinates"]["Y"]).length() < 30:
-			_save.player.current_system = system
+	for star in _save.galaxy.galaxy.size():
+		if Vector2(_save.galaxy.galaxy[star]["Coordinates"]["X"], _save.galaxy.galaxy[star]["Coordinates"]["Y"]).length() < 30:
+			_save.player.current_system = star
 			continue
 
 

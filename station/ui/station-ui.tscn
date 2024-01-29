@@ -1,0 +1,242 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://ui/theme/ui_theme.tres" type="Theme" id=2]
+[ext_resource path="res://station/ui/market.gd" type="Script" id=3]
+[ext_resource path="res://station/ui/station-ui.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 1, 1, 1, 1 )
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 1 )
+
+[node name="StationUI" type="CanvasLayer"]
+script = ExtResource( 4 )
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -32.0
+theme = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="Margin"]
+margin_right = 1216.0
+margin_bottom = 656.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Body" type="VBoxContainer" parent="Margin"]
+margin_right = 1216.0
+margin_bottom = 656.0
+
+[node name="StationName" type="Label" parent="Margin/Body"]
+margin_right = 1216.0
+margin_bottom = 64.0
+text = "Station Name"
+align = 1
+valign = 1
+
+[node name="StationGreeting" type="Label" parent="Margin/Body"]
+margin_top = 68.0
+margin_right = 1216.0
+margin_bottom = 100.0
+custom_fonts/font = SubResource( 2 )
+text = "Station Greeting | Ex. \"Welcome, pilot!\""
+align = 1
+valign = 1
+
+[node name="Tabs" type="HBoxContainer" parent="Margin/Body"]
+margin_top = 104.0
+margin_right = 1216.0
+margin_bottom = 136.0
+
+[node name="Button" type="Button" parent="Margin/Body/Tabs"]
+margin_right = 402.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+text = "Shipyard"
+
+[node name="Button2" type="Button" parent="Margin/Body/Tabs"]
+margin_left = 406.0
+margin_right = 809.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+text = "Commodities Market"
+
+[node name="Button3" type="Button" parent="Margin/Body/Tabs"]
+margin_left = 813.0
+margin_right = 1216.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+text = "Missions"
+
+[node name="HSeparator" type="HSeparator" parent="Margin/Body"]
+margin_top = 140.0
+margin_right = 1216.0
+margin_bottom = 144.0
+
+[node name="Market" type="HBoxContainer" parent="Margin/Body"]
+visible = false
+margin_top = 148.0
+margin_right = 1216.0
+margin_bottom = 656.0
+size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/Body/Market"]
+margin_right = 606.0
+margin_bottom = 508.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Commodities" type="VBoxContainer" parent="Margin/Body/Market/Scroll"]
+margin_right = 606.0
+margin_bottom = 508.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 8
+
+[node name="Cart" type="MarginContainer" parent="Margin/Body/Market"]
+margin_left = 610.0
+margin_right = 1216.0
+margin_bottom = 508.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Missions" type="VBoxContainer" parent="Margin/Body"]
+margin_top = 148.0
+margin_right = 1216.0
+margin_bottom = 656.0
+size_flags_vertical = 3
+
+[node name="Tabs" type="HBoxContainer" parent="Margin/Body/Missions"]
+margin_right = 1216.0
+margin_bottom = 32.0
+
+[node name="ActiveLabel" type="Label" parent="Margin/Body/Missions/Tabs"]
+modulate = Color( 0.439216, 0.439216, 0.439216, 1 )
+margin_right = 606.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 5 )
+text = "Active Missions:"
+align = 1
+uppercase = true
+
+[node name="AvailableLabel" type="Label" parent="Margin/Body/Missions/Tabs"]
+margin_left = 610.0
+margin_right = 1216.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 5 )
+text = "Available Missions:"
+align = 1
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="Margin/Body/Missions"]
+margin_top = 36.0
+margin_right = 1216.0
+margin_bottom = 40.0
+
+[node name="Active" type="ScrollContainer" parent="Margin/Body/Missions"]
+visible = false
+margin_top = 36.0
+margin_right = 1216.0
+margin_bottom = 270.0
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="Margin/Body/Missions/Active"]
+margin_right = 1216.0
+size_flags_horizontal = 3
+
+[node name="Available" type="HBoxContainer" parent="Margin/Body/Missions"]
+margin_top = 44.0
+margin_right = 1216.0
+margin_bottom = 508.0
+size_flags_vertical = 3
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/Body/Missions/Available"]
+margin_right = 606.0
+margin_bottom = 464.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="List" type="VBoxContainer" parent="Margin/Body/Missions/Available/Scroll"]
+margin_right = 606.0
+margin_bottom = 464.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewMission" type="VBoxContainer" parent="Margin/Body/Missions/Available"]
+margin_left = 610.0
+margin_right = 1216.0
+margin_bottom = 464.0
+size_flags_horizontal = 3
+custom_constants/separation = 8
+alignment = 2
+
+[node name="HSeparator" type="HSeparator" parent="Margin/Body/Missions/Available/ViewMission"]
+margin_top = 305.0
+margin_right = 606.0
+margin_bottom = 309.0
+
+[node name="Details" type="Label" parent="Margin/Body/Missions/Available/ViewMission"]
+margin_top = 317.0
+margin_right = 606.0
+margin_bottom = 384.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 6 )
+text = "Salutations Pilot! We need you to deliver 48 tons of poop to the poop dimension. Will ya do it?"
+valign = 2
+autowrap = true
+
+[node name="Reward" type="Label" parent="Margin/Body/Missions/Available/ViewMission"]
+margin_top = 392.0
+margin_right = 606.0
+margin_bottom = 424.0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 6 )
+text = "Reward: 10 credits"
+align = 2
+valign = 2
+autowrap = true
+
+[node name="Choices" type="HBoxContainer" parent="Margin/Body/Missions/Available/ViewMission"]
+margin_top = 432.0
+margin_right = 606.0
+margin_bottom = 464.0
+custom_constants/separation = 64
+alignment = 1
+
+[node name="Button" type="Button" parent="Margin/Body/Missions/Available/ViewMission/Choices"]
+margin_left = 185.0
+margin_right = 267.0
+margin_bottom = 32.0
+text = "Accept"
+
+[node name="Button2" type="Button" parent="Margin/Body/Missions/Available/ViewMission/Choices"]
+margin_left = 331.0
+margin_right = 421.0
+margin_bottom = 32.0
+text = "Decline"

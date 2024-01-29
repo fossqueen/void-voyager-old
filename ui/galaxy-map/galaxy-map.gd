@@ -43,8 +43,8 @@ func _physics_process(_delta):
 	$InfoBox/List/SelectedDistance/Distance.add_color_override("font_color", Color.green if selected_system and player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2 <= Global.player.jump_range else Color.red)
 	
 	$InfoBox/List/CurrentSystem/SystemName.text = Global.current_system["Name"]
-	$InfoBox/List/CurrentDetails/Details.text = "Coordinates: " + str(player_system["Coordinates"]) + "\nPOI's: " + str(player_system["Objects"].size())
-	$InfoBox/List/SelectedDetails/Details.text = "Coordinates: " + str(selected_system["Coordinates"]) + "\nPOI's: " + str(selected_system["Objects"].size()) if selected_system else ""
+	$InfoBox/List/CurrentDetails/Details.text = "Coordinates: " + str(player_system["Coordinates"]) + "\nPOI's: " + str(player_system["Objects"].size()) + "\nPopulation: " + str(player_system["Population"])
+	$InfoBox/List/SelectedDetails/Details.text = "Coordinates: " + str(selected_system["Coordinates"]) + "\nPOI's: " + str(selected_system["Objects"].size()) + "\nPopulation: " + str(selected_system["Population"]) if selected_system else ""
 	player_system_position = Vector2(player_system["Coordinates"]["X"], player_system["Coordinates"]["Y"])
 	player_system = Global.save.galaxy.galaxy[Global.save.player.current_system]
 	$InfoBox/List/Fuel/ProgressBar.value = Global.player.ship.fuel

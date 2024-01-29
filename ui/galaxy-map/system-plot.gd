@@ -31,13 +31,7 @@ func _ready():
 		color = Color(1.00, 0.00, 0.32)
 
 func _on_ClickRegion_mouse_entered():
-	var player_system = Global.save.galaxy.galaxy[Global.save.player.current_system]
-	var player_system_position = Vector2(player_system["Coordinates"]["X"], player_system["Coordinates"]["Y"])
-	var system_position = Vector2(system["Coordinates"]["X"], system["Coordinates"]["Y"])
-	#print(system["Name"])
-	#print("Points of interest: " + str(system["Objects"].size()))
-	#print("Distance from current position: " + str(int(player_system_position.distance_to(system_position)) * 2) + " ly")
-	
+	pass
 
 func _on_ClickRegion_mouse_exited():
 	pass

@@ -3,6 +3,7 @@
 [ext_resource path="res://asteroid/asteroid.gd" type="Script" id=1]
 
 [node name="Asteroid" type="RigidBody2D" groups=["asteroid", "radar_objects"]]
+z_index = 1
 collision_layer = 3
 mode = 3
 contacts_reported = 1

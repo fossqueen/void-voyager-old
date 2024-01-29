@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "PlayerSave",
 "language": "GDScript",
-"path": "res://save-resources/player-save.gd"
+"path": "res://save-resources/save-player.gd"
 }, {
 "base": "Reference",
 "class": "SaveFile",

@@ -29,7 +29,7 @@ func generate_object(usable_mass: float, planet_name: String, distance: float) -
 	var rings: bool
 	var moons: bool
 	var moon_type: int = 1
-	var moon_distance = radius * 6
+	var moon_distance = radius * 5
 	var body_distance = distance
 	var type = "Black Hole" if mass > 1500.00 and radius < 150 else "Terrestrial" if mass > 256.00 else "Gas Giant"
 	var random_sub_type = int(rand_range(0, 100))

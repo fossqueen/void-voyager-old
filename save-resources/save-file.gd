@@ -67,4 +67,3 @@ func load_savefile() -> void:
 	
 	galaxy = Galaxy.new()
 	galaxy.galaxy = data.galaxy
-	

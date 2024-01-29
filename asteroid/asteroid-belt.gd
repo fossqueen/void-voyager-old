@@ -10,9 +10,8 @@ func _ready():
 	var new_spawner = asteroid_spawner.instance()
 	
 	new_spawner.radius = Vector2(distance, 0)
-	new_spawner.count = distance / 4
+	new_spawner.count = clamp(distance / 4, 0, 3000) # Capping Belt Count to 3000, trying to optimize ;-;
 	new_spawner.system_belt = true
-	
 	add_child(new_spawner)
 
 

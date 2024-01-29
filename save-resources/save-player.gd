@@ -1,5 +1,5 @@
-extends Resource
 class_name PlayerSave
+extends Resource
 
 export var display_name: String = "Pilot"
 export var credits: int = 0
