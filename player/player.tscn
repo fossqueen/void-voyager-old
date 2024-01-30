@@ -122,7 +122,7 @@ default_font = SubResource( 4 )
 
 [node name="Player" type="RigidBody2D" groups=["player"]]
 z_index = 2
-mass = 25000.0
+mass = 20000.0
 contacts_reported = 4
 contact_monitor = true
 can_sleep = false

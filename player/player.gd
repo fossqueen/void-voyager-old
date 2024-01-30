@@ -44,8 +44,9 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("hyperspace"):
 		pass
 	
-	if event.is_action_pressed("primary_fire"):
-		$PulseLaser.fire()
+	if event.is_action("primary_fire"):
+		var fire = event.is_pressed()
+		$PulseLaser.is_firing = fire
 	
 	if event.is_action("secondary_fire"):
 		var fire = event.is_pressed()
@@ -116,14 +117,14 @@ func store_velocity() -> void:
 
 func damage(amount: float) -> void:
 	if ship.shield > 0:
-		ship.shield -= (amount / 10000)
+		ship.shield -= (amount)
 		$Shield/AnimationPlayer.play("pulse")
 		if ship.shield < 0:
 			ship.health -= (ship.shield * -1)
 			ship.shield = 0
 	else:
-		ship.health -= (amount / 10000)
-	if ship.health <= -100: # give some buffer for testing
+		ship.health -= (amount)
+	if ship.health <= 0:
 		destroy()
 
 
@@ -153,7 +154,7 @@ func set_variables() -> void:
 func _on_Player_body_entered(body):
 	print("Player: Collision detected with %s" % body)
 	body.damage(buf_v_length)
-	damage(buf_v_length)
+	damage(buf_v_length / 100)
 
 
 func _on_Scanner_body_entered(body):

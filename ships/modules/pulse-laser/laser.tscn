@@ -2,24 +2,26 @@
 
 [ext_resource path="res://ships/modules/pulse-laser/laser.gd" type="Script" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 0.5 )
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 12.0
+height = 56.0
 
 [node name="Laser" type="Area2D"]
 z_index = 1
 collision_layer = 0
 script = ExtResource( 1 )
 color = Color( 100, 0, 100, 1 )
-length = 256
+length = 64
 speed = 300
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PoolVector2Array( 32, 0, 0, 0 )
-width = 1.0
+points = PoolVector2Array( 64, 0, 0, 0 )
+width = 3.0
 default_color = Color( 100, 0, 100, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 16, 0 )
+position = Vector2( 32, 0 )
+rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Timer" type="Timer" parent="."]
