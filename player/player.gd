@@ -11,7 +11,7 @@ var reset_state: bool = false
 var mouse_motion: bool = false
 var flight_assist: bool = true
 
-const FUEL_EFFICIENCY: float = 0.0015
+const FUEL_EFFICIENCY: float = 0.0005
 const FLIGHT_ASSIST_AMOUNT: float = 0.6
 
 func _ready() -> void:

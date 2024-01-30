@@ -6,6 +6,7 @@
 bg_color = Color( 0, 0, 0, 0.2 )
 
 [node name="PlayerStats" type="MarginContainer"]
+modulate = Color( 1, 1, 1, 0.75 )
 margin_left = 128.0
 margin_right = 256.0
 size_flags_vertical = 9
