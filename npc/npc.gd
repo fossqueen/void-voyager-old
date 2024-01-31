@@ -27,12 +27,16 @@ export (Resource) var target # resource to point at
 export (Resource) var origin # resource to spawn from
 
 
-func attack_target(amount) -> void:
+func attack_target(_amount) -> void:
 	if is_instance_valid(attack) and is_firing:
-		$MiningLaser.damage_per_second = amount
-		$MiningLaser.set_is_casting(true)
+		#$MiningLaser.damage_per_second = amount
+		#$MiningLaser.set_is_casting(true)
+		$PulseLaser.damage = 10
+		$PulseLaser.set_is_firing(true)
+		$PulseLaser/FireDelay.wait_time = 0.5
 	else:
-		$MiningLaser.set_is_casting(false)
+		#$MiningLaser.set_is_casting(false)
+		$PulseLaser.set_is_firing(false)
 
 
 func damage(amount) -> void:
@@ -130,7 +134,9 @@ func _process(_delta):
 	
 
 func _integrate_forces(_state):
-	look_at(crosshairs)
+	#look_at(crosshairs)
+	set_applied_torque(get_angle_to(crosshairs) * pow(1.22, 100))
+	angular_damp = 1 / (abs(get_angle_to(crosshairs)) + 0.001)
 
 	var speed = ship.speed
 

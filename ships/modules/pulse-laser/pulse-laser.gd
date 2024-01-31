@@ -2,7 +2,7 @@ extends Node2D
 
 var damage: int = 125
 
-var parent
+onready var parent = get_parent()
 onready var laser = load("res://ships/modules/pulse-laser/laser.tscn")
 var is_firing:= false setget set_is_firing
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://npc/npc.gd" type="Script" id=1]
 [ext_resource path="res://ships/modules/mining-laser/mining-laser.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ships/animations/thrust.tres" type="Animation" id=3]
 [ext_resource path="res://ships/animations/idle.tres" type="Animation" id=4]
+[ext_resource path="res://ships/modules/pulse-laser/pulse-laser.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 2000.0
@@ -46,6 +47,8 @@ shape = SubResource( 1 )
 
 [node name="ChillThrustTimer" type="Timer" parent="."]
 wait_time = 10.0
+
+[node name="PulseLaser" parent="." instance=ExtResource( 5 )]
 
 [connection signal="body_entered" from="Scanner" to="." method="_on_Scanner_body_entered"]
 [connection signal="body_exited" from="Scanner" to="." method="_on_Scanner_body_exited"]

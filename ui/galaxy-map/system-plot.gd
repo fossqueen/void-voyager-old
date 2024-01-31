@@ -13,6 +13,11 @@ const RADIUS = 12
 func _draw():
 	draw_circle(CENTER, RADIUS, color)
 	draw_arc(CENTER, RADIUS, 0, deg2rad(360), 11, color, 1)
+	
+	for object in system["Objects"]:
+		if system["Objects"][object]["Type"] == "Black Hole":
+			draw_arc(CENTER, RADIUS * 5, 0, deg2rad(360), 12, Color.fuchsia, 1, false)
+
 
 func _ready():
 	if type == 0:
