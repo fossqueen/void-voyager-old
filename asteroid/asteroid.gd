@@ -70,13 +70,9 @@ func _on_VisEnabler_viewport_exited(_viewport): # off-screen optimizations
 	set_process(false)
 	set_physics_process(false)
 	set_physics_process_internal(false)
-	set_deferred("mode", MODE_STATIC)
-	$CollisionPolygon2D.disabled = true
 
 
 func _on_VisEnabler_viewport_entered(_viewport): # off-screen optimizations
 	set_process(true)
 	set_physics_process(true)
 	set_physics_process_internal(true)
-	set_deferred("mode", MODE_KINEMATIC)
-	$CollisionPolygon2D.disabled = false
