@@ -32,11 +32,11 @@ func attack_target(_amount) -> void:
 		#$MiningLaser.damage_per_second = amount
 		#$MiningLaser.set_is_casting(true)
 		$PulseLaser.damage = 10
-		$PulseLaser.set_is_firing(true)
+		$PulseLaser.is_firing = true
 		$PulseLaser/FireDelay.wait_time = 0.5
 	else:
 		#$MiningLaser.set_is_casting(false)
-		$PulseLaser.set_is_firing(false)
+		$PulseLaser.is_firing = false
 
 
 func damage(amount) -> void:
@@ -116,11 +116,13 @@ func _process(_delta):
 	
 	if is_instance_valid(attack): # see if we need to attack first
 		crosshairs = attack.global_position
-		if not is_firing and position.distance_to(crosshairs) < 500.0:
+		if not is_firing and position.distance_to(crosshairs) < 3600.0:
 			is_firing = true
 			attack_target(1)
 		elif is_firing:
 			is_firing = false
+			$PulseLaser.is_firing = false
+	
 	elif is_instance_valid(target):
 		crosshairs = target.global_position
 		if faction == FACTIONS.merchant:
