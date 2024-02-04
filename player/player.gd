@@ -31,10 +31,6 @@ func _integrate_forces(_state) -> void:
 	reset()
 	movement()
 
-func _physics_process(_delta) -> void:
-	#look()
-	pass
-
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("toggle_system_map"):
