@@ -41,9 +41,10 @@ func _find_neighbors(cell: Vector2, cell_mappings: Dictionary) -> Array:
 		var neighbor = cell + _into_2d(i, width)
 		
 		if cell_mappings.has(neighbor):
-			if not neighbor == cell:
-				if not _astar.are_points_connected(cell_mappings[cell], cell_mappings[neighbor]):
-					output.push_back(cell_mappings[neighbor])
+			if neighbor.distance_to(cell) <= jump_range:
+				if not neighbor == cell:
+					if not _astar.are_points_connected(cell_mappings[cell], cell_mappings[neighbor]):
+						 output.push_back(cell_mappings[neighbor])
 	
 	return output
 
@@ -58,13 +59,15 @@ func calculate_point_path(start: Vector2, end: Vector2) -> PoolVector2Array:
 		
 		var new_route = route.instance()
 		new_route.points = _astar.get_point_path(cell_mappings[start], cell_mappings[end])
-		print(new_route.points)
+		print("Galaxy Map: New route created @ %s" % new_route.points)
 		add_child(new_route)
+		if new_route.points == PoolVector2Array():
+			print("Galaxy Map: Route could not be plotted. Insufficient jump range.")
 		
 		return _astar.get_point_path(cell_mappings[start], cell_mappings[end])
 	
 	else:
-		print("Cannot plot route")
+		print("Galaxy Map: Error! Attempting to route to a non-existant star system.")
 		return PoolVector2Array()
 
 

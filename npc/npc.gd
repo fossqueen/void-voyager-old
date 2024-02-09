@@ -94,7 +94,7 @@ func _ready() -> void:
 	elif faction == FACTIONS.merchant: # MERCHANTS SETUP
 		target = random_array_choice(planet_bodies())
 	
-	print("spawned: ", FACTION_NAMES[faction], ", ", name, " at ", position)
+	print("NPC: Spawned ", FACTION_NAMES[faction], ", ", name, " at ", position)
 
 
 func _process(_delta):

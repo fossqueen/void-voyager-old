@@ -31,7 +31,7 @@ func open_system_map():
 	player_stats.hide()
 	Global.starfield.hide()
 	system_map_toggle = true
-	print("UI: System map opened")
+	print("System Map: initialized")
 
 func close_system_map():
 	var get_children = get_children()
@@ -43,7 +43,7 @@ func close_system_map():
 			player_stats.show()
 			Global.starfield.show()
 			system_map_toggle = false
-			print("UI: System map closed")
+			print("System Map: terminated")
 
 func toggle_galaxy_map():
 	if galaxy_map_toggle:
@@ -65,7 +65,7 @@ func open_galaxy_map():
 	Global.starfield.hide()
 	galaxy_map_toggle = true
 	
-	print("UI: Galaxy map opened")
+	print("Galaxy Map: initialized")
 
 func close_galaxy_map():
 	var get_children = get_children()
@@ -77,7 +77,7 @@ func close_galaxy_map():
 			player_stats.show()
 			Global.starfield.show()
 			galaxy_map_toggle = false
-			print("UI: Galaxy map closed")
+			print("Galaxy Map: terminated")
 
 func toggle_ship_panel():
 	if ship_panel_toggle:

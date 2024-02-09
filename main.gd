@@ -51,7 +51,7 @@ func create_save() -> void:
 	_save.galaxy = Galaxy.new()
 	_save.galaxy.galaxy = _galaxy_generator.initialize_galaxy(1024, 1024, 0.67)
 	_save.write_savefile()
-	print("Generated %s star systems" % _save.galaxy.galaxy.size())
+	print("Main: Generated %s star systems" % _save.galaxy.galaxy.size())
 	for star in _save.galaxy.galaxy.size():
 		if Vector2(_save.galaxy.galaxy[star]["Coordinates"]["X"], _save.galaxy.galaxy[star]["Coordinates"]["Y"]).length() < 30:
 			_save.player.current_system = star

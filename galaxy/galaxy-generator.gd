@@ -51,8 +51,6 @@ func generate_object(usable_mass: float, planet_name: String, distance: float) -
 	var moon_distance = radius * 10 # need to dial this, sometime gets really weird results
 	
 	var type = "Black Hole" if mass > 1500.00 and radius < 136 else "Terrestrial" if mass > 256.00 else "Gas Giant"
-	if type == "Black Hole":
-		print("Blackhole!")
 	
 	var random_sub_type = randi() % 100 + 1 
 	var sub_type = "None"
@@ -130,7 +128,7 @@ func generate_system(x: float, y: float, system_name: String) -> Dictionary:
 			"X": x,
 			"Y": y,
 		},
-		"Population": 100, #int(pow(clamp(core_mass / (Vector2.ZERO.distance_to(Vector2(x, y)) / 15), 0, rand_range(500000, 1000000)), 3)),
+		"Population": int(pow(clamp(core_mass / ((Vector2.ZERO.distance_to(Vector2(x, y)) + 1) / 15), 0, rand_range(500000, 1000000)), 3)),
 		"Star": star,
 		"Objects": objects,
 	}

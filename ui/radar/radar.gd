@@ -52,7 +52,7 @@ func get_objects():
 		$Panel.add_child(new_marker)
 		new_marker.show()
 		markers[object] = new_marker
-	print("UI: Radar: Retrieved system objects")
+	print("Radar: Retrieved system objects")
 
 func add_object(object):
 	var new_marker = icons[object.radar_icon].instance()
