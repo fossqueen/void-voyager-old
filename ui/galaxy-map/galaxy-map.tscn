@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/galaxy-map/map-marker.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/galaxy-map/current-system.png" type="Texture" id=7]
 [ext_resource path="res://ui/galaxy-map/search.png" type="Texture" id=8]
 [ext_resource path="res://ui/message-box/message-box.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/galaxy-map/plot-route.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
@@ -60,6 +61,9 @@ zoom_duration = 0.05
 galaxy_map = true
 
 [node name="Tween" type="Tween" parent="VPC/Viewport/Camera2D"]
+
+[node name="PlotRoute" type="Node2D" parent="VPC/Viewport"]
+script = ExtResource( 10 )
 
 [node name="InfoBox" type="MarginContainer" parent="."]
 anchor_bottom = 1.0

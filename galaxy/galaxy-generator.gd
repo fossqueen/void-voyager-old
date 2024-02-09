@@ -130,7 +130,7 @@ func generate_system(x: float, y: float, system_name: String) -> Dictionary:
 			"X": x,
 			"Y": y,
 		},
-		"Population": int(pow(clamp(core_mass / (Vector2.ZERO.distance_to(Vector2(x, y)) / 15), 0, rand_range(500000, 1000000)), 3)),
+		"Population": 100, #int(pow(clamp(core_mass / (Vector2.ZERO.distance_to(Vector2(x, y)) / 15), 0, rand_range(500000, 1000000)), 3)),
 		"Star": star,
 		"Objects": objects,
 	}
@@ -151,13 +151,13 @@ func generate_galaxy(stars: int, diameter: float, sigma: float) -> Array:
 	for _star in range(stars):
 		var anglerad = random_spiral(diameter, sigma)
 		
-		var x1 = (cos(anglerad[0]) * anglerad[1])
-		var y1 = (sin(anglerad[0]) * anglerad[1])
+		var x1 = int((cos(anglerad[0]) * anglerad[1]))
+		var y1 = int((sin(anglerad[0]) * anglerad[1]))
 		
 		var offset_x = rand_range(PI - 0.2, PI + 0.2)
 		var offset_y = rand_range(PI - 0.2, PI + 0.2)
-		var x2 = (cos(anglerad[0] + offset_x) * anglerad[1])
-		var y2 = (sin(anglerad[0] + offset_y) * anglerad[1])
+		var x2 = int((cos(anglerad[0] + offset_x) * anglerad[1]))
+		var y2 = int((sin(anglerad[0] + offset_y) * anglerad[1]))
 		
 		if !system_coordinates.has(Vector2(x1, y1)):
 			system_coordinates.append(Vector2(x1, y1))
@@ -167,7 +167,7 @@ func generate_galaxy(stars: int, diameter: float, sigma: float) -> Array:
 				system_names.append(system_name)
 				galaxy_gen.append(generate_system(x1, y1, system_name))
 		
-		if !system_coordinates.has(Vector2(int(x2), int(y2))):
+		if !system_coordinates.has(Vector2(x2, y2)):
 			system_coordinates.append(Vector2(x2, y2))
 			
 			var system_name = random_string(5)

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/galaxy-map/route.gd" type="Script" id=1]
+
+[node name="Route" type="Node2D" groups=["route"]]
+scale = Vector2( 10, 10 )
+script = ExtResource( 1 )

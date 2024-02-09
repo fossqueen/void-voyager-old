@@ -5,8 +5,11 @@ var data
 var selected_system
 onready var camera = $VPC/Viewport/Camera2D
 onready var selected_plot = $VPC/Viewport/SelectedPlot
+onready var plot_route = $VPC/Viewport/PlotRoute
 onready var player_system = Global.save.galaxy.galaxy[Global.save.player.current_system]
-onready var player_system_position = Vector2(player_system["Coordinates"]["X"], player_system["Coordinates"]["Y"])
+onready var player_system_position: Vector2  = Vector2(player_system["Coordinates"]["X"], player_system["Coordinates"]["Y"])
+
+var plots = []
 
 func _ready():
 	data = Global.save
@@ -32,6 +35,7 @@ func _ready():
 		new_system_plot.camera = camera
 		new_system_plot.select = selected_plot
 		new_system_plot.galaxy_map = self
+		plots.append(new_system_plot)
 		$VPC/Viewport.add_child(new_system_plot)
 		$VPC/Viewport/Camera2D.position = $VPC/Viewport/MapMarker.position
 		$VPC/Viewport/Camera2D.current = true
@@ -119,4 +123,4 @@ func _on_Search_pressed():
 
 func _on_Plot_pressed():
 	if selected_system:
-		$Navigation2D.get_simple_path(player_system_position, Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"]))
+		plot_route.calculate_point_path(player_system_position, Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"]))
