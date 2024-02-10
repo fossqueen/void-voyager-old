@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/theme/fonts/PixelOperator.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://ui/galaxy-map/map-marker.tscn" type="PackedScene" id=2]
@@ -17,11 +17,6 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="Theme" id=3]
 default_font = SubResource( 2 )
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 1 )
-border_width_right = 1
-border_color = Color( 1, 1, 1, 1 )
 
 [node name="GalaxyMap" type="CanvasLayer" groups=["galaxy_map"]]
 script = ExtResource( 4 )
@@ -46,6 +41,9 @@ handle_input_locally = false
 render_target_update_mode = 3
 physics_object_picking = true
 
+[node name="PlotRoute" type="Node2D" parent="VPC/Viewport"]
+script = ExtResource( 10 )
+
 [node name="MapMarker" parent="VPC/Viewport" instance=ExtResource( 2 )]
 
 [node name="SelectedPlot" parent="VPC/Viewport" instance=ExtResource( 5 )]
@@ -62,130 +60,40 @@ galaxy_map = true
 
 [node name="Tween" type="Tween" parent="VPC/Viewport/Camera2D"]
 
-[node name="PlotRoute" type="Node2D" parent="VPC/Viewport"]
-script = ExtResource( 10 )
+[node name="MessageBox" parent="." instance=ExtResource( 9 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -290.0
+margin_top = -160.0
+margin_right = 290.0
+margin_bottom = 160.0
 
-[node name="InfoBox" type="MarginContainer" parent="."]
-anchor_bottom = 1.0
-margin_right = 196.0
+[node name="Top" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 24.0
 theme = SubResource( 3 )
 
-[node name="Panel" type="Panel" parent="InfoBox"]
-margin_right = 214.0
-margin_bottom = 720.0
-custom_styles/panel = SubResource( 1 )
+[node name="TitleBar" type="HBoxContainer" parent="Top"]
+margin_right = 1280.0
+margin_bottom = 42.0
 
-[node name="List" type="VBoxContainer" parent="InfoBox"]
-margin_right = 214.0
-margin_bottom = 720.0
-
-[node name="Title" type="Label" parent="InfoBox/List"]
-margin_right = 214.0
-margin_bottom = 32.0
-size_flags_horizontal = 3
-text = "Galaxy Map"
-align = 1
-valign = 1
-
-[node name="HSeparator" type="HSeparator" parent="InfoBox/List"]
-margin_top = 36.0
-margin_right = 214.0
-margin_bottom = 40.0
-
-[node name="Fuel" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 44.0
-margin_right = 214.0
-margin_bottom = 76.0
-
-[node name="Details" type="Label" parent="InfoBox/List/Fuel"]
-margin_right = 62.0
-margin_bottom = 32.0
-text = "Fuel:"
-
-[node name="ProgressBar" type="ProgressBar" parent="InfoBox/List/Fuel"]
-margin_left = 66.0
-margin_right = 214.0
-margin_bottom = 32.0
+[node name="Search" type="HBoxContainer" parent="Top/TitleBar"]
+margin_right = 424.0
+margin_bottom = 42.0
 size_flags_horizontal = 3
 
-[node name="SelectedDistance" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 80.0
-margin_right = 214.0
-margin_bottom = 112.0
-
-[node name="Label" type="Label" parent="InfoBox/List/SelectedDistance"]
-margin_right = 184.0
-margin_bottom = 32.0
-text = "Selected Jump:"
-
-[node name="Distance" type="Label" parent="InfoBox/List/SelectedDistance"]
-margin_left = 188.0
-margin_right = 188.0
-margin_bottom = 32.0
-
-[node name="HSeparator4" type="HSeparator" parent="InfoBox/List"]
-margin_top = 116.0
-margin_right = 214.0
-margin_bottom = 120.0
-
-[node name="CameraButtons" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 124.0
-margin_right = 214.0
-margin_bottom = 162.0
-
-[node name="CurrentSystem" type="Button" parent="InfoBox/List/CameraButtons"]
-margin_right = 105.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-icon = ExtResource( 7 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="SelectedSystem" type="Button" parent="InfoBox/List/CameraButtons"]
-margin_left = 109.0
-margin_right = 214.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-icon = ExtResource( 6 )
-flat = true
-icon_align = 1
-expand_icon = true
-
-[node name="MapButtons" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 166.0
-margin_right = 214.0
-margin_bottom = 204.0
-
-[node name="Jump" type="Button" parent="InfoBox/List/MapButtons"]
-margin_right = 105.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-text = "JUMP"
-flat = true
-
-[node name="Plot" type="Button" parent="InfoBox/List/MapButtons"]
-margin_left = 109.0
-margin_right = 214.0
-margin_bottom = 38.0
-size_flags_horizontal = 3
-text = "PLOT"
-flat = true
-
-[node name="Search" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 208.0
-margin_right = 214.0
-margin_bottom = 250.0
-
-[node name="LineEdit" type="LineEdit" parent="InfoBox/List/Search"]
-margin_right = 174.0
+[node name="LineEdit" type="LineEdit" parent="Top/TitleBar/Search"]
+margin_right = 384.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 placeholder_text = "SEARCH"
 
-[node name="Search" type="Button" parent="InfoBox/List/Search"]
-margin_left = 178.0
-margin_right = 214.0
+[node name="Search" type="Button" parent="Top/TitleBar/Search"]
+margin_left = 388.0
+margin_right = 424.0
 margin_bottom = 42.0
 text = "   "
 icon = ExtResource( 8 )
@@ -193,84 +101,150 @@ flat = true
 icon_align = 1
 expand_icon = true
 
-[node name="HSeparator3" type="HSeparator" parent="InfoBox/List"]
-margin_top = 254.0
-margin_right = 214.0
-margin_bottom = 258.0
+[node name="Title" type="Label" parent="Top/TitleBar"]
+margin_left = 428.0
+margin_top = 5.0
+margin_right = 852.0
+margin_bottom = 37.0
+size_flags_horizontal = 3
+text = "Galaxy Map"
+align = 1
+valign = 1
 
-[node name="Label2" type="Label" parent="InfoBox/List"]
-margin_top = 262.0
-margin_right = 214.0
-margin_bottom = 294.0
-text = "Press J to Jump"
+[node name="Fuel" type="HBoxContainer" parent="Top/TitleBar"]
+margin_left = 856.0
+margin_right = 1280.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="InfoBox/List"]
-margin_top = 417.0
-margin_right = 214.0
-margin_bottom = 449.0
-size_flags_vertical = 6
+[node name="Details" type="Label" parent="Top/TitleBar/Fuel"]
+margin_top = 5.0
+margin_right = 62.0
+margin_bottom = 37.0
+text = "Fuel:"
 
-[node name="CurrentSystem" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 572.0
-margin_right = 214.0
-margin_bottom = 604.0
-
-[node name="Label" type="Label" parent="InfoBox/List/CurrentSystem"]
-margin_right = 208.0
+[node name="ProgressBar" type="ProgressBar" parent="Top/TitleBar/Fuel"]
+margin_left = 66.0
+margin_right = 424.0
 margin_bottom = 32.0
-text = "Current System: "
+size_flags_horizontal = 3
+value = 100.0
 
-[node name="SystemName" type="Label" parent="InfoBox/List/CurrentSystem"]
-margin_left = 212.0
-margin_right = 212.0
+[node name="Bottom" type="VBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -38.0
+theme = SubResource( 3 )
+alignment = 2
+
+[node name="MapButtons" type="HBoxContainer" parent="Bottom"]
+margin_right = 1280.0
+margin_bottom = 38.0
+
+[node name="Jump" type="Button" parent="Bottom/MapButtons"]
+margin_right = 252.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+text = "JUMP"
+flat = true
+
+[node name="Plot" type="Button" parent="Bottom/MapButtons"]
+margin_left = 256.0
+margin_right = 509.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+text = "PLOT"
+flat = true
+
+[node name="Distance" type="Label" parent="Bottom/MapButtons"]
+margin_left = 513.0
+margin_top = 3.0
+margin_right = 766.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="CurrentSystem" type="Button" parent="Bottom/MapButtons"]
+margin_left = 770.0
+margin_right = 1023.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+icon = ExtResource( 7 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="SelectedSystem" type="Button" parent="Bottom/MapButtons"]
+margin_left = 1027.0
+margin_right = 1280.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+icon = ExtResource( 6 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Info" type="MarginContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -56.0
+margin_bottom = 56.0
+mouse_filter = 2
+
+[node name="CurrentSystem" type="VBoxContainer" parent="Info"]
+margin_right = 1280.0
+margin_bottom = 112.0
+mouse_filter = 2
+theme = SubResource( 3 )
+
+[node name="Title" type="Label" parent="Info/CurrentSystem"]
+margin_right = 1280.0
 margin_bottom = 32.0
+text = "Current System"
 
-[node name="CurrentDetails" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 608.0
-margin_right = 214.0
-margin_bottom = 640.0
+[node name="SystemName" type="Label" parent="Info/CurrentSystem"]
+margin_top = 36.0
+margin_right = 1280.0
+margin_bottom = 68.0
+text = "Name"
 
-[node name="Details" type="Label" parent="InfoBox/List/CurrentDetails"]
-margin_right = 56.0
+[node name="Details" type="Label" parent="Info/CurrentSystem"]
+margin_top = 72.0
+margin_right = 1280.0
+margin_bottom = 104.0
+text = "Description"
+
+[node name="SelectedSystem" type="VBoxContainer" parent="Info"]
+margin_right = 1280.0
+margin_bottom = 112.0
+mouse_filter = 2
+theme = SubResource( 3 )
+
+[node name="Title" type="Label" parent="Info/SelectedSystem"]
+margin_right = 1280.0
 margin_bottom = 32.0
-text = "Desc"
+text = "Selected System"
+align = 2
 
-[node name="HSeparator2" type="HSeparator" parent="InfoBox/List"]
-margin_top = 644.0
-margin_right = 214.0
-margin_bottom = 648.0
+[node name="SystemName" type="Label" parent="Info/SelectedSystem"]
+margin_top = 36.0
+margin_right = 1280.0
+margin_bottom = 68.0
+text = "Name"
+align = 2
 
-[node name="SelectedSystem" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 652.0
-margin_right = 214.0
-margin_bottom = 684.0
+[node name="Details" type="Label" parent="Info/SelectedSystem"]
+margin_top = 72.0
+margin_right = 1280.0
+margin_bottom = 104.0
+text = "Description"
+align = 2
 
-[node name="Label" type="Label" parent="InfoBox/List/SelectedSystem"]
-margin_right = 210.0
-margin_bottom = 32.0
-text = "Selected System:"
-
-[node name="SystemName" type="Label" parent="InfoBox/List/SelectedSystem"]
-margin_left = 214.0
-margin_right = 214.0
-margin_bottom = 32.0
-
-[node name="SelectedDetails" type="HBoxContainer" parent="InfoBox/List"]
-margin_top = 688.0
-margin_right = 214.0
-margin_bottom = 720.0
-
-[node name="Details" type="Label" parent="InfoBox/List/SelectedDetails"]
-margin_right = 56.0
-margin_bottom = 32.0
-text = "Desc"
-
-[node name="MessageBox" parent="." instance=ExtResource( 9 )]
-visible = false
-
-[connection signal="pressed" from="InfoBox/List/CameraButtons/CurrentSystem" to="." method="_on_CurrentSystem_pressed"]
-[connection signal="pressed" from="InfoBox/List/CameraButtons/SelectedSystem" to="." method="_on_SelectedSystem_pressed"]
-[connection signal="pressed" from="InfoBox/List/MapButtons/Jump" to="." method="_on_Jump_pressed"]
-[connection signal="pressed" from="InfoBox/List/MapButtons/Plot" to="." method="_on_Plot_pressed"]
-[connection signal="text_entered" from="InfoBox/List/Search/LineEdit" to="." method="_on_LineEdit_text_entered"]
-[connection signal="pressed" from="InfoBox/List/Search/Search" to="." method="_on_Search_pressed"]
+[connection signal="text_entered" from="Top/TitleBar/Search/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="Top/TitleBar/Search/Search" to="." method="_on_Search_pressed"]
+[connection signal="pressed" from="Bottom/MapButtons/Jump" to="." method="_on_Jump_pressed"]
+[connection signal="pressed" from="Bottom/MapButtons/Plot" to="." method="_on_Plot_pressed"]
+[connection signal="pressed" from="Bottom/MapButtons/CurrentSystem" to="." method="_on_CurrentSystem_pressed"]
+[connection signal="pressed" from="Bottom/MapButtons/SelectedSystem" to="." method="_on_SelectedSystem_pressed"]

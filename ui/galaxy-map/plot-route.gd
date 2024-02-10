@@ -3,13 +3,16 @@ extends Node2D
 
 
 var _astar := AStar2D.new()
+
 onready var galaxy: Array = Global.save.galaxy.galaxy
+onready var current_system = Vector2(Global.save.galaxy.galaxy[Global.save.player.current_system]["Coordinates"]["X"], Global.save.galaxy.galaxy[Global.save.player.current_system]["Coordinates"]["Y"])
+onready var route = load("res://ui/galaxy-map/route.tscn")
 
 var jump_range: int = 30
-onready var current_system = Vector2(Global.save.galaxy.galaxy[Global.save.player.current_system]["Coordinates"]["X"], Global.save.galaxy.galaxy[Global.save.player.current_system]["Coordinates"]["Y"])
+
+var galaxy_map
 var cell_mappings: Dictionary = {}
-var directions = [Vector2(0, 1), Vector2(0, -1), Vector2(1, 0), Vector2(-1, 0), Vector2(1, 1), Vector2(-1, -1), Vector2(1, -1), Vector2(-1, 1)]
-onready var route = load("res://ui/galaxy-map/route.tscn")
+
 
 func _init() -> void:
 	pass
@@ -63,6 +66,8 @@ func calculate_point_path(start: Vector2, end: Vector2) -> PoolVector2Array:
 		add_child(new_route)
 		if new_route.points == PoolVector2Array():
 			print("Galaxy Map: Route could not be plotted. Insufficient jump range.")
+			galaxy_map.message_box_label.text = "Route could not be plotted. Insufficient jump range."
+			galaxy_map.message_box.show()
 		
 		return _astar.get_point_path(cell_mappings[start], cell_mappings[end])
 	

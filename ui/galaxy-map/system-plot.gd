@@ -8,7 +8,7 @@ var select
 var galaxy_map
 
 const CENTER = Vector2(0, 0)
-const RADIUS = 12
+const RADIUS = 10
 
 func _draw():
 	draw_circle(CENTER, RADIUS, color)

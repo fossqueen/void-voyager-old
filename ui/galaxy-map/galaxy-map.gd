@@ -6,6 +6,8 @@ var selected_system
 onready var camera = $VPC/Viewport/Camera2D
 onready var selected_plot = $VPC/Viewport/SelectedPlot
 onready var plot_route = $VPC/Viewport/PlotRoute
+onready var message_box = $MessageBox
+onready var message_box_label = $MessageBox/VBox/Label
 onready var player_system = Global.save.galaxy.galaxy[Global.save.player.current_system]
 onready var player_system_position: Vector2  = Vector2(player_system["Coordinates"]["X"], player_system["Coordinates"]["Y"])
 
@@ -13,6 +15,8 @@ var plots = []
 
 func _ready():
 	data = Global.save
+	plot_route.galaxy_map = self
+	
 	for i in data.galaxy.galaxy:
 		var new_system_plot = system_plot.instance()
 		new_system_plot.position.x = i["Coordinates"]["X"] * 10
@@ -41,17 +45,18 @@ func _ready():
 		$VPC/Viewport/Camera2D.current = true
 
 func _physics_process(_delta):
-	$InfoBox/List/SelectedSystem/SystemName.text = selected_system["Name"] if selected_system else ""
-	$InfoBox/List/SelectedDistance/Distance.text = str(int(player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2)) + " ly" if selected_system else ""
+	$Info/SelectedSystem/SystemName.text = selected_system["Name"] if selected_system else ""
+	$Bottom/MapButtons/Distance.text = str(int(player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2)) + " ly" if selected_system else ""
 	
-	$InfoBox/List/SelectedDistance/Distance.add_color_override("font_color", Color.green if selected_system and player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2 <= Global.player.jump_range else Color.red)
+	$Bottom/MapButtons/Distance.add_color_override("font_color", Color.green if selected_system and player_system_position.distance_to(Vector2(selected_system["Coordinates"]["X"], selected_system["Coordinates"]["Y"])) * 2 <= Global.player.jump_range else Color.red)
 	
-	$InfoBox/List/CurrentSystem/SystemName.text = Global.current_system["Name"]
-	$InfoBox/List/CurrentDetails/Details.text = "Coordinates: " + str(player_system["Coordinates"]["X"]) + ", " + str(player_system["Coordinates"]["Y"]) + "\nPOI's: " + str(player_system["Objects"].size()) + "\nPopulation: " + str(player_system["Population"])
-	$InfoBox/List/SelectedDetails/Details.text = "Coordinates: " + str(selected_system["Coordinates"]["X"]) + ", " + str(selected_system["Coordinates"]["Y"]) + "\nPOI's: " + str(selected_system["Objects"].size()) + "\nPopulation: " + str(selected_system["Population"]) if selected_system else ""
+	$Info/CurrentSystem/SystemName.text = Global.current_system["Name"]
+	$Info/CurrentSystem/Details.text = "Coordinates: " + str(player_system["Coordinates"]["X"]) + ", " + str(player_system["Coordinates"]["Y"]) + "\nPOI's: " + str(player_system["Objects"].size()) + "\nPopulation: " + str(player_system["Population"])
+	
+	$Info/SelectedSystem/Details.text = "Coordinates: " + str(selected_system["Coordinates"]["X"]) + ", " + str(selected_system["Coordinates"]["Y"]) + "\nPOI's: " + str(selected_system["Objects"].size()) + "\nPopulation: " + str(selected_system["Population"]) if selected_system else ""
 	player_system_position = Vector2(player_system["Coordinates"]["X"], player_system["Coordinates"]["Y"])
 	player_system = Global.save.galaxy.galaxy[Global.save.player.current_system]
-	$InfoBox/List/Fuel/ProgressBar.value = Global.player.ship.fuel
+	$Top/TitleBar/Fuel/ProgressBar.value = Global.player.ship.fuel
 
 func scale_plots(value: float) -> void:
 	var plots = get_tree().get_nodes_in_group("system_plot")
@@ -99,12 +104,12 @@ func _on_Jump_pressed():
 					Global.main.hyperspace(data.galaxy.galaxy.find(selected_system, 0))
 			else:
 				print("Exceeded Jump Range")
-				$MessageBox/VBox/Label.text = "Jump Range is insufficient."
-				$MessageBox.show()
+				message_box_label.text = "Jump Range is insufficient."
+				message_box.show()
 		else:
 			print("No selected system")
-			$MessageBox/VBox/Label.text = "No star system selected."
-			$MessageBox.show()
+			message_box_label.text = "No star system selected."
+			message_box.show()
 
 
 func _on_LineEdit_text_entered(new_text):

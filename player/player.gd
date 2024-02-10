@@ -127,7 +127,7 @@ func damage(amount: float) -> void:
 
 
 func destroy() -> void:
-	print("Ship destroyed")
+	print("Player: Ship destroyed")
 	queue_free()
 
 
