@@ -8,6 +8,7 @@ const OBJECT_RADIUS_MAX: float = 512.0
 
 const OBJECT_RINGS_CHANCE: int = 25 # % chance of planet spawning rings
 const OBJECT_MOON_CHANCE: int = 25 # % chance of planet spawning moon(s)
+const OBJECT_STATION_CHANCE: int = 50 # % chance of station spawning on objects
 
 const OBJECT_DISTANCE_MIN:float = 4000.00
 const OBJECT_DISTANCE_MAX:float = 12000.00
@@ -17,6 +18,10 @@ const STAR_MASS_MAX: float = 512.0
 
 const ASTEROID_BELT_CHANCE: int = 5 # % chance of object being an asteroid belt
 const MAX_ALLOWED_BELTS: int = 1 # maximum amount of asteroid belts per system, 1 is optimal for low-spec
+
+const STATION_NAME_POOL: Array = ["Barker", "Atlas", "Springfield", "Alyx", "Apoapsis", "Periapsis", "Brendan", "Preston", "Light", "Blueshift", "Redshift", "Rousseau", "Locke", "Burke", "Argyle", "Devin"]
+const STATION_SUFFIX_POOL: Array = ["Orbital", "Dock", "Station", "Terminal", "Port", "Outpost", "Installation", "Colony", "Reach"]
+
 
 func random_string(length: int) -> String:
 	var characters: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -50,6 +55,10 @@ func generate_object(usable_mass: float, planet_name: String, distance: float) -
 	var moon_type: int = 1 # only 1 type for now, just future-proofing
 	var moon_distance = radius * 10 # need to dial this, sometime gets really weird results
 	
+	var has_station: bool = false
+	if not rings:
+		has_station = true if randi() % 100 + 1 <= OBJECT_STATION_CHANCE else false
+	
 	var type = "Black Hole" if mass > 1500.00 and radius < 136 else "Terrestrial" if mass > 256.00 else "Gas Giant"
 	
 	var random_sub_type = randi() % 100 + 1 
@@ -75,6 +84,18 @@ func generate_object(usable_mass: float, planet_name: String, distance: float) -
 		"Moons": moons,
 		"MoonType": moon_type,
 		"MoonDistance": moon_distance,
+		"Station": generate_station(moon_distance) if has_station else {"Exists": false},
+	}
+
+
+func generate_station(moon_distance: float) -> Dictionary:
+	
+	return {
+		"Exists": true, # keeps track of stations existance, could be useful for destroying systems in the future
+		"Name": STATION_NAME_POOL[randi() % STATION_NAME_POOL.size()] + " " + STATION_SUFFIX_POOL[randi() % STATION_SUFFIX_POOL.size()],
+		"Size": randi() % 2, # 3 sizes, small(0), medium(1), large(2)
+		"Distance": moon_distance * 1.25, #hardcoded distance from planet
+		"State": 0, # hardcoded 'normal' state
 	}
 
 

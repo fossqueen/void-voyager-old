@@ -1,7 +1,7 @@
 extends Node2D
 
 var center = Vector2(0, 0)
-export var radius = 4
+export var radius = 16
 var start_angle = 0
 var end_angle = deg2rad(360)
 var point_count = 32

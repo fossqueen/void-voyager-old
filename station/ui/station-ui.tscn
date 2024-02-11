@@ -6,7 +6,7 @@
 [ext_resource path="res://station/ui/station-ui.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0, 0, 1 )
+bg_color = Color( 0, 0, 0, 0.5 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -240,3 +240,20 @@ margin_left = 331.0
 margin_right = 421.0
 margin_bottom = 32.0
 text = "Decline"
+
+[node name="Close" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = 20.0
+theme = ExtResource( 2 )
+alignment = 2
+
+[node name="Close" type="Button" parent="Close"]
+margin_left = 1218.0
+margin_right = 1248.0
+margin_bottom = 32.0
+text = " X "
+flat = true
+
+[connection signal="pressed" from="Close/Close" to="." method="_on_Close_pressed"]

@@ -9,8 +9,9 @@ onready var star_marker = load("res://ui/radar/star-marker.tscn")
 onready var planet_marker = load("res://ui/radar/planet-marker.tscn")
 onready var asteroid_marker = load("res://ui/radar/asteroid-marker.tscn")
 onready var moon_marker = load("res://ui/radar/moon-marker.tscn")
+onready var station_marker = load("res://ui/radar/station-marker.tscn")
 
-onready var icons = {"star": star_marker, "planet": planet_marker, "asteroid": asteroid_marker, "moon": moon_marker, "npc": ship_marker}
+onready var icons = {"star": star_marker, "planet": planet_marker, "asteroid": asteroid_marker, "moon": moon_marker, "npc": ship_marker, "station": station_marker}
 
 var grid_scale
 var markers = {}
@@ -29,7 +30,7 @@ func _process(_delta):
 			if $Panel.get_rect().has_point(obj_pos + $Panel.rect_position):
 				markers[i].scale = Vector2(1, 1)
 			else:
-				markers[i].scale = Vector2(0.40, 0.40)
+				markers[i].scale = Vector2(0.5, 0.5)
 			obj_pos = clamp_circle(obj_pos, 128)
 			markers[i].position = obj_pos
 		else:
@@ -47,7 +48,9 @@ func get_objects():
 			new_marker.color = object.color
 		elif object.radar_icon == "moon":
 			new_marker.color = object.self_modulate
-		else:
+		elif object.radar_icon == "station":
+			pass
+		else: 
 			continue
 		$Panel.add_child(new_marker)
 		new_marker.show()

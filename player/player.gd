@@ -139,6 +139,33 @@ func reset() -> void:
 		reset_state = false
 
 
+func dock(station_controller: Node) -> void:
+	set_deferred("mode", MODE_KINEMATIC)
+	$CollisionPolygon2D.disabled = true
+	set_process(false)
+	set_process_input(false)
+	set_process_unhandled_input(false)
+	hide()
+	$UI.radar.hide()
+	$UI.player_stats.hide()
+	camera.current = false
+	station_controller.camera.current = true
+
+
+func undock(station_position: Vector2, station_controller: Node) -> void:
+	global_position = station_position
+	$CollisionPolygon2D.disabled = false
+	set_process(true)
+	set_process_input(true)
+	set_process_unhandled_input(true)
+	set_deferred("mode", MODE_RIGID)
+	show()
+	$UI.radar.show()
+	$UI.player_stats.show()
+	station_controller.current = false
+	camera.current = true
+
+
 func set_variables() -> void:
 	Global.player = self
 	$UI/Radar.player = self

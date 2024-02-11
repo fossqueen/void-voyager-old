@@ -1,9 +1,32 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://station/station.gd" type="Script" id=1]
 [ext_resource path="res://station/ui/station-ui.tscn" type="PackedScene" id=2]
+[ext_resource path="res://station/station-object.gd" type="Script" id=3]
+[ext_resource path="res://ui/tooltip/tooltip.tscn" type="PackedScene" id=4]
 
-[node name="Station" type="Node2D" groups=["station"]]
+[sub_resource type="CircleShape2D" id=1]
+radius = 256.0
+
+[node name="StationController" type="Node2D" groups=["station"]]
 script = ExtResource( 1 )
 
 [node name="StationUI" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="ToolTip" parent="UI" instance=ExtResource( 4 )]
+visible = false
+
+[node name="Station" type="Area2D" parent="." groups=["radar_objects"]]
+script = ExtResource( 3 )
+
+[node name="Collider" type="CollisionShape2D" parent="Station"]
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera2D" parent="Station"]
+zoom = Vector2( 4, 4 )
+
+[connection signal="mouse_entered" from="Station" to="." method="_on_Station_mouse_entered"]
+[connection signal="mouse_exited" from="Station" to="." method="_on_Station_mouse_exited"]

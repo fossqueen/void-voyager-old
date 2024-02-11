@@ -13,6 +13,7 @@ var waterworld_texture = load("res://planet/textures/oceanic.png")
 var clouds = load("res://planet/textures/clouds.tscn")
 var asteroid_spawner = load("res://asteroid/asteroid-spawner.tscn")
 var moon_spawner = load("res://planet/moon.tscn")
+var station_spawner = load("res://station/station.tscn")
 export var debug_color: Color
 
 var radar_icon = "planet"
@@ -71,6 +72,15 @@ func configure_planet():
 		spawn_moon.distance = parent.moon_distance
 		spawn_moon.rotation = deg2rad(rand_range(0, 360))
 		add_child(spawn_moon)
+	if not parent.station == {}:
+		if parent.station["Exists"] == true:
+			var new_station = station_spawner.instance()
+			new_station.station_name = parent.station["Name"]
+			new_station.station_distance = parent.station["Distance"]
+			new_station.station_size = parent.station["Size"]
+			new_station.station_state = parent.station["State"]
+			add_child(new_station)
+		
 
 # signals
 func _on_Body_mouse_entered():

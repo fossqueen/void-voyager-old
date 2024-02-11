@@ -9,9 +9,10 @@ var distance = 2000
 export var rings: bool = false
 var moons: bool
 var moon_type: int = 1
-var moon_distance = 1000
+var moon_distance = 128
 var system_name
 var gravity = radius / 5.22
+var station = {}
 
 export var rotation_speed: float = 1
 
