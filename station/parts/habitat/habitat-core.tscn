@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://station/parts/habitat/habitat-core.gd" type="Script" id=1]
+
+[node name="HabitatCore" type="Node2D"]
+script = ExtResource( 1 )

@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://station/parts/window/window.tscn" type="PackedScene" id=1]
+[ext_resource path="res://station/parts/tube/tube.tscn" type="PackedScene" id=2]
+[ext_resource path="res://station/parts/habitat/habitat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://station/parts/solar-panel/solar-array.tscn" type="PackedScene" id=4]
+[ext_resource path="res://station/parts/habitat/habitat-core.tscn" type="PackedScene" id=5]
+
+[node name="StationArt" type="Node2D"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+
+[node name="Habitat" parent="." instance=ExtResource( 3 )]
+rotation = 1.07239
+scale = Vector2( 5.8, 5.8 )
+
+[node name="Tubes" type="Node2D" parent="Habitat"]
+rotation = -0.785398
+scale = Vector2( 0.172414, 0.172414 )
+
+[node name="Tube" parent="Habitat/Tubes" instance=ExtResource( 2 )]
+position = Vector2( 0, -192 )
+
+[node name="Tube2" parent="Habitat/Tubes" instance=ExtResource( 2 )]
+position = Vector2( 0, 192 )
+
+[node name="HabitatCore2" parent="Habitat" instance=ExtResource( 5 )]
+position = Vector2( -46.8153, -46.8154 )
+rotation = -0.785398
+scale = Vector2( 0.206897, 0.206897 )
+
+[node name="HabitatCore3" parent="Habitat" instance=ExtResource( 5 )]
+position = Vector2( 46.8153, 46.8154 )
+rotation = -0.785398
+scale = Vector2( 0.206897, 0.206897 )
+
+[node name="Solar" type="Node2D" parent="."]
+modulate = Color( 0, 1, 1, 1 )
+
+[node name="SolarArray" parent="Solar" instance=ExtResource( 4 )]
+position = Vector2( -128, 0 )
+rotation = -3.14159
+
+[node name="SolarArray2" parent="Solar" instance=ExtResource( 4 )]
+position = Vector2( 128, 0 )
+
+[node name="HabitatCore" parent="." instance=ExtResource( 5 )]
+scale = Vector2( 2, 2 )
+
+[node name="Window" parent="HabitatCore" instance=ExtResource( 1 )]
+scale = Vector2( 0.5, 0.125 )

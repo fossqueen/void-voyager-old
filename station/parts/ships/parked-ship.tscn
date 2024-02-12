@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://station/parts/ships/parked-ship.gd" type="Script" id=1]
+
+[node name="ParkedShip" type="Node2D"]
+script = ExtResource( 1 )
+points = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16, -20, 0 )

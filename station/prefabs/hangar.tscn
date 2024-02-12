@@ -1,0 +1,123 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://station/parts/solar-panel/solar-array.tscn" type="PackedScene" id=1]
+[ext_resource path="res://station/parts/window/window.tscn" type="PackedScene" id=2]
+[ext_resource path="res://station/parts/tube/tube.tscn" type="PackedScene" id=3]
+[ext_resource path="res://station/parts/habitat/habitat-core.tscn" type="PackedScene" id=4]
+[ext_resource path="res://station/parts/habitat/habitat.tscn" type="PackedScene" id=5]
+[ext_resource path="res://station/parts/ships/parked-ship.tscn" type="PackedScene" id=6]
+
+[node name="StationArt" type="Node2D"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+
+[node name="HabitatCore" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 96 )
+scale = Vector2( 1.15, 1.15 )
+
+[node name="Habitat" parent="." instance=ExtResource( 5 )]
+position = Vector2( 9.09495e-13, 96 )
+rotation = 1.44002
+scale = Vector2( 1.15, 1.15 )
+
+[node name="Windows" type="Node2D" parent="."]
+
+[node name="Window4" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( -128, 56 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window6" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( -64, 56 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window7" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( -128, -56 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window8" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( -96, -56 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window9" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( -64, -56 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window11" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( 96, -56 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window12" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( 128, -56 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window13" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( 64, 248 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window14" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( 96, 248 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window16" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( 40, 192 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window18" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( 40, 224 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window20" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( 152, 160 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Window21" parent="Windows" instance=ExtResource( 2 )]
+position = Vector2( 152, 224 )
+scale = Vector2( 0.15, 0.15 )
+
+[node name="Tube" parent="." instance=ExtResource( 3 )]
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Tube2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 96, 96 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="Window" parent="." instance=ExtResource( 2 )]
+position = Vector2( -96, 0 )
+
+[node name="Window2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 96, 0 )
+
+[node name="Window3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 96, 192 )
+
+[node name="ParkedShip" parent="." instance=ExtResource( 6 )]
+position = Vector2( -24, 80 )
+rotation = -0.785398
+scale = Vector2( 0.25, 0.25 )
+
+[node name="ParkedShip3" parent="." instance=ExtResource( 6 )]
+position = Vector2( -16, 120 )
+rotation = 2.16652
+scale = Vector2( 0.25, 0.25 )
+points = PoolVector2Array( 24, -18, -24, -24, -32, 0, -24, 24, 4.84555, 20.3943, 24, 18, 36, 0, 24, -18 )
+
+[node name="ParkedShip2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 24, 96 )
+rotation = -1.49253
+scale = Vector2( 0.25, 0.25 )
+points = PoolVector2Array( 64, 4, 66, 0, 64, -4, -56, -32, -60, -16, -60, 16, -56, 32, 64, 4 )
+
+[node name="ParkedShip3" parent="ParkedShip2" instance=ExtResource( 6 )]
+points = PoolVector2Array( -68, -10, -72, 0, -68, 10, -44, 12, -18, 4, -16, 0, -18, -4, -44, -12, -68, -10 )
+
+[node name="Solar" type="Node2D" parent="."]
+modulate = Color( 0, 1, 1, 1 )
+
+[node name="SolarArray" parent="Solar" instance=ExtResource( 1 )]
+position = Vector2( 160, 0 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="SolarArray2" parent="Solar" instance=ExtResource( 1 )]
+position = Vector2( -160, 0 )
+rotation = 3.14159
+scale = Vector2( 0.5, 0.5 )

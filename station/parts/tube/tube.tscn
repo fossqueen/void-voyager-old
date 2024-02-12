@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://station/parts/tube/tube.gd" type="Script" id=1]
+
+[node name="Tube" type="Node2D"]
+script = ExtResource( 1 )
+points = PoolVector2Array( 56, -192, 64, -184, 64, -40, 56, -32, 56, 32, 64, 40, 64, 184, 56, 192, -56, 192, -64, 184, -64, 40, -56, 32, -56, -32, -64, -40, -64, -184, -56, -192, 56, -192 )
+points2 = PoolVector2Array( -56, -32, 56, -32, -56, 32, 56, 32, -56, -32, 0, 32, 0, -32, 56, 32 )
