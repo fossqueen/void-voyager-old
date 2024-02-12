@@ -48,6 +48,7 @@ func load_save() -> void:
 
 func create_save() -> void:
 	_save.player = PlayerSave.new()
+	_save.player.credits = 100 # give the player a little spending money
 	_save.galaxy = Galaxy.new()
 	_save.galaxy.galaxy = _galaxy_generator.initialize_galaxy(1024, 1024, 0.67)
 	_save.write_savefile()

@@ -19,6 +19,9 @@ onready var ui = $StationUI
 onready var station = $Station
 onready var camera = $Station/Camera
 
+onready var large_station = load("res://station/prefabs/ring.tscn")
+onready var small_station = load("res://station/prefabs/hangar.tscn")
+
 var available_missions: Array = []
 var mouse_entered: bool = false
 
@@ -93,6 +96,14 @@ func generate_mission(): # will generate missions based on a number of variables
 
 
 func _ready():
+	if station_size == SIZE.large:
+		var new_art = large_station.instance()
+		station.add_child(new_art)
+	else:
+		var new_art = small_station.instance()
+		station.add_child(new_art)
+	
+	
 	var count = 10
 	while count > 0:
 		var new_mission = generate_mission()
