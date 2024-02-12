@@ -115,6 +115,8 @@ func _draw():
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept") and mouse_entered and station.global_position.distance_to(Global.player.global_position) < 360:
 		ui.show()
+		ui.refresh_player_stats()
+		ui.station_name.text = station_name
 		Global.player.dock(self)
 
 
