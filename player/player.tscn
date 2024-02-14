@@ -126,7 +126,7 @@ mass = 20000.0
 contacts_reported = 4
 contact_monitor = true
 can_sleep = false
-angular_damp = 0.0
+angular_damp = 30.0
 script = ExtResource( 1 )
 points = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16, -20, 0 )
 
@@ -190,6 +190,7 @@ polygon = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16 )
 zoom_max = 6.0
 
 [node name="Scanner" type="Area2D" parent="."]
+visible = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Scanner"]

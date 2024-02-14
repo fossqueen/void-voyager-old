@@ -19,8 +19,10 @@ const STAR_MASS_MAX: float = 512.0
 const ASTEROID_BELT_CHANCE: int = 5 # % chance of object being an asteroid belt
 const MAX_ALLOWED_BELTS: int = 1 # maximum amount of asteroid belts per system, 1 is optimal for low-spec
 
-const STATION_NAME_POOL: Array = ["Barker", "Atlas", "Springfield", "Alyx", "Apoapsis", "Periapsis", "Brendan", "Preston", "Light", "Blueshift", "Redshift", "Rousseau", "Locke", "Burke", "Argyle", "Devin"]
+const STATION_NAME_POOL: Array = ["Barker", "Atlas", "Springfield", "Alyx", "Apoapsis", "Periapsis", "Brendan", "Preston", "Light", "Blueshift", "Redshift", "Rousseau", "Locke", "Burke", "Argyle", "Devin", "Luna", "Sam", "Anisa", "Jude", "Ireland", "Martin", "Vodric"]
 const STATION_SUFFIX_POOL: Array = ["Orbital", "Dock", "Station", "Terminal", "Port", "Outpost", "Installation", "Colony", "Reach"]
+const GREEK: Array = ["ALPHA", "ALPHA", "ALPHA", "ALPHA", "BETA", "GAMMA", "GAMMA", "GAMMA", "DELTA", "EPSILON", "ZETA", "ZETA", "ZETA", "ZETA", "ETA", "THETA", "IOTA", "KAPPA", "LAMBDA", "MU", "NU", "XI", "XI", "XI", "XI","XI", "OMICRON", "PI", "RHO", "SIGMA", "TAU", "TAU", "UPSILON", "PHI", "CHI", "PSI", "OMEGA"]
+const PATTERNS: Array = [[0, 1, 0, 0, 1], [1, 0, 1, 0, 0], [1, 0, 0, 1, 0], [0, 0, 1, 0, 1], [1, 0, 1, 0, 1]]
 
 
 func random_string(length: int) -> String:
@@ -39,6 +41,47 @@ func random_digits(length: int) -> String:
 	for _digit in range(length):
 		string += digits[randi()% n_digi]
 	return string
+
+
+func random_letter(type: int) -> String:
+	var characters: String
+	if type == 0:
+		characters = "AAAEEEIIOOUYAAAEEEIIOOUYAAAEEEIIOOUYAAAEEEIIOOUYAAAEEEIIOOUYW---"
+	if type == 1:
+		characters = "BBCCCCCDFGGGHJKLMMMMMNNNNNPQQQQQRSSSSSTTTVWXXXXXYYYYYZZZZZ"
+	var n_char = len(characters)
+	var output = characters[randi() % n_char]
+	
+	return output
+
+
+func random_name() -> String:
+	var name: String
+	
+	var pattern = PATTERNS[randi() % PATTERNS.size()]
+	
+	if randi() % 100 + 1 <= 10:
+		name += GREEK[randi() % GREEK.size()] + " "
+	
+	var previous_letter
+	
+	for letter in pattern:
+		var string = str(random_letter(letter))
+		while string == previous_letter:
+			var dice = randi() % 100 + 1
+			if dice <=95:
+				str(random_letter(letter))
+			
+			previous_letter = string
+		
+		name += string
+	
+	if randi() % 100 + 1 <= 2:
+		name = random_digits(2) + random_letter(1)
+	
+	print(name)
+	
+	return name
 
 
 func generate_object(usable_mass: float, planet_name: String, distance: float) -> Dictionary:
@@ -181,7 +224,7 @@ func generate_galaxy(stars: int, diameter: float, sigma: float) -> Array:
 		if !system_coordinates.has(Vector2(x1, y1)):
 			system_coordinates.append(Vector2(x1, y1))
 			
-			var system_name = random_string(5)
+			var system_name = random_name()
 			if !system_names.has(system_name): # unique system names
 				system_names.append(system_name)
 				galaxy_gen.append(generate_system(x1, y1, system_name))
@@ -189,7 +232,7 @@ func generate_galaxy(stars: int, diameter: float, sigma: float) -> Array:
 		if !system_coordinates.has(Vector2(x2, y2)):
 			system_coordinates.append(Vector2(x2, y2))
 			
-			var system_name = random_string(5)
+			var system_name = random_name()
 			if !system_names.has(system_name):
 				system_names.append(system_name)
 				galaxy_gen.append(generate_system(x2, y2, system_name))

@@ -24,8 +24,12 @@ func _draw() -> void:
 
 
 func _integrate_forces(_state) -> void:
-	set_applied_torque(get_angle_to(get_global_mouse_position()) * pow(1.22, 100))
-	angular_damp = 4 / (abs(get_angle_to(get_global_mouse_position())) + 0.001)
+	#set_applied_torque(get_angle_to(get_global_mouse_position()) * pow(1.22, 100))
+	#angular_damp = 4 / (abs(get_angle_to(get_global_mouse_position())) + 0.001)
+	
+	set_applied_torque(get_angle_to(look()) * pow(1.2, 100))
+	angular_damp = 4 / (abs(get_angle_to(look())) + 0.001)
+
 	
 	store_velocity()
 	reset()
@@ -58,8 +62,6 @@ func _unhandled_input(event):
 		
 	if event is InputEventMouseMotion:
 		mouse_motion = true
-	else:
-		mouse_motion = false
 
 
 func movement() -> void:
@@ -87,13 +89,9 @@ func movement() -> void:
 			linear_damp = FLIGHT_ASSIST_AMOUNT
 
 
-func look() -> void:
-	var look_dir: Vector2 = Vector2(Input.get_axis("look_left", "look_right"), Input.get_axis("look_up", "look_down"))
-	if look_dir != Vector2.ZERO:
-		if look_dir.length() >= 0.75:
-			rotation = lerp_angle(rotation, look_dir.angle(), 0.5)
-	if mouse_motion:
-		look_at(get_global_mouse_position())
+func look() -> Vector2:
+	var look_dir: Vector2 = Vector2(Input.get_axis("look_left", "look_right"), Input.get_axis("look_up", "look_down")) + global_position
+	return look_dir
 
 
 func toggle_flight_assist() -> void:
