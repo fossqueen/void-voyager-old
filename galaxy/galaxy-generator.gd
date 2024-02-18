@@ -56,7 +56,7 @@ func random_letter(type: int) -> String:
 
 
 func random_name() -> String:
-	var name: String
+	var name: String = ''
 	
 	var pattern = PATTERNS[randi() % PATTERNS.size()]
 	
