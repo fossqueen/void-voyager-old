@@ -2,9 +2,9 @@ extends Node2D
 
 var asteroid = load("res://asteroid/asteroid.tscn")
 
-var count: int = 48
+export var count: int = 48
 var center = Vector2(0, 0)
-var radius = Vector2(1024, 0)
+export var radius: Vector2 = Vector2(1024, 0)
 var rotation_speed: float
 var radius_mod: Vector2
 var center_mod: Vector2

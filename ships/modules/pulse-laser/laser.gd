@@ -7,7 +7,7 @@ export var speed: int = 100
 
 var parent
 
-const PROJECTILE_SPEED: int = 8000
+const PROJECTILE_SPEED: int = 2000
 
 func _process(delta):
 	position += Vector2(1, 0).rotated(rotation) * PROJECTILE_SPEED * delta

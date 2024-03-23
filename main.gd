@@ -71,8 +71,9 @@ func run_game() -> void:
 	Global.save = _save
 	var new_player = player.instance()
 	new_player.ship = _save.player.current_ship
-	add_child(new_player)
+	
 	remove_child($MainMenu)
+	add_child(new_player)
 	load_system()
 	Global.ui.radar.get_objects()
 	menu_active = false

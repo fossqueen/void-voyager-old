@@ -21,3 +21,6 @@ func _physics_process(_delta):
 	if is_firing and $FireDelay.is_stopped():
 		fire()
 		$FireDelay.start()
+
+
+

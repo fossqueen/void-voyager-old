@@ -3,12 +3,12 @@ class_name GalaxyGenerator
 
 const OBJECT_MASS_MIN: float = 8.0
 const OBJECT_MASS_MAX: float = 2048.0
-const OBJECT_RADIUS_MIN: float = 128.0
-const OBJECT_RADIUS_MAX: float = 512.0
+const OBJECT_RADIUS_MIN: float = 128.0 #px
+const OBJECT_RADIUS_MAX: float = 512.0 #px
 
 const OBJECT_RINGS_CHANCE: int = 25 # % chance of planet spawning rings
-const OBJECT_MOON_CHANCE: int = 25 # % chance of planet spawning moon(s)
-const OBJECT_STATION_CHANCE: int = 50 # % chance of station spawning on objects
+const OBJECT_MOON_CHANCE: int = 50 # % chance of planet spawning moon(s)
+const OBJECT_STATION_CHANCE: int = 25 # % chance of station spawning on objects
 
 const OBJECT_DISTANCE_MIN:float = 4000.00
 const OBJECT_DISTANCE_MAX:float = 12000.00
@@ -21,7 +21,7 @@ const MAX_ALLOWED_BELTS: int = 1 # maximum amount of asteroid belts per system, 
 
 const STATION_NAME_POOL: Array = ["Barker", "Atlas", "Springfield", "Alyx", "Apoapsis", "Periapsis", "Brendan", "Preston", "Light", "Blueshift", "Redshift", "Rousseau", "Locke", "Burke", "Argyle", "Devin", "Luna", "Sam", "Anisa", "Jude", "Ireland", "Martin", "Vodric"]
 const STATION_SUFFIX_POOL: Array = ["Orbital", "Dock", "Station", "Terminal", "Port", "Outpost", "Installation", "Colony", "Reach"]
-const GREEK: Array = ["ALPHA", "ALPHA", "ALPHA", "ALPHA", "BETA", "GAMMA", "GAMMA", "GAMMA", "DELTA", "EPSILON", "ZETA", "ZETA", "ZETA", "ZETA", "ETA", "THETA", "IOTA", "KAPPA", "LAMBDA", "MU", "NU", "XI", "XI", "XI", "XI","XI", "OMICRON", "PI", "RHO", "SIGMA", "TAU", "TAU", "UPSILON", "PHI", "CHI", "PSI", "OMEGA"]
+const GREEK: Array = ["ALPHA", "BETA", "GAMMA", "DELTA", "ZETA", "ETA", "THETA", "LAMBDA", "MU", "NU", "XI", "SIGMA", "TAU", "PHI", "OMEGA"]
 const PATTERNS: Array = [[0, 1, 0, 0, 1], [1, 0, 1, 0, 0], [1, 0, 0, 1, 0], [0, 0, 1, 0, 1], [1, 0, 1, 0, 1]]
 
 
@@ -56,7 +56,7 @@ func random_letter(type: int) -> String:
 
 
 func random_name() -> String:
-	var name: String
+	var name: String = ""
 	
 	var pattern = PATTERNS[randi() % PATTERNS.size()]
 	
@@ -70,7 +70,7 @@ func random_name() -> String:
 		while string == previous_letter:
 			var dice = randi() % 100 + 1
 			if dice <=95:
-				str(random_letter(letter))
+				string = str(random_letter(letter))
 			
 			previous_letter = string
 		
@@ -78,8 +78,6 @@ func random_name() -> String:
 	
 	if randi() % 100 + 1 <= 2:
 		name = random_digits(2) + random_letter(1)
-	
-	print(name)
 	
 	return name
 
@@ -192,7 +190,7 @@ func generate_system(x: float, y: float, system_name: String) -> Dictionary:
 			"X": x,
 			"Y": y,
 		},
-		"Population": int(pow(clamp(core_mass / ((Vector2.ZERO.distance_to(Vector2(x, y)) + 1) / 15), 0, rand_range(500000, 1000000)), 3)),
+		"Population": int(pow(clamp(core_mass / ((Vector2.ZERO.distance_to(Vector2(x, y)) + 1) / 15), 0, rand_range(500000, 1000000)), 3)), # actual headache to look at, laugh at it until i do this again
 		"Star": star,
 		"Objects": objects,
 	}
@@ -229,7 +227,7 @@ func generate_galaxy(stars: int, diameter: float, sigma: float) -> Array:
 				system_names.append(system_name)
 				galaxy_gen.append(generate_system(x1, y1, system_name))
 		
-		if !system_coordinates.has(Vector2(x2, y2)):
+		if !system_coordinates.has(Vector2(x2, y2)): # repeated for xy2, the second half of the spiral
 			system_coordinates.append(Vector2(x2, y2))
 			
 			var system_name = random_name()

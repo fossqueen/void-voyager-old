@@ -4,4 +4,3 @@
 
 [node name="StarMarker" type="Node2D" groups=["radar_markers"]]
 script = ExtResource( 1 )
-radius = 32

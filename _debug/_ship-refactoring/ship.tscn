@@ -1,0 +1,128 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://_debug/_ship-refactoring/ship.gd" type="Script" id=1]
+[ext_resource path="res://_debug/_ship-refactoring/shield.gd" type="Script" id=2]
+[ext_resource path="res://camera/camera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://_debug/_ship-refactoring/art.gd" type="Script" id=4]
+[ext_resource path="res://_debug/_ship-refactoring/modules/pulse-laser/pulse-laser.tscn" type="PackedScene" id=5]
+[ext_resource path="res://_debug/_ship-refactoring/modules/orb-launcher/orb-launcher.gd" type="Script" id=6]
+
+[sub_resource type="Gradient" id=5]
+offsets = PoolRealArray( 0, 0.470588 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.444444, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_box_extents = Vector3( 1, 2, 1 )
+flag_disable_z = true
+spread = 2.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = -128.0
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 45.0
+angle_random = 1.0
+scale = 12.0
+scale_random = 1.0
+scale_curve = SubResource( 3 )
+color_ramp = SubResource( 6 )
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="Animation" id=10]
+resource_name = "pulse"
+length = 0.5
+loop = true
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Ship" type="RigidBody2D"]
+mass = 20000.0
+can_sleep = false
+linear_damp = 0.0
+angular_damp = 30.0
+script = ExtResource( 1 )
+fuel = 100.0
+
+[node name="Art" type="Node2D" parent="."]
+script = ExtResource( 4 )
+points = PoolVector2Array( -20, 0, -12, -16, 28, 0, -12, 16, -20, 0 )
+
+[node name="Animations" type="Node2D" parent="Art"]
+
+[node name="Thrust" type="Particles2D" parent="Art/Animations"]
+z_index = -1
+emitting = false
+amount = 256
+lifetime = 4.0
+speed_scale = 2.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 4 )
+
+[node name="ThrustLat" type="Particles2D" parent="Art/Animations"]
+rotation = 1.5708
+z_index = -1
+emitting = false
+amount = 256
+lifetime = 4.0
+speed_scale = 2.0
+randomness = 1.0
+fixed_fps = 60
+local_coords = false
+process_material = SubResource( 4 )
+
+[node name="Camera" parent="." instance=ExtResource( 3 )]
+smoothing_enabled = true
+zoom_max = 5.0
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -8, -8, 8, -8, 8, 8, -8, 8 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="OrbLauncher" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
+[node name="Interval" type="Timer" parent="OrbLauncher"]
+one_shot = true
+
+[node name="PulseLaser" parent="." instance=ExtResource( 5 )]
+position = Vector2( 24, 0 )
+
+[node name="Scanner" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scanner"]
+shape = SubResource( 1 )
+
+[node name="Shield" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Shield"]
+anims/pulse = SubResource( 10 )

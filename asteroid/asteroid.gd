@@ -1,33 +1,31 @@
-extends RigidBody2D
+extends KinematicBody2D
 
 const radar_icon: String = "asteroid"
 const MIN_SIZE: float = 0.05
 const MAX_SIZE: float = 1.5
 
-var size: float
+var size: float = 1
 var health: float = 100
 var rotation_speed: float = 0
 
-var points: PoolVector2Array = PoolVector2Array([Vector2(-64, -8), Vector2(-40, -48), Vector2(-8, -56), Vector2(48, -40), Vector2(56, 16), Vector2(8, 56), Vector2(-48, 40), Vector2(-64, -8)])
-var explosion = load("res://particles/explosion/explosionparticles.tscn")
-var item = load("res://item/item.tscn")
+export var points: PoolVector2Array = PoolVector2Array([Vector2(-64, -8), Vector2(-40, -48), Vector2(-8, -56), Vector2(48, -40), Vector2(56, 16), Vector2(8, 56), Vector2(-48, 40), Vector2(-64, -8)])
+export var explosion: PackedScene
+export var item: PackedScene
 
 
 func _draw():
-	var width: int = 1
 	draw_colored_polygon(points, Color.black)
-	draw_polyline(points, Color.white, width)
+	draw_polyline(points, Color.white, 1)
 
 
 func _ready():
-	sleeping = true
-	
 	rotation_speed = rand_range(-0.5, 0.5)
 	size = rand_range(MIN_SIZE, MAX_SIZE)
 	
 	global_scale = Vector2(size, size)
 	health = health * size # scales health based on size
 	$CollisionPolygon2D.polygon = points
+	$OverlapChecker/CollisionPolygon2D2.polygon = points
 
 
 func _physics_process(delta):
@@ -40,29 +38,33 @@ func damage(amount) -> void: # need to eventually tweak the damage
 	health -= amount
 
 	if health <= 0:
-		var new_explosion = explosion.instance()
+		var drop_item = item.instance() # dirty randomized item drop, will need to change
+		drop_item.itemID = randi() % 6
+		drop_item.position = position
+		get_parent().call_deferred("add_child", drop_item)
+		
+		var new_explosion = explosion.instance() # dirty explosion particles implementation
 		new_explosion.position = position
 		new_explosion.modulate = Color.white
 		new_explosion.z_index = -1
-		get_parent().add_child(new_explosion)
-		var drop_item = item.instance()
-		drop_item.itemID = randi() % 6
-		drop_item.global_position = global_position
-		get_tree().root.call_deferred("add_child", drop_item)
+		get_parent().call_deferred("add_child", new_explosion)
+		
 		queue_free()
 
 
 # signals
-func _on_Asteroid_body_shape_entered(_body_rid, body, _body_shape_index, _local_shape_index): # prevents asteroids from stacking on top of each other
+func _on_OverlapChecker_body_entered(body): # used to prevent asteroids from overlapping each other. removed after timer stops
 	if body.is_in_group("asteroid"):
+		if body == self:
+			return
 		if body.size > size:
 			body.queue_free()
 		else:
 			queue_free()
 
 
-func _on_Timer_timeout(): # contact monitor is only needed for the above signal. disables after setup
-	contact_monitor = false
+func _on_Timer_timeout(): 
+	$OverlapChecker.queue_free()
 	$Timer.queue_free()
 
 

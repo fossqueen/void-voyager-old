@@ -1,7 +1,7 @@
 extends MarginContainer
 
 var player
-export var zoom = 10
+export var zoom = 5
 
 onready var player_marker = $Panel/PlayerMarker
 onready var ship_marker = load("res://ui/radar/player-marker.tscn")
@@ -31,7 +31,7 @@ func _process(_delta):
 				markers[i].scale = Vector2(1, 1)
 			else:
 				markers[i].scale = Vector2(0.5, 0.5)
-			obj_pos = clamp_circle(obj_pos, 128)
+			obj_pos = clamp_circle(obj_pos, 64)
 			markers[i].position = obj_pos
 		else:
 			markers.erase(i)

@@ -24,11 +24,12 @@ func _draw() -> void:
 
 
 func _integrate_forces(_state) -> void:
-	#set_applied_torque(get_angle_to(get_global_mouse_position()) * pow(1.22, 100))
-	#angular_damp = 4 / (abs(get_angle_to(get_global_mouse_position())) + 0.001)
+	set_applied_torque(get_angle_to(get_global_mouse_position()) * pow(1.22, 100))
+	angular_damp = 4 / (abs(get_angle_to(get_global_mouse_position())) + 0.001)
 	
-	set_applied_torque(get_angle_to(look()) * pow(1.2, 100))
-	angular_damp = 4 / (abs(get_angle_to(look())) + 0.001)
+	$PulseLaser.look_at(get_global_mouse_position())
+	#set_applied_torque(get_angle_to(look()) * pow(1.2, 100))
+	#angular_damp = 4 / (abs(get_angle_to(look())) + 0.001)
 
 	
 	store_velocity()
@@ -51,8 +52,7 @@ func _unhandled_input(event):
 		$PulseLaser.is_firing = fire
 	
 	if event.is_action("secondary_fire"):
-		var fire = event.is_pressed()
-		$MiningLaser.is_casting = fire
+		pass
 	
 	if Input.is_action_just_pressed("flight_assist"):
 		toggle_flight_assist()
@@ -170,7 +170,6 @@ func set_variables() -> void:
 	$UI/PlayerStats.player = self
 	camera = $Camera
 	Global.ui = $UI
-	$PulseLaser.parent = self
 
 
 # Signals

@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://_debug/_ship-refactoring/modules/pulse-laser/pulse-laser.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.988235, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+flag_disable_z = true
+spread = 10.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 64.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 8 )
+
+[node name="PulseLaser" type="RayCast2D"]
+enabled = true
+cast_to = Vector2( 100, 0 )
+script = ExtResource( 1 )
+interval = 0.25
+
+[node name="Interval" type="Timer" parent="."]
+one_shot = true
+
+[node name="FireParticle" type="Particles2D" parent="."]
+scale = Vector2( 2, 2 )
+z_index = -1
+emitting = false
+amount = 24
+lifetime = 0.3
+one_shot = true
+speed_scale = 8.0
+explosiveness = 0.75
+process_material = SubResource( 9 )

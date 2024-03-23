@@ -33,7 +33,7 @@ func attack_target(_amount) -> void:
 		#$MiningLaser.set_is_casting(true)
 		$PulseLaser.damage = 10
 		$PulseLaser.is_firing = true
-		$PulseLaser/FireDelay.wait_time = 0.5
+		$PulseLaser/Interval.wait_time = 0.5
 	else:
 		#$MiningLaser.set_is_casting(false)
 		$PulseLaser.is_firing = false
@@ -91,8 +91,11 @@ func _ready() -> void:
 	behavior = BEHAVIOR.traveling # start traveling
 	if faction == FACTIONS.pirate:
 		behavior = BEHAVIOR.pissed # make them upset at the world
+		$PulseLaser.color = Color.red
 	elif faction == FACTIONS.merchant: # MERCHANTS SETUP
 		target = random_array_choice(planet_bodies())
+	elif faction == FACTIONS.police:
+		$PulseLaser.color = Color.blue
 	
 	print("NPC: Spawned ", FACTION_NAMES[faction], ", ", name, " at ", position)
 

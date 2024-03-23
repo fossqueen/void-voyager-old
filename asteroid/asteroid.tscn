@@ -1,14 +1,15 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://asteroid/asteroid.gd" type="Script" id=1]
+[ext_resource path="res://particles/explosion/explosionparticles.tscn" type="PackedScene" id=2]
+[ext_resource path="res://item/item.tscn" type="PackedScene" id=3]
 
-[node name="Asteroid" type="RigidBody2D" groups=["asteroid", "radar_objects"]]
+[node name="Asteroid" type="KinematicBody2D" groups=["asteroid", "radar_objects"]]
 z_index = 1
 collision_layer = 3
-mode = 3
-contacts_reported = 1
-contact_monitor = true
 script = ExtResource( 1 )
+explosion = ExtResource( 2 )
+item = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
@@ -18,7 +19,12 @@ autostart = true
 
 [node name="VisEnabler" type="VisibilityEnabler2D" parent="."]
 
-[connection signal="body_shape_entered" from="." to="." method="_on_Asteroid_body_shape_entered"]
+[node name="OverlapChecker" type="Area2D" parent="."]
+collision_layer = 3
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="OverlapChecker"]
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="viewport_entered" from="VisEnabler" to="." method="_on_VisEnabler_viewport_entered"]
 [connection signal="viewport_exited" from="VisEnabler" to="." method="_on_VisEnabler_viewport_exited"]
+[connection signal="body_entered" from="OverlapChecker" to="." method="_on_OverlapChecker_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 0.509091 ), 0.0, 0.0, 0, 0, Vector2( 0.224719, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.481818 ), 0.0, 0.0, 0, 0 ]
@@ -8,7 +8,20 @@ curve = SubResource( 1 )
 
 [sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 2
-emission_box_extents = Vector3( 1920, 1080, 1 )
+emission_box_extents = Vector3( 4000, 4000, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+angular_velocity = 25.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 10.0
+scale_random = 1.0
+scale_curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 4000, 4000, 1 )
 flag_disable_z = true
 gravity = Vector3( 0, 0, 0 )
 angular_velocity = 25.0
@@ -22,27 +35,25 @@ scale_curve = SubResource( 2 )
 [node name="Starfield" type="ParallaxBackground"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.1, 0.1 )
-motion_mirroring = Vector2( 1920, 1080 )
+motion_scale = Vector2( 0.025, 0.025 )
+motion_mirroring = Vector2( 5120, 2880 )
 
 [node name="Particles2D" type="Particles2D" parent="ParallaxLayer"]
-scale = Vector2( 2, 2 )
-amount = 128
+amount = 512
 lifetime = 8.0
-preprocess = 32.0
+preprocess = 512.0
 fixed_fps = 20
-visibility_rect = Rect2( 0, 0, 1920, 1080 )
+visibility_rect = Rect2( -2560, -1280, 5120, 2880 )
 process_material = SubResource( 3 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.05, 0.05 )
-motion_mirroring = Vector2( 1920, 1080 )
+motion_mirroring = Vector2( 5120, 2880 )
 
 [node name="Particles2D" type="Particles2D" parent="ParallaxLayer2"]
-scale = Vector2( 3, 3 )
-amount = 64
+amount = 1024
 lifetime = 8.0
-preprocess = 32.0
+preprocess = 600.0
 fixed_fps = 20
-visibility_rect = Rect2( 0, 0, 1920, 1080 )
-process_material = SubResource( 3 )
+visibility_rect = Rect2( -2560, -1280, 5120, 2880 )
+process_material = SubResource( 4 )
