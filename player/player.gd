@@ -90,8 +90,10 @@ func movement() -> void:
 
 
 func look() -> Vector2:
-	var look_dir: Vector2 = Vector2(Input.get_axis("look_left", "look_right"), Input.get_axis("look_up", "look_down")) + global_position
-	return look_dir
+	var pointer: Vector2 = get_global_mouse_position()
+	if pointer == Vector2.ZERO:
+		return Vector2(Input.get_axis("look_left", "look_right"), Input.get_axis("look_up", "look_down")) + global_position
+	return pointer
 
 
 func toggle_flight_assist() -> void:
